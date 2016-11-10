@@ -13,7 +13,7 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
-      test: /\.js$/, // Transform all .js files required somewhere with Babel
+      test: /\.jsx?$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',
       exclude: /node_modules/,
       query: options.babelQuery,
@@ -33,7 +33,7 @@ module.exports = (options) => ({
       test: /\.(jpg|png|gif)$/,
       loaders: [
         'file-loader',
-        'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}',
+        // 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}',
       ],
     }, {
       test: /\.html$/,
@@ -47,6 +47,16 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
+    new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
+      if (!/\/moment\/
+      // context needs to be modified in place
+      Object.assign((context), {
+        // include only CJK
+        regExp: /^\.\/(ja|ko|zh)/,
+        // point to the locale data folder relative to moment's src/lib/locale
+        request: '../../locale'
+      })
+    }),
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports?self.fetch!whatwg-fetch',
@@ -59,6 +69,12 @@ module.exports = (options) => ({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
+      // 此处定义通用样式的变量
+      COLOR_1: '"#ff7575"',
+      COLOR_2: '"#5f5f5f"',
+      COLOR_3: '"#a2a2a2"',
+      COLOR_4: '"#f6f6f6"',
+      FONT: '""',
     }),
     new webpack.NamedModulesPlugin(),
   ]),
