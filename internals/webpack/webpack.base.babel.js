@@ -48,14 +48,14 @@ module.exports = (options) => ({
   },
   plugins: options.plugins.concat([
     new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
-      if (!/\/moment\/
+      if (!/\/moment\//.test(context.context)) { return; }
       // context needs to be modified in place
       Object.assign((context), {
         // include only CJK
         regExp: /^\.\/(ja|ko|zh)/,
         // point to the locale data folder relative to moment's src/lib/locale
-        request: '../../locale'
-      })
+        request: '../../locale',
+      });
     }),
     new webpack.ProvidePlugin({
       // make fetch available
