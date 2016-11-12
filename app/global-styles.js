@@ -1,3 +1,4 @@
+/* global COLOR_3 */
 import { injectGlobal } from 'styled-components';
 
 /* eslint no-unused-expressions: 0 */
@@ -10,6 +11,7 @@ injectGlobal`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: ${COLOR_3};
   }
 
   body.fontLoaded {

@@ -1,6 +1,6 @@
+/* global COLOR_1 COLOR_2 COLOR_3 */
 import React from 'react';
-import moment from 'moment';
-
+import { convDate, convAudioTime } from 'utils/tools';
 import styled from 'styled-components';
 
 
@@ -44,7 +44,7 @@ const ActionsItem = styled.span`
   padding-left: 10px;
   margin-left: 8px;
   color: ${COLOR_3};
-  background-size: auto 100%!important;
+  background-size: 13px 13px!important;
   padding-left: 14px;
   padding-top: 2px;
 `;
@@ -75,6 +75,7 @@ const Coast = styled.span`
 
 export default class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
+    id: React.PropTypes.string,
     title: React.PropTypes.string,
     desc: React.PropTypes.string,
     coast: React.PropTypes.number,
@@ -86,7 +87,6 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
 
   render() {
     const { title, desc, coast, createDate, time, rank, ablumPicture } = this.props;
-    const convDate = (date) => moment(date).format('MM/DD/YYYY');
     return (
       <Wrapper>
         <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
@@ -94,7 +94,7 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
         <Desc>{desc}</Desc>
         <Actions>
           <Rank>NO.{rank}</Rank>
-          <Time>{`${parseInt(time / 60, 10)}'${time % 60}''` }</Time>
+          <Time>{convAudioTime(time, '\'')}</Time>
           <CreateDate>{convDate(createDate)}</CreateDate>
           <Special>会员专享</Special>
         </Actions>

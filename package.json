@@ -121,7 +121,8 @@
       "import/no-dynamic-require": 0,
       "import/no-extraneous-dependencies": 0,
       "import/no-named-as-default": 0,
-      "import/no-unresolved": 2,
+      "import/no-unresolved": 0,
+      "import/extensions": 0,
       "import/prefer-default-export": 0,
       "indent": [
         2,
@@ -140,7 +141,7 @@
       "jsx-a11y/role-supports-aria-props": 2,
       "max-len": 0,
       "newline-per-chained-call": 0,
-      "no-console": 1,
+      "no-console": 0,
       "no-use-before-define": 0,
       "prefer-template": 2,
       "class-methods-use-this": 0,
