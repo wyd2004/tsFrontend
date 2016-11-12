@@ -2,10 +2,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { convAudioTime } from 'utils/tools';
+import ProgressBar from 'components/ProgressBar';
 
 const Wrapper = styled.div`
-
+  & audio {
+    display: none;
+  }
 `;
 const Card = styled.div`
   padding: 20px;
@@ -22,49 +24,6 @@ const Ablum = styled.div`
     width: 100%;
   }
 `;
-const Progress = styled.div`
-  margin: 12px;
-
-  & audio {
-    display: none;
-  }
-`;
-const Time = styled.span`
-  color: ${COLOR_3};
-  width: 40px;
-  display: inline-block;
-`;
-const ProgressBar = styled.span`
-  height: 3px;
-  background: ${COLOR_3};
-  width: calc(100% - 80px);
-  position: relative;
-  display:inline-block;
-  top: -3px;
-  border-radius: 3px;
-
-  &:before {
-    content: '';
-    color: ${COLOR_1};
-    display: block;
-    width: ${(props) => props.progress}%;
-    height: 3px;
-    background-color: ${COLOR_1};
-    border-radius: 3px;
-  }
-  &:after {
-    content: '';
-    width: 7px;
-    height: 7px;
-    color: ${COLOR_1};
-    position: absolute;
-    top: -2px;
-    left: ${(props) => props.progress}%;
-    border-radius: 7px;
-    transform: translateX(-50%);
-    background-color: ${COLOR_1};
-  }
-`;
 const Actions = styled.div`
 
 `;
@@ -75,7 +34,7 @@ const Prev = styled.span`
   width: 25px;
   display: inline-block;
   position: relative;
-top: -17px;
+  top: -17px;
 `;
 const Next = styled(Prev)`
   background: url(${require('./assets/next.png')});
@@ -103,14 +62,15 @@ export default class Player extends React.Component { // eslint-disable-line rea
     srcShort: React.PropTypes.string,
     src: React.PropTypes.string,
     ablum: React.PropTypes.string,
-    canPlay: React.PropTypes.bool,
+    isMenmber: React.PropTypes.bool,
     time: React.PropTypes.number,
+    onPrev: React.PropTypes.func,
+    onNext: React.PropTypes.func,
   }
   constructor(props) {
     super(props);
     this.state = {
-      currentTime: undefined,
-      totleTime: undefined,
+      currentTime: 0,
       loaded: false,
       played: false,
     };
@@ -119,9 +79,9 @@ export default class Player extends React.Component { // eslint-disable-line rea
     this.setState({
       ...this.state,
       loaded: true,
+      canPlay: true,
     });
-    console.log('音频已加载完毕');
-  };
+  }
   handlePlay = () => {
     let played;
     if (this.audio.paused) {
@@ -135,21 +95,37 @@ export default class Player extends React.Component { // eslint-disable-line rea
       ...this.state,
       played,
     });
-  };
+  }
+  handleTimeUpdate = () => {
+    this.setState({
+      ...this.state,
+      currentTime: this.audio.currentTime,
+    });
+  }
+  handleProgressUpdate = (newProgress) => {
+    this.audio.currentTime = (newProgress / 100) * this.audio.duration;
+  }
   render() {
-    const { srcShort, src, ablum, canPlay, time } = this.props;
-    const { currentTime, totleTime, played } = this.state;
+    const { srcShort, src, ablum, isMenmber, time: totalTime } = this.props;
+    const { currentTime, loaded, played } = this.state;
+
     return (
       <Wrapper>
+        {/* 此处的ref用法请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
+        <audio
+          ref={(c) => { this.audio = c; }}
+          src={isMenmber ? src : srcShort} preload
+          onCanPlay={this.handleLoaded}
+          onTimeUpdate={this.handleTimeUpdate}
+        />
         <Card>
           <Ablum><img src={ablum || require('./assets/default.jpg')} alt="节目封面" /></Ablum>
-          <Progress>
-            {/* 此处的ref请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
-            <audio ref={(c) => { this.audio = c; }} src={canPlay ? src : srcShort} preload onCanPlay={this.handleLoaded} />
-            <Time>{currentTime ? convAudioTime(currentTime) : '--:--'}</Time>
-            <ProgressBar progress={currentTime / totleTime || 10}></ProgressBar>
-            <Time>{currentTime ? convAudioTime(totleTime) : '--:--'}</Time>
-          </Progress>
+          <ProgressBar
+            currentTime={currentTime}
+            totalTime={totalTime}
+            ready={loaded}
+            onProgressUpdate={this.handleProgressUpdate}
+          />
           <Actions>
             <Prev></Prev>
             <PlayButton onClick={this.handlePlay} played={played}></PlayButton>

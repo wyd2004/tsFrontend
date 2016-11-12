@@ -5,13 +5,14 @@ export function convDate(date) {
 }
 
 export function convAudioTime(time, separate = ':') {
+  const timeInteger = parseInt(time, 10);
   let result;
   if (separate === ':') {
-    result = `${parseInt(time / 60, 10)}${separate}${time % 60}`;
+    result = `${parseInt(timeInteger / 60, 10)}${separate}${timeInteger % 60}`;
   } else if (separate === '\'') {
-    result = `${parseInt(time / 60, 10)}${separate}${time % 60}${separate}${separate}`;
+    result = `${parseInt(timeInteger / 60, 10)}${separate}${timeInteger % 60}${separate}${separate}`;
   } else {
-    result = time;
+    result = timeInteger;
   }
   return result;
 }
