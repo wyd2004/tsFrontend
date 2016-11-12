@@ -10,9 +10,14 @@
  * reloading is not a necessity for you then you can refactor it and remove
  * the linting exception.
  */
-
+/* global COLOR_4 */
 import React from 'react';
+import styled from 'styled-components';
 
+const Warpper = styled.div`
+  padding: 6px;
+  background: ${COLOR_4}
+`;
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -21,9 +26,9 @@ export default class App extends React.PureComponent { // eslint-disable-line re
 
   render() {
     return (
-      <div>
+      <Warpper>
         {React.Children.toArray(this.props.children)}
-      </div>
+      </Warpper>
     );
   }
 }

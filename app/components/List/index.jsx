@@ -1,9 +1,22 @@
 import React from 'react';
+import ListItem from 'components/ListItem';
+import styled from 'styled-components';
 
+const Wraper = styled.div`
+
+`;
 export default class List extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    data: React.PropTypes.array,
+  };
   render() {
+    const { data } = this.props;
     return (
-      <h1>Component</h1>
+      <Wraper>
+        {
+          data.map(({ id, title, desc, coast, createDate, time, rank }) => <ListItem key={id} id={id} title={title} desc={desc} coast={coast} createDate={createDate} time={time} rank={rank} />)
+        }
+      </Wraper>
     );
   }
 }

@@ -1,9 +1,12 @@
+/* global COLOR_3 */
+
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ListItem from 'components/ListItem';
+import List from 'components/List';
+import Player from 'components/Player';
 
 const Wrapper = styled.div`
-  background: ${COLOR_3};
+
 `;
 export default class App extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -12,22 +15,21 @@ export default class App extends Component { // eslint-disable-line react/prefer
   };
 
   render() {
+    const mockList = [
+      { id: '1233sdasf', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 5 },
+    ];
+    const mockPodcast = {
+      srcShort: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
+      src: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
+      ablum: 'http://p4.music.126.net/xomieFDiQZkFO3bebFAuDg==/103354093026187.jpg?param=130y130',
+      canPlay: true,
+      time: 1233,
+    };
     return (
       <Wrapper>
         <h1>组件集合：</h1>
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
-        <ListItem title="中年人减肥之道" desc="B哥夜话" coast={6} createDate={Date.now()} time={78} rank={12} />
+        <Player {...mockPodcast} />
+        <List data={mockList} />
       </Wrapper>
     );
   }
