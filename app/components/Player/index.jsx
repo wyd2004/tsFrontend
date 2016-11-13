@@ -3,19 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 import ProgressBar from 'components/ProgressBar';
+import Card from 'components/Card';
 
 const Wrapper = styled.div`
   & audio {
     display: none;
   }
 `;
-const Card = styled.div`
-  padding: 20px;
-  border-radius: 2px;
-  text-align: center;
-  background: white;
-  margin: 6px;
-`;
+
 const Ablum = styled.div`
   width: 100%;
   height: auto;
@@ -52,10 +47,15 @@ const PlayButton = styled.span`
 const StyledLink = styled(Link)`
   color: ${COLOR_1};
 `;
-const Card2 = styled(Card)`
+const Card2 = styled.div`
+  background: white;
+  border-radius: 2px;
+  margin: 6px;
+  position: relative;
   font-size: 13px;
   padding-top: 5px;
   padding-bottom: 5px;
+  text-align: center;
 `;
 export default class Player extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

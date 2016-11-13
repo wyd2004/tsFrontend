@@ -19,6 +19,9 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
 import configureStore from './store';
+import FastClick from 'fastclick';
+FastClick.attach(document.body, {});
+
 import 'global-styles';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder

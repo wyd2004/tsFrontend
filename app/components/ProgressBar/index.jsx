@@ -79,6 +79,10 @@ export default class ProgressBar extends React.PureComponent { // eslint-disable
     window.addEventListener('touchmove', this.handleTouchMove);
     window.addEventListener('touchend', this.handleTouchEnd);
   }
+  componentWillUnmount() {
+    window.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('touchend', this.handleTouchEnd);
+  }
   handleTouchStart = (e) => {
     const { pageX } = e.touches[0];
     const { progress } = this.state;
@@ -109,15 +113,16 @@ export default class ProgressBar extends React.PureComponent { // eslint-disable
   }
   handleTouchEnd = () => {
     const { onProgressUpdate } = this.props;
-    const { progress } = this.state;
-    console.log(progress);
+    const { isPressed, progress } = this.state;
 
-    this.setState({
-      ...this.state,
-      startTouch: 0,
-      isPressed: false,
-    });
-    onProgressUpdate(progress);
+    if (isPressed) {
+      this.setState({
+        ...this.state,
+        startTouch: 0,
+        isPressed: false,
+      });
+      onProgressUpdate(progress);
+    }
   }
   render() {
     const { currentTime, totalTime, ready } = this.props;

@@ -23,6 +23,13 @@ module.exports = {
     }),
     new webpack.NamedModulesPlugin(),
   ],
+  resolve: {
+    modulesDirectories: [
+      'app',
+      'node_modules',
+    ],
+    extensions: ['', '.js', '.jsx'],
+  },
   module: {
     loaders: [
       // add your custom loaders.

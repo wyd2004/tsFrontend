@@ -14,6 +14,8 @@ injectGlobal`
     color: ${COLOR_3};
   }
 
+  a,button,input{-webkit-tap-highlight-color:rgba(0,0,0,0);}/* 1.去除android a/button/input标签被点击时产生的边框 2.去除ios a标签被点击时产生的半透明灰色背景 */
+
   body.fontLoaded {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
