@@ -10,4 +10,5 @@ storiesOf('Button', module)
     <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
   ));
 
-require('../app/components/ListItem/story');
+// require('../app/components/ListItem/story');
+require('../app/components/Avatar/story');
