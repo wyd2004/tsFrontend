@@ -6,6 +6,7 @@ import List from 'components/List';
 import Player from 'components/Player';
 import SearchBar from 'components/SearchBar';
 import UserButton from 'components/UserButton';
+import MemberRights from 'components/MemberRights';
 
 const Wrapper = styled.div`
 
@@ -30,6 +31,7 @@ export default class App extends Component { // eslint-disable-line react/prefer
     return (
       <Wrapper>
         <h1>组件集合：</h1>
+        <MemberRights />
         <UserButton />
         <SearchBar onSearch={(content) => console.log(content)} />
         <Player {...mockPodcast} />
