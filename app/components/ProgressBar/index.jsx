@@ -9,7 +9,7 @@ import { convAudioTime } from 'utils/tools';
 
 const Wrapper = styled.div`
   margin: 12px;
-
+  text-align: center;
 `;
 const Bar = styled.span`
   height: 3px;

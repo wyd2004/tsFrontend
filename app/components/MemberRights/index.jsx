@@ -14,7 +14,8 @@ const List = styled.ul`
 const ListItem = styled.li`
   float: left;
   width: 33.33333%;
-
+  text-align: center;
+  
   & img {
     ${''/* width: 28px;*/}
     border: 1px dotted rgb(210, 210, 210);

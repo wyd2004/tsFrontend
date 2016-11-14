@@ -20,7 +20,7 @@ const Ablum = styled.div`
   }
 `;
 const Actions = styled.div`
-
+  text-align: center;
 `;
 const Prev = styled.span`
   background-image: url(${require('./assets/prev.png')});

@@ -7,6 +7,7 @@ import Player from 'components/Player';
 import SearchBar from 'components/SearchBar';
 import UserButton from 'components/UserButton';
 import MemberRights from 'components/MemberRights';
+import PodcastProfile from 'components/PodcastProfile';
 
 const Wrapper = styled.div`
 
@@ -19,7 +20,7 @@ export default class App extends Component { // eslint-disable-line react/prefer
 
   render() {
     const mockList = [
-      { id: '1233sdasf', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 5 },
+      { id: '1233sdasf', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
     ];
     const mockPodcast = {
       srcShort: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
@@ -31,6 +32,7 @@ export default class App extends Component { // eslint-disable-line react/prefer
     return (
       <Wrapper>
         <h1>组件集合：</h1>
+        <PodcastProfile {...mockList[0]} />
         <MemberRights />
         <UserButton />
         <SearchBar onSearch={(content) => console.log(content)} />
