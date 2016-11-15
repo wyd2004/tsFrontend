@@ -30,7 +30,7 @@ export default class Avatar extends PureComponent {
 
   static propTypes = {
     src: PropTypes.string,
-    isVip: PropTypes.boolean,
+    isVip: PropTypes.bool,
     alt: PropTypes.string,
   };
 
