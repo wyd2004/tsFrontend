@@ -1,5 +1,6 @@
 import React from 'react';
-import { CardExt, Title, Desc, Ablum, Coast } from 'components/ListItem/style';
+import CardWrap from 'components/Card/CardWrapS';
+import { Title, Desc, Ablum, Coast } from 'components/ListItem/style';
 
 export default class PodcastProfile extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -12,16 +13,14 @@ export default class PodcastProfile extends React.PureComponent { // eslint-disa
 
   render() {
     const { title, desc, coast, ablumPicture } = this.props;
-    console.log(this.props);
-
     return (
-      <CardExt>
-        <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
+      <CardWrap>
+        <Ablum><img src={ablumPicture} alt="" /></Ablum>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
         <Desc>购买后，在xx年xx月xx日前，可随意收听本节目</Desc>
         <Coast>RMB {parseInt(coast, 10).toFixed(2)}</Coast>
-      </CardExt>
+      </CardWrap>
     );
   }
 }

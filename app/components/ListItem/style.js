@@ -1,13 +1,8 @@
 /* global COLOR_1 COLOR_2 COLOR_3 */
 
 import styled from 'styled-components';
-import { Wrapper } from 'components/Card';
+import Button from './Button';
 
-const CardExt = styled(Wrapper)`
-  padding: 12px;
-  position: relative;
-  overflow: hidden;
-`;
 const Title = styled.h1`
   font-size: 13px;
   text-align: left;
@@ -55,18 +50,13 @@ const Time = styled(ActionsItem)`
 const CreateDate = styled(ActionsItem)`
   background: url(${require('./assets/time.png')}) no-repeat left;
 `;
-const Coast = styled.span`
+const Coast = styled(Button)`
   position: absolute;
   top: 12px;
   right: 12px;
-  background: ${COLOR_1};
-  padding: 5px;
-  border-radius: 2px;
-  color: white;
 `;
 
 export {
-  CardExt,
   Title,
   Desc,
   Ablum,

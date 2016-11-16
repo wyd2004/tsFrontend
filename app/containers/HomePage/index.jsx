@@ -8,6 +8,7 @@ import SearchBar from 'components/SearchBar';
 import UserButton from 'components/UserButton';
 import MemberRights from 'components/MemberRights';
 import PodcastProfile from 'components/PodcastProfile';
+import MembershipList from 'components/MembershipList';
 
 const Wrapper = styled.div`
 
@@ -29,10 +30,17 @@ export default class App extends Component { // eslint-disable-line react/prefer
       canPlay: true,
       time: 1233,
     };
+    const mockMemberList = [
+      { id: 1, title: '糖蒜广播会员', desc: '', limit: '1年', price: 10 },
+      { id: 2, title: '糖蒜广播会员', desc: '', limit: '1年', price: 10 },
+      { id: 3, title: '糖蒜广播会员', desc: '', limit: '1年', price: 10 },
+      { id: 4, title: '糖蒜广播会员', desc: '现在订阅就送超值大礼包', limit: '1年', price: 10 },
+    ];
     return (
       <Wrapper>
         <h1>组件集合：</h1>
         <PodcastProfile {...mockList[0]} />
+        <MembershipList data={mockMemberList} />
         <MemberRights />
         <UserButton />
         <SearchBar onSearch={(content) => console.log(content)} />

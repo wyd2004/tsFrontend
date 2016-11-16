@@ -1,6 +1,7 @@
 import React from 'react';
 import { convDate, convAudioTime } from 'utils/tools';
-import { CardExt, Title, Desc, Ablum, Actions, Special, Rank, Time, CreateDate, Coast } from './style';
+import CardWrapS from 'components/Card/CardWrapS';
+import { Title, Desc, Ablum, Actions, Special, Rank, Time, CreateDate, Coast } from './style';
 
 export default class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -17,7 +18,7 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
   render() {
     const { title, desc, coast, createDate, time, rank, ablumPicture } = this.props;
     return (
-      <CardExt>
+      <CardWrapS>
         <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
@@ -28,7 +29,7 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
           <Special>会员专享</Special>
         </Actions>
         <Coast>RMB {parseInt(coast, 10).toFixed(2)}</Coast>
-      </CardExt>
+      </CardWrapS>
     );
   }
 }
