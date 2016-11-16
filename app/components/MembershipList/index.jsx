@@ -34,6 +34,7 @@ const ButtonFloat = styled(Button)`
   float: right;
 `;
 export default class MembershipList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /* eslint-disable react/no-unused-prop-types */
   static propTypes = {
     data: React.PropTypes.arrayOf(React.PropTypes.shape({
       id: React.PropTypes.number,
@@ -44,12 +45,13 @@ export default class MembershipList extends React.PureComponent { // eslint-disa
     })),
     onSelected: React.PropTypes.func,
   }
-  handleBuy = (id) => {
-    return (e) => {
+  /* eslint-disable react/no-unused-prop-types */
+  handleBuy = (id) => (
+    (e) => {
       e.preventDefault();
       this.onSelected(id);
-    };
-  };
+    }
+  )
   render() {
     const { data } = this.props;
     return (
