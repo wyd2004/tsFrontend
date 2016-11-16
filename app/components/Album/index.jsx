@@ -9,41 +9,39 @@ const Wrapper = styled.a`
 const Img = styled.img`
   width: 64px;
   height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
 `;
 
-const VipIcon = styled.img`
+const FlagIcon = styled.img`
   position: absolute;
-  width: 17px;
-  height: 17px;
-  right: 0px;
-  bottom: 3px;
+  width: 30px;
+  height: 16px;
+  top: -6px;
+  right: -12px;
 `;
 
-export default class Avatar extends PureComponent {
+export default class Album extends PureComponent {
   static defaultProps = {
-    isVip: false,
-    alt: '头像',
-    src: require('./assets/avatar.png'),
+    isNew: false,
+    alt: '栏目',
+    src: require('./assets/defaults.png'),
     url: '###',
   };
 
   static propTypes = {
     src: PropTypes.string,
-    isVip: PropTypes.bool,
+    isNew: PropTypes.bool,
     alt: PropTypes.string,
     url: PropTypes.string,
   };
 
   render() {
-    const { src, isVip, alt, url } = this.props;
-    const vipPng = require('./assets/vip.png');
+    const { src, isNew, alt, url } = this.props;
+    const newPng = require('./assets/new.png');
 
     return (
       <Wrapper href={url}>
         <Img src={src} alt={alt} />
-        {isVip ? (<VipIcon src={vipPng} />) : ''}
+        {isNew ? (<FlagIcon src={newPng} />) : ''}
       </Wrapper>
     );
   }

@@ -13,3 +13,5 @@ storiesOf('Button', module)
 // require('../app/components/ListItem/story');
 require('../app/components/Avatar/story');
 require('../app/components/Header/story');
+require('../app/components/Album/story');
+require('../app/components/CollectionItem/story');

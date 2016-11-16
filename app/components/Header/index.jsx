@@ -60,13 +60,14 @@ export default class Header extends PureComponent {
     otherText: PropTypes.string,
     avatarSrc: PropTypes.string,
     avatarAlt: PropTypes.string,
+    userUrl: PropTypes.string,
     isSelf: PropTypes.bool,
     isVip: PropTypes.bool,
     toRenew: PropTypes.func,
   };
 
   render() {
-    const { isVip, avatarSrc, avatarAlt, otherText, userName, isSelf, toRenew } = this.props;
+    const { userUrl, isVip, avatarSrc, avatarAlt, otherText, userName, isSelf, toRenew } = this.props;
     let headerText;
     if (isSelf) {
       if (otherText) {
@@ -81,7 +82,7 @@ export default class Header extends PureComponent {
     return (
       <Wrapper>
         <AvatarWrap>
-          <Avatar isVip={isVip} src={avatarSrc} alt={avatarAlt} />
+          <Avatar url={userUrl} isVip={isVip} src={avatarSrc} alt={avatarAlt} />
         </AvatarWrap>
         <TextWrap>
           <UserName>{userName}</UserName>
