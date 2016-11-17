@@ -15,3 +15,4 @@ require('../app/components/Avatar/story');
 require('../app/components/Header/story');
 require('../app/components/Album/story');
 require('../app/components/CollectionItem/story');
+require('../app/components/Collection/story');
