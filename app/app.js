@@ -19,6 +19,8 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
 import configureStore from './store';
+import globalSagas from 'containers/App/sagas';
+
 import FastClick from 'fastclick';
 FastClick.attach(document.body, {});
 
@@ -33,6 +35,7 @@ import 'sanitize.css/sanitize.css';
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
+store.runSaga(...globalSagas);
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState

@@ -5,7 +5,7 @@
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
 const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+  console.error('动态页面加载失败', err); // eslint-disable-line no-console
 };
 
 const loadModule = (cb) => (componentModule) => {
@@ -19,15 +19,18 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'indexPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/HomePage'),
+          System.import('containers/IndexPage/reducer'),
+          System.import('containers/IndexPage/sagas'),
+          System.import('containers/IndexPage'),
         ]);
 
         const renderRoute = loadModule(cb);
-
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('index', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 
