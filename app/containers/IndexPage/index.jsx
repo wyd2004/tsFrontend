@@ -16,8 +16,14 @@ import styled from 'styled-components';
 
 import Button from './button';
 
+const Actions = styled.div`
+  overflow: hidden;
+`;
 const PodcastButton = styled(Button)`
-
+  height: 110px;
+  line-height: 80px;
+  background-size: 55px;
+  text-indent: 40px;
 `;
 
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -33,10 +39,12 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
             { name: 'description', content: '糖蒜广播-微信' },
           ]}
         />
-        <PodcastButton icon="podcast">节目</PodcastButton>
-        <Button icon="search">搜索</Button>
-        <Button icon="ablum">专辑</Button>
-        <List />
+        <Actions>
+          <PodcastButton icon="podcast">节目</PodcastButton>
+          <Button icon="search">搜索</Button>
+          <Button icon="ablum">专辑</Button>
+        </Actions>
+        {/* <List /> */}
       </div>
     );
   }
