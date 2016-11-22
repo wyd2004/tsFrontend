@@ -16,7 +16,6 @@ import styled from 'styled-components';
 
 const Warpper = styled.div`
   padding: 6px;
-  background: ${COLOR_4}
 `;
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

@@ -28,9 +28,6 @@ const PodcastButton = styled(Button)`
 
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    this.props.onShowDialog();
-    console.log(this.props);
-
     return (
       <div>
         <Helmet

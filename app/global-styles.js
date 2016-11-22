@@ -1,4 +1,4 @@
-/* global COLOR_3 */
+/* global COLOR_3 COLOR_4 */
 import { injectGlobal } from 'styled-components';
 
 /* eslint no-unused-expressions: 0 */
@@ -21,7 +21,7 @@ injectGlobal`
   }
 
   #app {
-    background-color: #fafafa;
+    background-color: ${COLOR_4};
     min-height: 100%;
     min-width: 100%;
   }

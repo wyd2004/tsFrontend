@@ -1,4 +1,4 @@
-/* global COLOR_3 */
+/* global COLOR_1 COLOR_3 */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   padding: 7px;
   border-radius: 2px;
   background: white;
-  margin: 6px;
 `;
 const InputContainer = styled.div`
   padding-left: 17px;
@@ -27,6 +26,7 @@ const InputContainer = styled.div`
 `;
 const Submit = styled.span`
   position: absolute;
+  color: ${COLOR_1};
   display: ${(props) => props.shrink ? 'block' : 'none'};
   right: 0;
   top: 0;
