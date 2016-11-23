@@ -5,11 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-
-export const CURRENT_TYPE = {
-  PODCAST: 'index/currentType/poadcast',
-  ALBUM: 'index/currentType/album',
-};
+import { CHANGE_LIST, LOAD_PODCAST_SUCCESS, LOAD_ALBUM_SUCCESS, CURRENT_TYPE } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({

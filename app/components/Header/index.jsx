@@ -6,13 +6,12 @@ import Avatar from '../Avatar';
 
 const Wrapper = styled.div`
   display: flex;
-  padding: 22px 0;
 `;
 
 const AvatarWrap = styled.span`
   display: inline-block;
   min-width: 64px;
-  padding: 22px;
+  margin-right: 20px;
 `;
 
 const TextWrap = styled.span`

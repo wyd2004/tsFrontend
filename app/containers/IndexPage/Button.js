@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import CardWrap from 'components/Card/CardWrap';
 
-const Button = styled.a`
+/* eslint-disable */
+const Button = styled.button`
   border-radius: 2px;
   background: white;
   margin: 3px;
@@ -16,4 +16,5 @@ const Button = styled.a`
   background-repeat: no-repeat;
   background-size: 18px 18px;
 `;
+/* eslint-enable */
 export default Button;

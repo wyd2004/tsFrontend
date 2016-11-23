@@ -16,6 +16,9 @@ const Title = styled.span`
   width: 125px;
   display: inline-block;
 `;
+const Item = styled.div`
+  padding-top: 3px;
+`;
 const Limit = styled.span`
   color: ${COLOR_3};
   width: 80px;
@@ -59,9 +62,11 @@ export default class MembershipList extends React.PureComponent { // eslint-disa
         {data.map(({ id, title, desc, limit, price }) =>
           <CardWrapS key={id}>
             <ButtonFloat onClick={this.handleBuy(id)}>购买</ButtonFloat>
-            <Title>{title}</Title>
-            <Limit>{limit}</Limit>
-            <Price>￥{price}</Price>
+            <Item>
+              <Title>{title}</Title>
+              <Limit>{limit}</Limit>
+              <Price>￥{price}</Price>
+            </Item>
             <Desc>{desc}</Desc>
           </CardWrapS>
         )}

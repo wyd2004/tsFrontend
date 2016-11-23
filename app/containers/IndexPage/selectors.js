@@ -16,7 +16,7 @@ const selectIndexPageDomain = () => (state) => state.get('index');
 
 const selectIndexPage = () => createSelector(
   selectIndexPageDomain(),
-  (indexState) => ({indexState}),
+  (indexState) => ({ indexState }),
 );
 
 export default selectIndexPage;

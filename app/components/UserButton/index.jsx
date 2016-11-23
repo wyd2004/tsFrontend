@@ -15,7 +15,7 @@ const Button = styled(Link)`
 export default class UserButton extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <Button to="/usercenter"></Button>
+      <Button to="/profile"></Button>
     );
   }
 }

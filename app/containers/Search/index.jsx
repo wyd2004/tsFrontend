@@ -8,7 +8,7 @@ import selectSearchPage from './selectors';
 
 import SearchBar from 'components/SearchBar';
 
-import { searchPodcast, DIALOG_TYPE } from './actions';
+import { searchPodcast } from './actions';
 
 const ResultBar = styled.p`
   color: ${COLOR_3};

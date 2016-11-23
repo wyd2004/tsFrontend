@@ -11,50 +11,39 @@ const errorLoading = (err) => {
 const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
-
+/* eslint-disable */
+const routes = [
+  { path: '/',          name: 'indexPage',      module: 'IndexPage' },
+  { path: '/search',    name: 'searchPage',     module: 'Search' },
+  { path: '/profile',   name: 'profile',        module: 'Profile' },
+]
+/* eslint-enable */
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
+  const loadPage = ((module, cb) => {
+    const importModules = Promise.all([
+      System.import(`containers/${module}/reducer`),
+      System.import(`containers/${module}/sagas`),
+      System.import(`containers/${module}/index`),
+    ]);
 
-  return [
+    const renderRoute = loadModule(cb);
+    importModules.then(([reducer, sagas, component]) => {
+      injectReducer(module, reducer.default);
+      injectSagas(sagas.default);
+      renderRoute(component);
+    });
+
+    importModules.catch(errorLoading);
+  });
+  return routes.map(({ module, path, name }) => (
     {
-      path: '/',
-      name: 'indexPage',
+      path,
+      name,
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/IndexPage/reducer'),
-          System.import('containers/IndexPage/sagas'),
-          System.import('containers/IndexPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('index', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
+        loadPage(module, cb);
       },
-    }, {
-      path: '/search',
-      name: 'searchPage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/Search/reducer'),
-          System.import('containers/Search/sagas'),
-          System.import('containers/Search'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('search', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-  ];
+    }
+  ));
 }

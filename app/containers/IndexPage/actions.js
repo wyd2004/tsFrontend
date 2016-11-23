@@ -5,11 +5,29 @@
  */
 
 export const CHANGE_LIST = 'app/IndexPage/CHANGE_LIST';
-export const LOADPOADCAST = 'app/IndexPage/LOADPOADCAST';
-export const LOADALBUM = 'app/IndexPage/LOADALBUM';
+export const LOAD_PODCAST_SUCCESS = 'app/IndexPage/LOAD_PODCAST_SUCCESS';
+export const LOAD_ALBUM_SUCCESS = 'app/IndexPage/LOAD_ALBUM_SUCCESS';
 
-export function defaultAction() {
+export const CURRENT_TYPE = {
+  PODCAST: 'index/currentType/poadcast',
+  ALBUM: 'index/currentType/album',
+};
+
+export function changeList(currentType) {
   return {
-    type: DEFAULT_ACTION,
+    type: CHANGE_LIST,
+    currentType,
+  };
+}
+
+export function loadPodcast() {
+  return {
+    type: LOAD_PODCAST_SUCCESS,
+  };
+}
+
+export function loadAlbum() {
+  return {
+    type: LOAD_ALBUM_SUCCESS,
   };
 }
