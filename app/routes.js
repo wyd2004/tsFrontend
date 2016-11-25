@@ -16,6 +16,7 @@ const routes = [
   { path: '/',          name: 'indexPage',      module: 'IndexPage' },
   { path: '/search',    name: 'searchPage',     module: 'Search' },
   { path: '/profile',   name: 'profile',        module: 'Profile' },
+  { path: '/people',    name: 'people',         module: 'People' },
 ]
 /* eslint-enable */
 export default function createRoutes(store) {

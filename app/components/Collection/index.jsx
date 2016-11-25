@@ -8,11 +8,6 @@ const Wrap = styled.div`
   flex-direction: column;
 `;
 
-const Title = styled.h3`
-  font-size: 13px;
-  color: ${COLOR_1};
-`;
-
 const CollectionItemWrap = styled.span`
   display: inline-block;
   width: 25%;
@@ -20,18 +15,17 @@ const CollectionItemWrap = styled.span`
 `;
 
 const CollectionList = styled.div`
-
+      margin-bottom: -15px;
 `;
 
 export default class Collection extends PureComponent {
   static propTypes = {
     type: PropTypes.string,
-    title: PropTypes.string,
     data: PropTypes.array,
   }
 
   render() {
-    const { type, title, data } = this.props;
+    const { type, data } = this.props;
     const collection = data.map((v, i) => {
       const { src, alt, url, isNew, text } = v;
       return <CollectionItemWrap key={i}><CollectionItem type={type} src={src} url={url} alt={alt} isNew={isNew} text={text} /></CollectionItemWrap>;
@@ -40,7 +34,6 @@ export default class Collection extends PureComponent {
 
     return (
       <Wrap>
-        <Title>{title}</Title>
         <CollectionList>
           {collection}
           {(data.length >= 7 && type === 'album') ? (<CollectionItemWrap><CollectionItem type={type} src={addPic} url={'###'} alt={'查看全部'} text={'查看全部'} /></CollectionItemWrap>) : null}

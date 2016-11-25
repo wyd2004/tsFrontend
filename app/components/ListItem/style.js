@@ -54,6 +54,7 @@ const Coast = styled(Button)`
   position: absolute;
   top: 12px;
   right: 12px;
+  background-color: ${(props) => props.isBuy ? COLOR_3 : COLOR_1};
 `;
 
 export {

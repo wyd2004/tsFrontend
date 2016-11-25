@@ -14,7 +14,7 @@ export default class List extends React.PureComponent { // eslint-disable-line r
     return (
       <Wraper>
         {
-          data.map(({ id, title, desc, coast, createDate, time, rank }) => <ListItem key={id} id={id} title={title} desc={desc} coast={coast} createDate={createDate} time={time} rank={rank} />)
+          data.map((props) => <ListItem {...props} key={props.id} />)
         }
       </Wraper>
     );

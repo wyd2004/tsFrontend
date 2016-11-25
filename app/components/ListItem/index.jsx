@@ -13,10 +13,11 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
     time: React.PropTypes.number,
     rank: React.PropTypes.number,
     ablumPicture: React.PropTypes.string,
+    isBuy: React.PropTypes.bool,
   };
 
   render() {
-    const { title, desc, coast, createDate, time, rank, ablumPicture } = this.props;
+    const { title, desc, coast, createDate, time, rank, ablumPicture, isBuy } = this.props;
     return (
       <CardWrapS>
         <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
@@ -28,7 +29,7 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
           <CreateDate>{convDate(createDate)}</CreateDate>
           <Special>会员专享</Special>
         </Actions>
-        <Coast>RMB {parseInt(coast, 10).toFixed(2)}</Coast>
+        <Coast isBuy={isBuy} >{isBuy ? '已购买' : `RMB${parseInt(coast, 10).toFixed(2)}`}</Coast>
       </CardWrapS>
     );
   }
