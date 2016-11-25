@@ -1,9 +1,13 @@
-/* global COLOR_1 COLOR_3 */
+/* global COLOR_1 COLOR_2 COLOR_3 */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
+import { convDate } from 'utils/tools';
+
 import ProgressBar from 'components/ProgressBar';
 import Card from 'components/Card';
+
+import Button from 'components/ListItem/Button';
 
 const Wrapper = styled.div`
   & audio {
@@ -57,15 +61,53 @@ const Card2 = styled.div`
   padding-bottom: 5px;
   text-align: center;
 `;
+const Title = styled.h1`
+  font-size: 13px;
+  color: ${COLOR_2};
+  font-weight: normal;
+  margin-top: 0;
+`;
+const Info = styled.p`
+  color: ${COLOR_3};
+  font-size: 11px;
+  margin: 0;
+`;
+const Label = styled.span`
+  display: inline-block;
+  ${''/* width: 60px;*/}
+  text-align: right;
+`;
+const Coast = styled.span`
+  display: inline-block;
+  padding-left: 15px;
+  background-image: url(${require('./assets/coast.png')});
+  background-size: 14px;
+  background-position-y: center;
+  margin-right: 20px;
+  margin-bottom: 6px;
+`;
+const Date = styled(Coast)`
+  background-image: url(${require('../ListItem/assets/time.png')});
+`;
+const Subscribe = styled(Button)`
+  float: right;
+`;
+
 export default class Player extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     srcShort: React.PropTypes.string,
     src: React.PropTypes.string,
     ablum: React.PropTypes.string,
-    isMenmber: React.PropTypes.bool,
+    canPlay: React.PropTypes.bool,
     time: React.PropTypes.number,
     onPrev: React.PropTypes.func,
     onNext: React.PropTypes.func,
+    title: React.PropTypes.string,
+    date: React.PropTypes.number,
+    serial: React.PropTypes.string,
+    desc: React.PropTypes.string,
+    people: React.PropTypes.string,
+    coast: React.PropTypes.number,
   }
   constructor(props) {
     super(props);
@@ -106,7 +148,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
   render() {
-    const { srcShort, src, ablum, isMenmber, time: totalTime } = this.props;
+    const { srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast } = this.props;
     const { currentTime, loaded, played } = this.state;
 
     return (
@@ -114,7 +156,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
         {/* 此处的ref用法请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
         <audio
           ref={(c) => { this.audio = c; }}
-          src={isMenmber ? src : srcShort} preload
+          src={canPlay ? src : srcShort} preload
           onCanPlay={this.handleLoaded}
           onTimeUpdate={this.handleTimeUpdate}
         />
@@ -133,6 +175,17 @@ export default class Player extends React.Component { // eslint-disable-line rea
           </Actions>
         </Card>
         <Card2>试听5分钟，完整收听请<StyledLink>开通会员</StyledLink>或<StyledLink>购买本节目</StyledLink></Card2>
+        <Card>
+          { !canPlay && <Subscribe>订阅</Subscribe> }
+          <Title>{title}</Title>
+          <Info>
+            <Coast>{coast}</Coast>
+            <Date>{convDate(date)}</Date>
+          </Info>
+          <Info><Label>主持人：</Label>{people}</Info>
+          <Info><Label>栏目：</Label>{serial}</Info>
+          <Info><Label>栏目介绍：</Label>{desc}</Info>
+        </Card>
       </Wrapper>
     );
   }

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
+
 import List from 'components/List';
 import Player from 'components/Player';
 import SearchBar from 'components/SearchBar';

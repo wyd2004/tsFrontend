@@ -13,10 +13,12 @@ const loadModule = (cb) => (componentModule) => {
 };
 /* eslint-disable */
 const routes = [
+  { path: '/preview',   name: 'preview',        module: 'HomePage' },
   { path: '/',          name: 'indexPage',      module: 'IndexPage' },
   { path: '/search',    name: 'searchPage',     module: 'Search' },
   { path: '/profile',   name: 'profile',        module: 'Profile' },
   { path: '/people',    name: 'people',         module: 'People' },
+  { path: '/play',      name: 'play',           module: 'Play' },
 ]
 /* eslint-enable */
 export default function createRoutes(store) {
