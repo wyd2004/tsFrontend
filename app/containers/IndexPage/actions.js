@@ -4,30 +4,37 @@
  *
  */
 
-export const CHANGE_LIST = 'app/IndexPage/CHANGE_LIST';
+export const LOAD_PODCAST = 'app/IndexPage/LOAD_PODCAST';
 export const LOAD_PODCAST_SUCCESS = 'app/IndexPage/LOAD_PODCAST_SUCCESS';
+export const LOAD_ALBUM = 'app/IndexPage/LOAD_ALBUM_SUCCESS';
 export const LOAD_ALBUM_SUCCESS = 'app/IndexPage/LOAD_ALBUM_SUCCESS';
 
-export const CURRENT_TYPE = {
-  PODCAST: 'index/currentType/poadcast',
-  ALBUM: 'index/currentType/album',
-};
-
-export function changeList(currentType) {
+export function loadPodcast(page = 0) {
   return {
-    type: CHANGE_LIST,
-    currentType,
+    type: LOAD_PODCAST,
+    page,
   };
 }
 
-export function loadPodcast() {
+export function loadAlbum(page = 0) {
+  return {
+    type: LOAD_ALBUM,
+    page,
+  };
+}
+
+export function podcastLoaded(podcasts, more) {
   return {
     type: LOAD_PODCAST_SUCCESS,
+    podcasts,
+    more,
   };
 }
 
-export function loadAlbum() {
+export function ablumLoaded(ablums, more) {
   return {
     type: LOAD_ALBUM_SUCCESS,
+    ablums,
+    more,
   };
 }

@@ -6,11 +6,8 @@ import Helmet from 'react-helmet';
 import Player from 'components/Player';
 import selectProfile from './selectors';
 
-import Card from 'components/Card';
-
 import List from 'components/List';
 import Title from 'components/Title';
-import PeopleProfile from 'components/PeopleProfile';
 
 
 export class Play extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -30,7 +27,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
       canPlay: false,
       time: 1233,
       title: '本期：上班拍女同事的照片是否违法',
-      date: '123123412',
+      date: 123123412,
       serial: '失色静安寺',
       desc: '会说相声的拍照片儿的不是一个好搓屎的。”——@二宝-杨毅',
       people: '糖蒜',

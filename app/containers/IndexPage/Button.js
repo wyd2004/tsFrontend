@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// 这里关掉eslint是因为在background-image这行不能用eslint-disabled-line
 /* eslint-disable */
 const Button = styled.button`
   border-radius: 2px;
@@ -16,5 +17,4 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-size: 18px 18px;
 `;
-/* eslint-enable */
 export default Button;

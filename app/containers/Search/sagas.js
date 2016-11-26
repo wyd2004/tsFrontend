@@ -12,7 +12,6 @@ export function* requestSearch() {
   const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
   try {
     const result = yield call(request, requestURL);
-    debugger
     yield put(getSearchResult(result));
   } catch (err) {
     yield put(showDialog(DIALOG_TYPE.failed, err));
