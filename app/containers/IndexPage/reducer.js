@@ -11,20 +11,20 @@ import { LOAD_PODCAST_SUCCESS, LOAD_ALBUM_SUCCESS } from './actions';
 const initialState = fromJS({
   podcast: {
     page: 0,
-    result: [],
+    results: [],
   },
   album: {
     page: 0,
-    result: [],
+    results: [],
   },
 });
 
 function indexPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PODCAST_SUCCESS:
-      return state.setIn(['podcast', 'page'], action.page).mergeIn(['podcast', 'result'], action.podcasts);
+      return state.setIn(['podcast', 'page'], action.more).mergeIn(['podcast', 'results'], action.podcasts);
     case LOAD_ALBUM_SUCCESS:
-      return state.setIn(['ablum', 'page'], action.page).mergeIn(['album', 'result'], action.albums);
+      return state.setIn(['album', 'page'], action.more).mergeIn(['album', 'results'], action.albums);
     default:
       return state;
   }

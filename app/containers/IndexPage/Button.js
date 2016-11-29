@@ -12,6 +12,7 @@ const Button = styled.button`
   width: calc(50% - 12px);
   display: block;
   float: left;
+  background-color: ${(props) => props.highlight ? 'rgba(210, 210, 210, 0.2)' : ''};
   background-position: 20px center;
   background-image: url(${(props) => props.icon ? require('./assets/' + props.icon + '.png') : ''});
   background-repeat: no-repeat;

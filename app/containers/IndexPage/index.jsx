@@ -1,14 +1,20 @@
 /* global COLOR_3 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import selectIndexPage from './selectors';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { Motion, spring } from 'react-motion';
+
+import { selectPodcast, selectAblum } from './selectors';
+
+import Loading from 'react-loading-animation';
 import List from 'components/List';
 import UserButton from 'components/UserButton';
 
-import { showDialog, DIALOG_TYPE } from 'containers/App/actions';
+import * as indexActions from './actions';
 
 import styled from 'styled-components';
 
@@ -26,10 +32,38 @@ const PodcastButton = styled(Button)`
 const LinkWrapper = styled(Link)`
   color: ${COLOR_3};
 `;
+const ContentWrapper = styled.div`
+  width: 200%;
+`;
+const ListWrapper = styled.div`
+  width: 50%;
+  float: left;
+`;
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      current: 'podcast',
+    };
+  }
+  componentWillMount() {
+    this.props.loadPodcast();
+    this.props.loadAlbum();
+  }
+  handleChange = (state) =>
+     (e) => {
+       e.preventDefault();
+       this.setState({
+         ...this.state,
+         current: state,
+       });
+     }
+
   render() {
+    const { podcast, ablum } = this.props;
+    const { current } = this.state;
     return (
-      <div>
+      <div style={{ overflow: 'hidden' }}>
         <Helmet
           title="糖蒜广播-微信"
           meta={[
@@ -37,25 +71,41 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
           ]}
         />
         <Actions>
-          <PodcastButton icon="podcast">节目</PodcastButton>
+          <PodcastButton icon="podcast" onClick={this.handleChange('podcast')} highlight={current === 'podcast'}>节目</PodcastButton>
           <LinkWrapper to="/search">
             <Button icon="search">搜索</Button>
           </LinkWrapper>
-          <Button icon="ablum">专辑</Button>
+          <Button icon="ablum" onClick={this.handleChange('album')} highlight={current === 'album'}>专辑</Button>
         </Actions>
         <UserButton />
-        {/* <List /> */}
+        <Loading isLoading={podcast.length === 0}>
+          <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
+            {({ x }) =>
+              <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
+                <ListWrapper><List data={podcast} /></ListWrapper>
+                <ListWrapper><List data={podcast} /></ListWrapper>
+              </ContentWrapper>
+            }
+          </Motion>
+        </Loading>
       </div>
     );
   }
 }
 
-const mapStateToProps = selectIndexPage();
+IndexPage.propTypes = {
+  loadAlbum: PropTypes.func,
+  loadPodcast: PropTypes.func,
+  podcast: PropTypes.array,
+  ablum: PropTypes.array,
+};
 
 function mapDispatchToProps(dispatch) {
-  return {
-    onShowDialog: () => dispatch(showDialog(DIALOG_TYPE.loadding, 'heellosadjkasjd')),
-  };
+  return bindActionCreators(indexActions, dispatch);
 }
+const mapStateToProps = createStructuredSelector({
+  podcast: selectPodcast(),
+  ablum: selectAblum(),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

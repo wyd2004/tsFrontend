@@ -1,25 +1,26 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the indexPage state domain
- */
-const selectIndexPageDomain = () => (state) => state.get('index');
-
-/**
- * Other specific selectors
- */
+* Direct selector to the indexPage state domain
+*/
+const selectIndexPageDomain = () => (state) => state.get('IndexPage');
 
 
 /**
- * Default selector used by IndexPage
- */
+* Default selector used by IndexPage
+*/
 
-const selectIndexPage = () => createSelector(
+const selectPodcast = () => createSelector(
   selectIndexPageDomain(),
-  (indexState) => ({ indexState }),
+  (indexState) => indexState.getIn(['podcast', 'results']).toJS(),
 );
 
-export default selectIndexPage;
+const selectAblum = () => createSelector(
+  selectIndexPageDomain(),
+  (indexState) => indexState.getIn(['album', 'results']).toJS(),
+);
+
 export {
-  selectIndexPageDomain,
+  selectPodcast,
+  selectAblum,
 };

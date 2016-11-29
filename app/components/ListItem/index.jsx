@@ -5,11 +5,11 @@ import { Title, Desc, Ablum, Actions, Special, Rank, Time, CreateDate, Coast } f
 
 export default class ListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    id: React.PropTypes.string,
+    id: React.PropTypes.number,
     title: React.PropTypes.string,
     desc: React.PropTypes.string,
     coast: React.PropTypes.number,
-    createDate: React.PropTypes.number,
+    createDate: React.PropTypes.string,
     time: React.PropTypes.number,
     rank: React.PropTypes.number,
     ablumPicture: React.PropTypes.string,
@@ -21,6 +21,7 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
     return (
       <CardWrapS>
         <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
+        <Coast isBuy={isBuy} >{isBuy ? '已购买' : `RMB${parseInt(coast, 10).toFixed(2)}`}</Coast>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
         <Actions>
@@ -29,7 +30,6 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
           <CreateDate>{convDate(createDate)}</CreateDate>
           <Special>会员专享</Special>
         </Actions>
-        <Coast isBuy={isBuy} >{isBuy ? '已购买' : `RMB${parseInt(coast, 10).toFixed(2)}`}</Coast>
       </CardWrapS>
     );
   }

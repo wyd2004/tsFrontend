@@ -6,17 +6,17 @@
 
 export const LOAD_PODCAST = 'app/IndexPage/LOAD_PODCAST';
 export const LOAD_PODCAST_SUCCESS = 'app/IndexPage/LOAD_PODCAST_SUCCESS';
-export const LOAD_ALBUM = 'app/IndexPage/LOAD_ALBUM_SUCCESS';
+export const LOAD_ALBUM = 'app/IndexPage/LOAD_ALBUM';
 export const LOAD_ALBUM_SUCCESS = 'app/IndexPage/LOAD_ALBUM_SUCCESS';
 
-export function loadPodcast(page = 0) {
+export function loadPodcast(page = 1) {
   return {
     type: LOAD_PODCAST,
     page,
   };
 }
 
-export function loadAlbum(page = 0) {
+export function loadAlbum(page = 1) {
   return {
     type: LOAD_ALBUM,
     page,

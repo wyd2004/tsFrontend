@@ -9,10 +9,16 @@ const Title = styled.h1`
   color: ${COLOR_2};
   margin: 0;
   font-weight: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const Desc = styled.div`
   color: ${COLOR_3};
   font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const Ablum = styled.div`
   border-radius: 5px;
@@ -51,9 +57,8 @@ const CreateDate = styled(ActionsItem)`
   background: url(${require('./assets/time.png')}) no-repeat left;
 `;
 const Coast = styled(Button)`
-  position: absolute;
-  top: 12px;
-  right: 12px;
+  float: right;
+  margin-left: 10px;
   background-color: ${(props) => props.isBuy ? COLOR_3 : COLOR_1};
 `;
 

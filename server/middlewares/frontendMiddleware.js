@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
-
+const proxy = require('express-http-proxy');
 // Dev middleware
 const addDevMiddlewares = (app, webpackConfig) => {
   const webpack = require('webpack');
@@ -30,7 +30,13 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
-
+  app.use('/api/**', proxy('http://120.25.232.11', {
+    forwardPathAsync(req) {
+      return new Promise((resolve) => {
+        setTimeout(() => { resolve(require('url').parse(req.originalUrl).path.replace('/api', '/')); }, 1000);
+      });
+    },
+  }));
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
       if (err) {
