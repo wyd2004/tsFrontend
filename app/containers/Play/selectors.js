@@ -1,17 +1,26 @@
 import { createSelector } from 'reselect';
 
-const selectProfileDomain = () => (state) => state.get('profile');
+/**
+* Direct selector to the indexPage state domain
+*/
+const selectPlayDomain = () => (state) => state.get('play');
+
 
 /**
- * Default selector used by searchPage
- */
+* Default selector used by IndexPage
+*/
 
-const selectProfile = () => createSelector(
-  selectProfileDomain(),
-  (profileState) => ({ profileState }),
+const selectPodcast = () => createSelector(
+  selectPlayDomain(),
+  (state) => state.get('podcast').toJS(),
 );
 
-export default selectProfile;
+const selectHistory = () => createSelector(
+  selectPlayDomain(),
+  (state) => state.getIn(['history', 'results']).toJS(),
+);
+
 export {
-  selectProfileDomain,
+  selectPodcast,
+  selectHistory,
 };

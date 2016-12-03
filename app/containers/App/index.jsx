@@ -1,28 +1,31 @@
-/**
- *
- * App.react.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
 /* global COLOR_4 */
 import React from 'react';
+import { createStructuredSelector } from 'reselect';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getSearchObj } from 'utils/tools';
+import * as globalActions from './actions';
+import { selectCurrentUser } from './selectors';
+
 import styled from 'styled-components';
+
 
 const Warpper = styled.div`
   padding: 6px;
   overflow: hidden;
 `;
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
-  static propTypes = {
-    children: React.PropTypes.node,
-  };
+  componentWillMount() {
+    const { location, user, fetchAccessToken, authError } = this.props;
+    if (!user) {
+      authError();
+    }
+    const code = getSearchObj(location.search).code;
+    if (code) {
+      fetchAccessToken(code);
+    }
+  }
 
   render() {
     return (
@@ -32,3 +35,18 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+App.propTypes = {
+  children: React.PropTypes.node,
+  location: React.PropTypes.object,
+  user: React.PropTypes.object,
+  fetchAccessToken: React.PropTypes.func,
+  authError: React.PropTypes.func,
+};
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ ...globalActions }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

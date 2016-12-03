@@ -6,19 +6,17 @@
 
 import { fromJS } from 'immutable';
 
-import { SEARCH_SUCCESS, SEARCH_ERROR } from './actions';
+import { SEARCH_SUCCESS } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({
-  result: [],
+  results: [],
 });
 
 function searchPageReducer(state = initialState, action) {
   switch (action.type) {
     case SEARCH_SUCCESS:
-      return state.set('result', action.result);
-    case SEARCH_ERROR:
-      return state.set('result', null);
+      return state.set('results', action.result);
     default:
       return state;
   }

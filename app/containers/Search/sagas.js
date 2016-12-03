@@ -1,20 +1,27 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
-import request from 'utils/request';
+import fetchData from 'containers/App/sagas/fetchData';
 
-import { SEARCH, getSearchResult } from './actions';
-import { DIALOG_TYPE, showDialog } from 'containers/App/actions';
+import { SEARCH, searchResult } from './actions';
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export function* requestSearch() {
-  const username = 'jonneyyan';
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  try {
-    const result = yield call(request, requestURL);
-    yield put(getSearchResult(result));
-  } catch (err) {
-    yield put(showDialog(DIALOG_TYPE.failed, err));
+export function* requestSearch(action) {
+  const url = `/podcast/episode/?search=${action.content}`;
+  const results = yield call(fetchData, { url });
+  if (results) {
+    const memorizedResults = results.map((item) =>
+      ({
+        ...item,
+        desc: item.description || '暂无简介',
+        rank: item.episodes_count || 0,
+        ablumPicture: item.image,
+        time: item.length || 0,
+        coast: item.price || 0,
+        createDate: item.dt_updated,
+      })
+    );
+    yield put(searchResult(memorizedResults));
   }
 }
 

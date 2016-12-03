@@ -61,6 +61,9 @@ const Coast = styled(Button)`
   margin-left: 10px;
   background-color: ${(props) => props.isBuy ? COLOR_3 : COLOR_1};
 `;
+const Searched = styled.span`
+  color: ${COLOR_1};
+`;
 
 export {
   Title,
@@ -72,4 +75,5 @@ export {
   Time,
   CreateDate,
   Coast,
+  Searched,
 };

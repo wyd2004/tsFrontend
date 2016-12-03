@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
 * Direct selector to the indexPage state domain
 */
-const selectIndexPageDomain = () => (state) => state.get('IndexPage');
+const selectIndexPageDomain = () => (state) => state.get('indexPage');
 
 
 /**

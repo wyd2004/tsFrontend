@@ -13,39 +13,39 @@ const loadModule = (cb) => (componentModule) => {
 };
 /* eslint-disable */
 const routes = [
-  { path: '/preview',   name: 'preview',        module: 'HomePage' },
-  { path: '/',          name: 'indexPage',      module: 'IndexPage' },
-  { path: '/search',    name: 'searchPage',     module: 'Search' },
-  { path: '/profile',   name: 'profile',        module: 'Profile' },
-  { path: '/people',    name: 'people',         module: 'People' },
-  { path: '/play',      name: 'play',           module: 'Play' },
+  { path: '/preview',   name: 'preview',        modulePath: 'HomePage' },
+  { path: '/',          name: 'indexPage',      modulePath: 'IndexPage' },
+  { path: '/search',    name: 'search',         modulePath: 'Search' },
+  { path: '/profile',   name: 'profile',        modulePath: 'Profile' },
+  { path: '/people',    name: 'people',         modulePath: 'People' },
+  { path: '/play/:id',  name: 'play',           modulePath: 'Play' },
 ]
 /* eslint-enable */
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
-  const loadPage = ((module, cb) => {
+  const loadPage = ((modulePath, name, cb) => {
     const importModules = Promise.all([
-      System.import(`containers/${module}/reducer`),
-      System.import(`containers/${module}/sagas`),
-      System.import(`containers/${module}/index`),
+      System.import(`containers/${modulePath}/reducer`),
+      System.import(`containers/${modulePath}/sagas`),
+      System.import(`containers/${modulePath}/index`),
     ]);
 
     const renderRoute = loadModule(cb);
     importModules.then(([reducer, sagas, component]) => {
-      injectReducer(module, reducer.default);
+      injectReducer(name, reducer.default);
       injectSagas(sagas.default);
       renderRoute(component);
     });
 
     importModules.catch(errorLoading);
   });
-  return routes.map(({ module, path, name }) => (
+  return routes.map(({ modulePath, path, name }) => (
     {
       path,
       name,
       getComponent(nextState, cb) {
-        loadPage(module, cb);
+        loadPage(modulePath, name, cb);
       },
     }
   ));

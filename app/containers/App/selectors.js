@@ -1,4 +1,26 @@
-// selectLocationState expects a plain JS object for the routing state
+/**
+ * The global state selectors
+ */
+
+import { createSelector } from 'reselect';
+
+const selectGlobal = () => (state) => state.get('global');
+
+const selectCurrentUser = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('user')
+);
+
+const selectLoading = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('loading')
+);
+
+const selectDailog = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('dialog')
+);
+
 const selectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -16,5 +38,9 @@ const selectLocationState = () => {
 };
 
 export {
+  selectGlobal,
+  selectCurrentUser,
+  selectLoading,
+  selectDailog,
   selectLocationState,
 };

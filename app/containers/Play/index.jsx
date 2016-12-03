@@ -1,24 +1,32 @@
 /* global COLOR_1 COLOR_3 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Player from 'components/Player';
-import selectProfile from './selectors';
+import { selectPodcast, selectHistory } from './selectors';
+import { createStructuredSelector } from 'reselect';
+import { bindActionCreators } from 'redux';
+
+import * as playActions from './actions';
 
 import List from 'components/List';
 import Title from 'components/Title';
 
 
 export class Play extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  componentWillMount() {
+    const { id } = this.props.params;
+    this.props.loadPodcast(id);
+    this.props.loadHistory(id);
+  }
   render() {
     const mockList = [
-      { id: '1', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, isBuy: true },
-      { id: '2', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '3', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '4', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '5', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
+      { id: 1, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, isBuy: true },
+      { id: 2, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
+      { id: 3, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
+      { id: 4, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
+      { id: 5, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
     ];
     const mockPodcast = {
       srcShort: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
@@ -48,13 +56,23 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
     );
   }
 }
+Play.propTypes = {
+  loadPodcast: PropTypes.func,
+  loadHistory: PropTypes.func,
+  podcast: PropTypes.object,
+  history: PropTypes.array,
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
 
-const mapStateToProps = selectProfile();
+};
+const mapStateToProps = createStructuredSelector({
+  podcast: selectPodcast(),
+  history: selectHistory(),
+});
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // onSearch: (content) => dispatch(searchPodcast(content)),
-  };
+  return bindActionCreators(playActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Play);

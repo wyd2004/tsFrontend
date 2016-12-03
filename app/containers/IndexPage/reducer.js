@@ -5,7 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-import { LOAD_PODCAST_SUCCESS, LOAD_ALBUM_SUCCESS } from './actions';
+import { LOAD_PODCASTS_SUCCESS, LOAD_ALBUMS_SUCCESS } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -21,10 +21,14 @@ const initialState = fromJS({
 
 function indexPageReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_PODCAST_SUCCESS:
-      return state.setIn(['podcast', 'page'], action.more).mergeIn(['podcast', 'results'], action.podcasts);
-    case LOAD_ALBUM_SUCCESS:
-      return state.setIn(['album', 'page'], action.more).mergeIn(['album', 'results'], action.albums);
+    case LOAD_PODCASTS_SUCCESS:
+      return state
+      .setIn(['podcast', 'page'], action.more ? state.getIn(['podcast', 'page']) + 1 : null)
+      .mergeIn(['podcast', 'results'], action.podcasts);
+    case LOAD_ALBUMS_SUCCESS:
+      return state
+      .setIn(['album', 'page'], action.more ? state.getIn(['album', 'page']) + 1 : null)
+      .mergeIn(['album', 'results'], action.albums);
     default:
       return state;
   }

@@ -47,8 +47,9 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
     };
   }
   componentWillMount() {
-    this.props.loadPodcast();
-    this.props.loadAlbum();
+    const { podcast, ablum } = this.props;
+    podcast && this.props.loadPodcast();
+    ablum && this.props.loadAlbum();
   }
   handleChange = (state) =>
      (e) => {

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import selectSearchPage from './selectors';
 
 import SearchBar from 'components/SearchBar';
+import { Searched } from 'components/ListItem/style';
 
 import { searchPodcast } from './actions';
 
@@ -26,11 +27,25 @@ const Total = styled.span`
 
 
 export class SearchPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
-  handleSearch = () => {
-    this.props.onSearch('hello');
+  static propTypes = {
+    onSearch: React.PropTypes.func,
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchValue: '',
+    };
+  }
+  handleSearch = (value) => {
+    this.props.onSearch(value);
+    this.setState({
+      searchValue: value,
+    });
   }
   render() {
+    // const {resutls} = this.props;
+    const results = [];
+    const { searchValue } = this.state;
     return (
       <div>
         <Helmet
@@ -40,7 +55,7 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
           ]}
         />
         <SearchBar onSearch={this.handleSearch} />
-        <ResultBar>以下是包含{'混同'}的节目<Total>共有<span>10</span>个节目</Total></ResultBar>
+        { results.length !== 0 && <ResultBar>以下是包含<Searched>{searchValue}</Searched>的节目<Total>共有<span>{results.length}</span>个节目</Total></ResultBar> }
       </div>
     );
   }

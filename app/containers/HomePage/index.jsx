@@ -22,7 +22,7 @@ export default class App extends Component { // eslint-disable-line react/prefer
 
   render() {
     const mockList = [
-      { id: '1233sdasf', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
+      { id: '1233sdasf', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
     ];
     const mockPodcast = {
       srcShort: 'http://120.25.232.11/podcast/episode/3/full_file/',

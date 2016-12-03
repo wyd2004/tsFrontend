@@ -25,6 +25,10 @@
         "always"
       ],
       "no-confusing-arrow": 0,
+      "no-unused-expressions": [
+        "error",
+        { "allowShortCircuit": true }
+      ],
       "arrow-body-style": [
         2,
         "as-needed"

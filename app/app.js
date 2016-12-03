@@ -35,7 +35,7 @@ import 'sanitize.css/sanitize.css';
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
-store.runSaga(...globalSagas);
+store.runSaga(globalSagas);
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState

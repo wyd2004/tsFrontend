@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-
+const HOST = '/api';
 /**
  * Parses the JSON returned by a network request
  *
@@ -37,7 +37,7 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  return fetch(`${HOST}${url}`, options)
     .then(checkStatus)
     .then(parseJSON);
 }
