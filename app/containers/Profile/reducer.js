@@ -11,7 +11,7 @@ import { LOAD_SUBSCRIBE, LOAD_MEMBER, LOAD_PEOPLE } from './actions';
 // The initial state of the App
 const initialState = fromJS({
   subscribe: [],
-  member: [],
+  member: null,
   people: [],
 });
 

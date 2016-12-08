@@ -33,7 +33,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
   app.use('/api/**', proxy('http://120.25.232.11', {
     forwardPathAsync(req) {
       return new Promise((resolve) => {
-        setTimeout(() => { resolve(require('url').parse(req.originalUrl).path.replace('/api', '/')); }, 1000);
+        setTimeout(() => { resolve(require('url').parse(req.originalUrl).path); }, 1000);
       });
     },
   }));

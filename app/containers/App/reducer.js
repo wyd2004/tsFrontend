@@ -6,11 +6,18 @@
 
 import { fromJS } from 'immutable';
 
-import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED } from './actions';
+import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_PROFILE_SUCCESS, FETCH_ACCESS_TOKEN_SUCCESS } from './actions';
 
 export const key = 'USER_DATA';
 
-let user;
+let user = {
+  member_id: 1,
+  token: '1b4ea5daa3037b36f1beaddf562c7bda4d7e1337',
+  nickname: 'test_member',
+  avatar: 'https://tower.im/assets/default_avatars/jokul.jpg',
+  expire_datetime: '2016-11-20T14:36:32.427000Z',
+};
+// let user;
 try {
   const json = localStorage.getItem(key);
   if (json) {
@@ -25,8 +32,8 @@ try {
 const initialState = fromJS({
   dialog: null,
   loading: null,
-  user,
-});
+  user: null,
+}).set('user', user);
 
 function globalReducer(state = initialState, action) {
   switch (action.type) {
@@ -41,6 +48,10 @@ function globalReducer(state = initialState, action) {
       return state.set('loading', action.indentify);
     case LOADED:
       return state.set('loading', null);
+    case FETCH_ACCESS_TOKEN_SUCCESS:
+      return state.set('user', action.userData);
+    case FETCH_PROFILE_SUCCESS:
+      return state.mergeIn(['user'], action.userData);
     default:
       return state;
   }

@@ -2,13 +2,15 @@ import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import { LOAD_PODCASTS, LOAD_ALBUMS, podcastLoaded, ablumLoaded } from './actions';
 import fetchData from 'containers/App/sagas/fetchData';
+import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 
 export function* getData(action) {
   const isPodcast = action.type === LOAD_PODCASTS;
   const url = isPodcast ? `/podcast/episode/?page=${action.page}` : `/podcast/album/?page=${action.page}`;
   const loadedAction = isPodcast ? podcastLoaded : ablumLoaded;
-  const results = yield call(fetchData, { url });
-  if (results) {
+  const response = yield call(fetchData, { url });
+  if (response) {
+    const { results, next } = response;
     const memorizedResults = results.map((item) =>
     ({
       ...item,
@@ -20,7 +22,7 @@ export function* getData(action) {
       createDate: item.dt_updated,
     })
   );
-    yield put(loadedAction(memorizedResults));
+    yield put(loadedAction(memorizedResults, next));
   }
 }
 
@@ -34,6 +36,6 @@ export function* loadPodcastAlbum() {
 }
 
 // Bootstrap sagas
-export default [
+export default cancelSagaOnLocationChange([
   loadPodcastAlbum,
-];
+]);

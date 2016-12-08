@@ -5,7 +5,7 @@ export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
 export function* handleShowDialog() {
-  yield call(delay, 1000);
+  yield call(delay, 2000);
   yield put({ type: HIDE_DIALOG });
 }
 

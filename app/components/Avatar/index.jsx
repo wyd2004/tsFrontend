@@ -1,7 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router';
 
-const Wrapper = styled.a`
+const Wrapper = styled(Link)`
   display: inline-block;
   position: relative;
 `;
@@ -26,22 +27,21 @@ export default class Avatar extends PureComponent {
     isVip: false,
     alt: '头像',
     src: require('./assets/avatar.png'),
-    url: '###',
   };
 
   static propTypes = {
     src: PropTypes.string,
     isVip: PropTypes.bool,
     alt: PropTypes.string,
-    url: PropTypes.string,
+    id: PropTypes.number,
   };
 
   render() {
-    const { src, isVip, alt, url } = this.props;
+    const { src, isVip, alt, id } = this.props;
     const vipPng = require('./assets/vip.png');
 
     return (
-      <Wrapper href={url}>
+      <Wrapper to={`/special/${id}`}>
         <Img src={src} alt={alt} />
         {isVip ? (<VipIcon src={vipPng} />) : ''}
       </Wrapper>

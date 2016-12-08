@@ -19,6 +19,8 @@ export const LOADED = 'app/global/LOADED';
 export const AUTH_ERROR = 'app/global/AUTH_ERROR';
 export const FETCH_ACCESS_TOKEN = 'app/global/FETCH_ACCESS_TOKEN';
 export const FETCH_ACCESS_TOKEN_SUCCESS = 'app/global/FETCH_ACCESS_TOKEN_SUCCESS';
+export const FETCH_PROFILE = 'app/global/FETCH_PROFILE';
+export const FETCH_PROFILE_SUCCESS = 'app/global/FETCH_PROFILE_SUCCESS';
 
 export function loading(indentify) {
   return {
@@ -33,7 +35,6 @@ export function loaded(indentify) {
     indentify,
   };
 }
-
 
 export function showDialog(dialogType, message) {
   return {
@@ -50,7 +51,6 @@ export function authError(from) {
   };
 }
 
-
 export function fetchAccessToken(code) {
   return {
     type: FETCH_ACCESS_TOKEN,
@@ -58,10 +58,23 @@ export function fetchAccessToken(code) {
   };
 }
 
-
 export function fetchAccessTokenSuccess(userData) {
   return {
     type: FETCH_ACCESS_TOKEN_SUCCESS,
+    userData,
+  };
+}
+
+export function fetchProfile(id) {
+  return {
+    type: FETCH_PROFILE,
+    id,
+  };
+}
+
+export function profileLoaded(userData) {
+  return {
+    type: FETCH_PROFILE_SUCCESS,
     userData,
   };
 }

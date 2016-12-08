@@ -1,6 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
+import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 
 import { SEARCH, searchResult } from './actions';
 
@@ -42,6 +43,6 @@ export function* searchPoadcast() {
 }
 
 // Bootstrap sagas
-export default [
+export default cancelSagaOnLocationChange([
   searchPoadcast,
-];
+]);

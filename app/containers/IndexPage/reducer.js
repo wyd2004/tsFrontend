@@ -23,11 +23,11 @@ function indexPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PODCASTS_SUCCESS:
       return state
-      .setIn(['podcast', 'page'], action.more ? state.getIn(['podcast', 'page']) + 1 : null)
+      .setIn(['podcast', 'page'], action.next ? state.getIn(['podcast', 'page']) + 1 : null)
       .mergeIn(['podcast', 'results'], action.podcasts);
     case LOAD_ALBUMS_SUCCESS:
       return state
-      .setIn(['album', 'page'], action.more ? state.getIn(['album', 'page']) + 1 : null)
+      .setIn(['album', 'page'], action.next ? state.getIn(['album', 'page']) + 1 : null)
       .mergeIn(['album', 'results'], action.albums);
     default:
       return state;

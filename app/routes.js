@@ -13,12 +13,16 @@ const loadModule = (cb) => (componentModule) => {
 };
 /* eslint-disable */
 const routes = [
-  { path: '/preview',   name: 'preview',        modulePath: 'HomePage' },
-  { path: '/',          name: 'indexPage',      modulePath: 'IndexPage' },
-  { path: '/search',    name: 'search',         modulePath: 'Search' },
-  { path: '/profile',   name: 'profile',        modulePath: 'Profile' },
-  { path: '/people',    name: 'people',         modulePath: 'People' },
-  { path: '/play/:id',  name: 'play',           modulePath: 'Play' },
+  { path: '/preview',         name: 'preview',        modulePath: 'HomePage'        },
+  { path: '/',                name: 'indexPage',      modulePath: 'IndexPage'       },
+  { path: '/search',          name: 'search',         modulePath: 'Search'          },
+  { path: '/profile',         name: 'profile',        modulePath: 'Profile'         },  // 个人中心
+  { path: '/people',          name: 'people',         modulePath: 'People'          },  // 主播页
+  { path: '/play/:id',        name: 'play',           modulePath: 'Play'            },  // 播放页
+  { path: '/special/:id',     name: 'special',        modulePath: 'Special'         },  // 专辑栏目列表
+  { path: '/buy',             name: 'buy',            modulePath: 'Buy'             },  // 单次购买页
+  { path: '/buyFinish',       name: 'buyFinish',      modulePath: 'BuyFinish'       },  // 支付完成页
+  { path: '/subscription',    name: 'subscription',   modulePath: 'Subscription'    },  // 已订阅栏目列表页
 ]
 /* eslint-enable */
 export default function createRoutes(store) {

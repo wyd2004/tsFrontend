@@ -4,7 +4,7 @@ const CardWrap = styled.div`
   padding: 20px;
   border-radius: 2px;
   background: white;
-  margin: 6px;
+  margin: 6px 0;
   position: relative;
   overflow: hidden;
 `;

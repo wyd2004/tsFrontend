@@ -15,11 +15,12 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
     rank: React.PropTypes.number,
     ablumPicture: React.PropTypes.string,
     isBuy: React.PropTypes.bool,
+    buying: React.PropTypes.bool,
     searchValue: React.PropTypes.string,
   };
 
   render() {
-    const { id, title, desc, coast, createDate, time, rank, ablumPicture, isBuy, searchValue } = this.props;
+    const { id, title, desc, coast, createDate, time, rank, ablumPicture, isBuy, searchValue, buying } = this.props;
     const renderSearchValue = (string) => {
       const index = string.search(searchValue);
       if (searchValue && index !== -1) {
@@ -34,12 +35,17 @@ export default class ListItem extends React.PureComponent { // eslint-disable-li
           <Coast isBuy={isBuy} >{isBuy ? '已购买' : `RMB${parseInt(coast, 10).toFixed(2)}`}</Coast>
           <Title>{renderSearchValue(title)}</Title>
           <Desc>{renderSearchValue(desc)}</Desc>
-          <Actions>
-            <Rank>NO.{rank}</Rank>
-            <Time>{convAudioTime(time, '\'')}</Time>
-            <CreateDate>{convDate(createDate)}</CreateDate>
-            <Special>会员专享</Special>
-          </Actions>
+          {
+            buying
+            ? <Desc>购买后，该微信号对本节目有永久试听权</Desc>
+            : <Actions>
+              <Rank>NO.{rank}</Rank>
+              <Time>{convAudioTime(time, '\'')}</Time>
+              <CreateDate>{convDate(createDate)}</CreateDate>
+              <Special>会员专享</Special>
+            </Actions>
+          }
+
         </CardWrapS>
       </Link>
     );

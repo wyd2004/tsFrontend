@@ -13,24 +13,25 @@ import styled from 'styled-components';
 const Warpper = styled.div`
   padding: 6px;
   overflow: hidden;
+  height: 100vh;
 `;
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   componentWillMount() {
     const { location, user, fetchAccessToken, authError } = this.props;
-    if (!user) {
-      authError();
-    }
     const code = getSearchObj(location.search).code;
     if (code) {
       fetchAccessToken(code);
+    } else if (!user) {
+      authError();
     }
   }
 
   render() {
+    const { user } = this.props;
     return (
       <Warpper>
-        {React.Children.toArray(this.props.children)}
+        {user && React.Children.toArray(this.props.children)}
       </Warpper>
     );
   }

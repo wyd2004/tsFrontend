@@ -6,51 +6,41 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import selectProfile from './selectors';
 
-import Card from 'components/Card';
+import Card from 'components/Card/CardWrapS';
 import Title from 'components/Title';
 
-import MemberRights from 'components/MemberRights';
-import MembershipList from 'components/MembershipList';
-import Header from 'components/Header';
-import Collection from 'components/Collection';
+import AlbumHeader from 'components/AlbumHeader';
+import List from 'components/List';
 
 export class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    const mockMemberList = [
-      { id: 1, title: '糖蒜广播会员sad ', desc: '1231231', limit: '1年sd', price: 1000 },
-      { id: 2, title: '糖蒜广播会员123', desc: '', limit: '1年', price: 10 },
-      { id: 3, title: '糖蒜广播会员1', desc: '', limit: '1年', price: 10 },
-      { id: 4, title: '糖蒜广播会员', desc: '现在订阅就送超值大礼包', limit: '1年', price: 10 },
+    const mockList = [
+      { id: 1, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
+      { id: 3, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
+      { id: 4, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
+      { id: 5, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
     ];
-    const mockCollectionData = [{ text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }];
+    const ablumInfo = {
+      image: 'http://p4.music.126.net/xomieFDiQZkFO3bebFAuDg==/103354093026187.jpg?param=130y130',
+      title: '时间卡位',
+      amount: 123,
+      desc: '他是法国波旁王朝国王，也是世界历史上在位时间最长的君主之一。5岁那年被母后安娜抱上了国王宝座，开始了长达72年的漫长……',
+    };
+    const { image, title, amount, desc } = ablumInfo;
     return (
       <div>
         <Helmet
-          title="个人中心"
+          title="专辑列表"
           meta={[
-            { name: 'description', content: '糖蒜广播-个人中心' },
+            { name: 'description', content: '糖蒜广播-专辑列表' },
           ]}
         />
         <Card>
-          <Header isVip otherText={'2015-06-13'} isSelf userName={'xxxx'} toRenew={() => console.log(123)} />
+          <AlbumHeader image={image} title={title} amount={amount} desc={desc} />
         </Card>
-        <Title icon="vip">订阅栏目</Title>
-        <Card>
-          <Collection type={'album'} data={mockCollectionData} />
-        </Card>
-        <Title icon="vip">会员栏目</Title>
-        <Card>
-          <Collection type={'album'} data={mockCollectionData} />
-        </Card>
-        <Title icon="vip">按主播查看</Title>
-        <Card>
-          <Collection type={'avatar'} data={mockCollectionData} />
-        </Card>
-        <Title icon="vip">开通会员</Title>
-        <MembershipList data={mockMemberList} />
-        <Title icon="rights">会员特权</Title>
-        <MemberRights />
+        <Title icon="podcast">订阅栏目</Title>
+        <List data={mockList} />
       </div>
     );
   }
