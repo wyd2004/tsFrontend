@@ -11,8 +11,8 @@ import { Motion, spring } from 'react-motion';
 import { selectPodcast, selectAblum } from './selectors';
 
 import Loading from 'react-loading-animation';
-import List from 'components/List';
 import UserButton from 'components/UserButton';
+import PodcastItem from 'components/PodcastItem';
 
 import * as indexActions from './actions';
 
@@ -79,16 +79,18 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
           <Button icon="ablum" onClick={this.handleChange('album')} highlight={current === 'album'}>专辑</Button>
         </Actions>
         <UserButton />
-        <Loading isLoading={podcast.length === 0}>
-          <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
-            {({ x }) =>
-              <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
-                <ListWrapper><List data={podcast} /></ListWrapper>
-                <ListWrapper><List data={podcast} /></ListWrapper>
-              </ContentWrapper>
+        <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
+          {({ x }) =>
+            <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
+              <ListWrapper>
+                {podcast.map((item) => <PodcastItem {...item} />)}
+              </ListWrapper>
+              <ListWrapper>
+                {podcast.map((item) => <PodcastItem {...item} />)}
+              </ListWrapper>
+            </ContentWrapper>
             }
-          </Motion>
-        </Loading>
+        </Motion>
       </div>
     );
   }

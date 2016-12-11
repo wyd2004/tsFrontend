@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 
 import * as playActions from './actions';
 
-import List from 'components/List';
+import PodcastItem from 'components/PodcastItem';
 import Title from 'components/Title';
 
 
@@ -51,7 +51,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
         />
         <Player {...mockPodcast} />
         <Title icon="before">往期广播</Title>
-        <List data={mockList} />
+        {mockList.map((item) => <PodcastItem {...item} />)}
       </div>
     );
   }

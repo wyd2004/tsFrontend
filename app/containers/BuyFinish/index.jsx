@@ -5,9 +5,8 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import ListItem from 'components/ListItem';
 import CardOrigin from 'components/Card/CardWrap';
-import Button from 'components/ListItem/Button';
+import Button from 'components/PodcastItem/Button';
 import Title from 'components/Title';
 
 const Card = styled(CardOrigin)`
@@ -55,7 +54,6 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
           ]}
         />
         <Title icon="buy">节目购买</Title>
-        <ListItem {...mockData} />
         <Tips>
           <Desc>单月会员只要￥60！！还有多种特权</Desc>
           <Link to="/profile"><Button>我还是买会员吧</Button></Link>

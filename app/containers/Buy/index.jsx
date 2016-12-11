@@ -1,13 +1,18 @@
 /* global COLOR_1 COLOR_2 */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import ListItem from 'components/ListItem';
+import { selectPodcast } from './selectors';
+import { loadPodcast, requireOrder } from './actions';
+
+import PodcastItem from 'components/PodcastItem';
 import CardOrigin from 'components/Card/CardWrap';
-import Button from 'components/ListItem/Button';
+import Button from 'components/PodcastItem/Button';
 import Title from 'components/Title';
 
 const Card = styled(CardOrigin)`
@@ -15,7 +20,7 @@ const Card = styled(CardOrigin)`
 `;
 
 const Wrapper = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,12 +45,17 @@ const PayButton = styled(Button)`
 `;
 export class Buy extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
+    const { params } = this.props;
+    const { id } = params;
+    this.props.loadPodcast(id);
   }
   handlePay = () => {
-
+    const { params } = this.props;
+    const { id } = params;
+    this.props.requireOrder(id);
   }
   render() {
-    const mockData = { id: 123, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, buying: true };
+    const { item } = this.props;
     return (
       <Wrapper>
         <Helmet
@@ -55,10 +65,10 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
           ]}
         />
         <Title icon="buy">节目购买</Title>
-        <ListItem {...mockData} />
+        <PodcastItem {...item} />
         <Tips>
           <Desc>单月会员只要￥60！！还有多种特权</Desc>
-          <Link to="/profile"><Button>我还是买会员吧</Button></Link>
+          <Link to="/payBundle"><Button>我还是买会员吧</Button></Link>
         </Tips>
         <PayButton onClick={this.handlePay}>去支付</PayButton>
       </Wrapper>
@@ -66,15 +76,16 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 Buy.propTypes = {
-  podcast: PropTypes.shape({
-    id: React.PropTypes.number,
-    title: React.PropTypes.string,
-    desc: React.PropTypes.string,
-    coast: React.PropTypes.number,
-    isBuy: React.PropTypes.bool,
-    ablumPicture: React.PropTypes.string,
-  }),
-
+  item: PropTypes.object,
+  params: PropTypes.object,
+  loadPodcast: PropTypes.func,
+  requireOrder: PropTypes.func,
 };
 
-export default Buy;
+const mapStateToProps = selectPodcast();
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ loadPodcast, requireOrder }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Buy);

@@ -1,3 +1,4 @@
+/* global WX_APP_ID */
 import { takeEvery } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import { FETCH_ACCESS_TOKEN, AUTH_ERROR, FETCH_PROFILE, fetchAccessTokenSuccess, fetchProfile, profileLoaded } from 'containers/App/actions';
@@ -9,7 +10,7 @@ import { key } from '../reducer';
 function* weixinWatcher() {
   const handleLogin = (action) => {
     let url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
-    url += '?appid=wx4ff6dd6b015ca309';
+    url += `?appid=${WX_APP_ID}`;
     url += `&redirect_uri=${encodeURIComponent(action.from)}`;
     url += '&response_type=code';
     url += '&scope=snsapi_userinfo';

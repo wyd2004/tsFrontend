@@ -6,23 +6,38 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_SUBSCRIBE, LOAD_MEMBER, LOAD_PEOPLE } from './actions';
+import { LOAD_SUBSCRIPTION_SUCCESS, LOAD_VIP_SUCCESS, LOAD_PEOPLE_SUCCESS } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({
-  subscribe: [],
-  member: null,
-  people: [],
+  subscribe: {
+    page: 1,
+    results: [],
+  },
+  member: {
+    page: 1,
+    results: [],
+  },
+  people: {
+    page: 1,
+    results: [],
+  },
 });
 
 function profileReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_SUBSCRIBE:
-      return state.set('subscribe', action.result);
-    case LOAD_MEMBER:
-      return state.set('member', action.result);
-    case LOAD_PEOPLE:
-      return state.set('people', action.result);
+    case LOAD_SUBSCRIPTION_SUCCESS:
+      return state
+        .setIn(['subscribe', 'page'], action.next ? state.getIn(['subscribe', 'page']) + 1 : state.getIn(['subscribe', 'page']))
+        .setIn(['subscribe', 'results'], action.results);
+    case LOAD_VIP_SUCCESS:
+      return state
+        .setIn(['member', 'page'], action.next ? state.getIn(['member', 'page']) + 1 : state.getIn(['subscribe', 'page']))
+        .setIn(['member', 'results'], action.results);
+    case LOAD_PEOPLE_SUCCESS:
+      return state
+        .setIn(['people', 'page'], action.next ? state.getIn(['people', 'page']) + 1 : state.getIn(['subscribe', 'page']))
+        .setIn(['people', 'results'], action.results);
     default:
       return state;
   }

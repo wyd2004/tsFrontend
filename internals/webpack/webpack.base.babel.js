@@ -74,6 +74,7 @@ module.exports = (options) => ({
       COLOR_2: '"#5f5f5f"',
       COLOR_3: '"#a2a2a2"',
       COLOR_4: '"#f6f6f6"',
+      WX_APP_ID: '"wx9fe6e07f6e94aaec"',
       FONT: '""',
     }),
     new webpack.NamedModulesPlugin(),

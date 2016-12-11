@@ -13,17 +13,11 @@ const Wrapper = styled(Link)`
 const Img = styled.img`
   width: 64px;
   height: 64px;
+  border-radius: 64px;
   display: block;
   margin: auto;
 `;
 
-const FlagIcon = styled.img`
-  position: absolute;
-  width: 30px;
-  height: 16px;
-  top: -6px;
-  right: -12px;
-`;
 const Text = styled.span`
   margin-top: 6px;
   font-size: 14px;
@@ -36,20 +30,16 @@ export default class Album extends PureComponent {
 
   static propTypes = {
     image: PropTypes.string,
-    isNew: PropTypes.bool,
     title: PropTypes.string,
-    to: PropTypes.string,
     id: PropTypes.number,
   };
 
   render() {
-    const { image, isNew, title, id, to } = this.props;
-    const newPng = require('./assets/new.png');
+    const { image, title, id } = this.props;
 
     return (
-      <Wrapper to={to || `/special/${id}`}>
+      <Wrapper to={`/people/${id}`}>
         <Img src={image} alt={title} />
-        {isNew ? (<FlagIcon src={newPng} />) : ''}
         <Text>{title}</Text>
       </Wrapper>
     );

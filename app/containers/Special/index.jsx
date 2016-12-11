@@ -7,10 +7,9 @@ import styled from 'styled-components';
 import selectProfile from './selectors';
 
 import Card from 'components/Card/CardWrapS';
-import Title from 'components/Title';
 
 import AlbumHeader from 'components/AlbumHeader';
-import List from 'components/List';
+import PodcastItem from 'components/PodcastItem';
 
 export class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -39,8 +38,7 @@ export class Special extends React.Component { // eslint-disable-line react/pref
         <Card>
           <AlbumHeader image={image} title={title} amount={amount} desc={desc} />
         </Card>
-        <Title icon="podcast">订阅栏目</Title>
-        <List data={mockList} />
+        {mockList.map((item) => <PodcastItem {...item} />) }
       </div>
     );
   }

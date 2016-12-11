@@ -36,7 +36,7 @@ export default class Collection extends PureComponent {
       <Wrap>
         <CollectionList>
           {collection}
-          {(data.length >= 7 && type === 'album') ? (<CollectionItemWrap><CollectionItem type={type} src={addPic} url={'###'} alt={'查看全部'} text={'查看全部'} /></CollectionItemWrap>) : null}
+          {(data.length >= 7 && type === 'album') ? (<CollectionItemWrap><CollectionItem type={type} src={addPic} isAll alt={'查看全部'} text={'查看全部'} /></CollectionItemWrap>) : null}
         </CollectionList>
       </Wrap>
     );

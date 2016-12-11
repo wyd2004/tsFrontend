@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import selectSearchPage from './selectors';
 
 import SearchBar from 'components/SearchBar';
-import { Searched } from 'components/ListItem/style';
+import { Searched } from 'components/PodcastItem/style';
 
 import { searchPodcast } from './actions';
 

@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { loadSubscription } from 'containers/Profile/actions';
-import { selectSubscription } from 'containers/Profile/selectors';
+import { loadVip } from 'containers/Profile/actions';
+import { selectVip } from 'containers/Profile/selectors';
 
 import PodcastItem from 'components/PodcastItem';
 import Title from 'components/Title';
 
 const Wrapper = styled.div`
 `;
-export class Subscription extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class Vip extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     const { podcasts } = this.props;
@@ -22,27 +22,27 @@ export class Subscription extends React.Component { // eslint-disable-line react
     return (
       <Wrapper>
         <Helmet
-          title="已订阅栏目"
+          title="会员栏目"
           meta={[
-            { name: 'description', content: '糖蒜广播-已订阅栏目' },
+            { name: 'description', content: '糖蒜广播-会员栏目' },
           ]}
         />
-        <Title icon="podcast">订阅栏目</Title>
+        <Title icon="podcast">会员栏目</Title>
         {data.map((item) => <PodcastItem {...item} />)}
       </Wrapper>
     );
   }
 }
-Subscription.propTypes = {
+Vip.propTypes = {
   podcasts: PropTypes.object,
-  loadSubscription: PropTypes.func,
+  loadVip: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loadSubscription }, dispatch);
+  return bindActionCreators({ loadVip }, dispatch);
 }
 const mapStateToProps = createStructuredSelector({
-  podcasts: selectSubscription(),
+  podcasts: selectVip(),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Subscription);
+export default connect(mapStateToProps, mapDispatchToProps)(Vip);

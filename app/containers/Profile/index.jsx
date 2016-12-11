@@ -10,26 +10,26 @@ import { createStructuredSelector } from 'reselect';
 
 import Card from 'components/Card';
 import Title from 'components/Title';
+import Album from 'components/Album';
+import People from 'components/People';
 
-import MemberRights from 'components/MemberRights';
-import MembershipList from 'components/MembershipList';
 import Header from 'components/Header';
-import Collection from 'components/Collection';
-
+const Wrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 export class Profile extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     const { user } = this.props;
     const { expire_datetime: expire, nickname } = user;
     const isVip = expire !== false;
-    console.log(user);
-    const mockMemberList = [
-      { id: 1, title: '糖蒜广播会员sad ', desc: '1231231', limit: '1年sd', price: 1000 },
-      { id: 2, title: '糖蒜广播会员123', desc: '', limit: '1年', price: 10 },
-      { id: 3, title: '糖蒜广播会员1', desc: '', limit: '1年', price: 10 },
-      { id: 4, title: '糖蒜广播会员', desc: '现在订阅就送超值大礼包', limit: '1年', price: 10 },
+    const mockCollectionData = [
+      { title: 'a', id: 1 }, { title: 'a', id: 4 },
+      { title: 'a', id: 2 }, { title: 'a', id: 5 }, { title: 'a', id: 7 },
+      { title: 'a', id: 3 }, { title: 'a', id: 6 },
     ];
-    const mockCollectionData = [{ text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }, { text: 'a' }];
+    const addPic = require('./add.png');
     return (
       <div>
         <Helmet
@@ -41,33 +41,26 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
         <Card>
           <Header isVip={isVip} otherText={moment(expire).format('YYYY/MM/DD')} isSelf userName={nickname} toRenew={() => console.log(123)} />
         </Card>
-        {
-          expire
-          ? (
-            <div>
-              <Title icon="vip">订阅栏目</Title>
-              <Card>
-                <Collection type={'album'} data={mockCollectionData} />
-              </Card>
-              <Title icon="vip">会员栏目</Title>
-              <Card>
-                <Collection type={'album'} data={mockCollectionData} />
-              </Card>
-              <Title icon="vip">按主播查看</Title>
-              <Card>
-                <Collection type={'avatar'} data={mockCollectionData} />
-              </Card>
-            </div>
-          )
-          : (
-            <div>
-              <Title icon="vip">开通会员</Title>
-              <MembershipList data={mockMemberList} />
-              <Title icon="rights">会员特权</Title>
-              <MemberRights />
-            </div>
-          )
-        }
+        <Title icon="vip">订阅栏目</Title>
+        <Card>
+          <Wrap>
+            {mockCollectionData.map((album) => <Album key={album.id} {...album} />)}
+            {mockCollectionData.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/subscription" />}
+          </Wrap>
+        </Card>
+        <Title icon="vip">会员栏目</Title>
+        <Card>
+          <Wrap>
+            {mockCollectionData.map((album) => <Album key={album.id} {...album} />)}
+            {mockCollectionData.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/vip" />}
+          </Wrap>
+        </Card>
+        <Title icon="vip">按主播查看</Title>
+        <Card>
+          <Wrap>
+            {mockCollectionData.map((host) => <People key={host.id} {...host} />)}
+          </Wrap>
+        </Card>
       </div>
     );
   }

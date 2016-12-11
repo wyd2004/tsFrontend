@@ -7,7 +7,7 @@ import selectProfile from './selectors';
 
 import Card from 'components/Card';
 
-import List from 'components/List';
+import PodcastItem from 'components/PodcastItem';
 import PeopleProfile from 'components/PeopleProfile';
 
 
@@ -37,7 +37,7 @@ export class People extends React.Component { // eslint-disable-line react/prefe
             username={'大王王大大王'}
           />
         </Card>
-        <List data={mockList} />
+        {mockList.map((item) => <PodcastItem {...item} />)}
       </div>
     );
   }

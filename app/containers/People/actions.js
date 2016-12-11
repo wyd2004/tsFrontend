@@ -1,28 +1,29 @@
-/*
- *
- * IndexPage actions
- *
- */
+export const LOAD_PEOPLE = 'app/People/LOAD_PEOPLE';
+export const LOAD_PEOPLE_SUCCESS = 'app/People/LOAD_PEOPLE_SUCCESS';
+export const LOAD_PEOPLE_PODCASTS = 'app/People/LOAD_PEOPLE_PODCASTS';
+export const LOAD_PEOPLE_PODCASTS_SUCCESS = 'app/People/LOAD_PEOPLE_PODCASTS_SUCCESS';
 
-export const LOAD_SUBSCRIBE = 'app/Profile/LOAD_SUBSCRIBE';
-export const LOAD_MEMBER = 'app/Profile/LOAD_MEMBER';
-export const LOAD_PEOPLE = 'app/Profile/LOAD_PEOPLE';
-
-export function loadSubscribe(result) {
-  return {
-    type: LOAD_SUBSCRIBE,
-    result,
-  };
-}
-export function loadMember(result) {
-  return {
-    type: LOAD_MEMBER,
-    result,
-  };
-}
-export function loadPeople(result) {
+export function loadPeople(id) {
   return {
     type: LOAD_PEOPLE,
+    id,
+  };
+}
+export function peopleLoaded(result) {
+  return {
+    type: LOAD_PEOPLE_SUCCESS,
+    result,
+  };
+}
+export function loadPodcast(id) {
+  return {
+    type: LOAD_PEOPLE_PODCASTS,
+    id,
+  };
+}
+export function podcastLoaded(result) {
+  return {
+    type: LOAD_PEOPLE_PODCASTS_SUCCESS,
     result,
   };
 }

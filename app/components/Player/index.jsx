@@ -7,7 +7,7 @@ import { convDate } from 'utils/tools';
 import ProgressBar from 'components/ProgressBar';
 import Card from 'components/Card';
 
-import Button from 'components/ListItem/Button';
+import Button from 'components/PodcastItem/Button';
 
 const Wrapper = styled.div`
   & audio {
@@ -87,7 +87,7 @@ const Coast = styled.span`
   margin-bottom: 6px;
 `;
 const Date = styled(Coast)`
-  background-image: url(${require('../ListItem/assets/time.png')});
+  background-image: url(${require('../PodcastItem/assets/time.png')});
 `;
 const Subscribe = styled(Button)`
   float: right;
@@ -97,6 +97,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
   static propTypes = {
     srcShort: React.PropTypes.string,
     src: React.PropTypes.string,
+    id: React.PropTypes.number,
     ablum: React.PropTypes.string,
     canPlay: React.PropTypes.bool,
     time: React.PropTypes.number,
@@ -148,7 +149,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
   render() {
-    const { srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast } = this.props;
+    const { id, srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast } = this.props;
     const { currentTime, loaded, played } = this.state;
 
     return (
@@ -174,7 +175,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
             <Next></Next>
           </Actions>
         </Card>
-        <Card2>试听5分钟，完整收听请<StyledLink>开通会员</StyledLink>或<StyledLink>购买本节目</StyledLink></Card2>
+        <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/${id}`}>购买本节目</StyledLink></Card2>
         <Card>
           { !canPlay && <Subscribe>订阅</Subscribe> }
           <Title>{title}</Title>

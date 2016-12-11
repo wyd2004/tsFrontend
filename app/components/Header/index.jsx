@@ -1,5 +1,6 @@
 /* global COLOR_1 COLOR_2 COLOR_3 COLOR_4 */
 import React, { PureComponent, PropTypes } from 'react';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 
 import Avatar from '../Avatar';
@@ -32,7 +33,7 @@ const OtherText = styled.span`
   color: ${COLOR_3};
 `;
 
-const RenewWrap = styled.span`
+const RenewWrap = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,7 +88,7 @@ export default class Header extends PureComponent {
           <UserName>{userName}</UserName>
           <OtherText>{headerText}</OtherText>
         </TextWrap>
-        {isVip && isSelf ? <RenewWrap onClick={toRenew}><RenewIcon src={require('./assets/renew.png')}></RenewIcon><RenewText>续费</RenewText></RenewWrap> : null}
+        {isVip && isSelf ? <RenewWrap to="/project"><RenewIcon src={require('./assets/renew.png')}></RenewIcon><RenewText>续费</RenewText></RenewWrap> : null}
       </Wrapper>
     );
   }

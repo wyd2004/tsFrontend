@@ -33,15 +33,14 @@ export default class Avatar extends PureComponent {
     src: PropTypes.string,
     isVip: PropTypes.bool,
     alt: PropTypes.string,
-    id: PropTypes.number,
   };
 
   render() {
-    const { src, isVip, alt, id } = this.props;
+    const { src, isVip, alt } = this.props;
     const vipPng = require('./assets/vip.png');
 
     return (
-      <Wrapper to={`/special/${id}`}>
+      <Wrapper>
         <Img src={src} alt={alt} />
         {isVip ? (<VipIcon src={vipPng} />) : ''}
       </Wrapper>

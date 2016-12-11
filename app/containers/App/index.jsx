@@ -5,15 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getSearchObj } from 'utils/tools';
 import * as globalActions from './actions';
-import { selectCurrentUser } from './selectors';
+import { selectCurrentUser, selectLoading, selectDailog } from './selectors';
 
 import styled from 'styled-components';
-
+import DialogBox from 'components/DialogBox';
 
 const Warpper = styled.div`
   padding: 6px;
   overflow: hidden;
-  height: 100vh;
 `;
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -28,10 +27,12 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
   }
 
   render() {
-    const { user } = this.props;
+    const { user, load, dialog } = this.props;
     return (
       <Warpper>
         {user && React.Children.toArray(this.props.children)}
+        {load && <DialogBox type="Loading" />}
+        {dialog && <DialogBox type={dialog.type} message={dialog.message} />}
       </Warpper>
     );
   }
@@ -42,9 +43,13 @@ App.propTypes = {
   user: React.PropTypes.object,
   fetchAccessToken: React.PropTypes.func,
   authError: React.PropTypes.func,
+  load: React.PropTypes.string,
+  dialog: React.PropTypes.object,
 };
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser(),
+  load: selectLoading(),
+  dialog: selectDailog(),
 });
 
 function mapDispatchToProps(dispatch) {
