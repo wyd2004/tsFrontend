@@ -12,12 +12,12 @@ const selectPlayDomain = () => (state) => state.get('play');
 
 const selectPodcast = () => createSelector(
   selectPlayDomain(),
-  (state) => state.get('podcast').toJS(),
+  (state) => state.get('podcast'),
 );
 
 const selectHistory = () => createSelector(
   selectPlayDomain(),
-  (state) => state.getIn(['history', 'results']).toJS(),
+  (state) => state.get('history').toJS(),
 );
 
 export {

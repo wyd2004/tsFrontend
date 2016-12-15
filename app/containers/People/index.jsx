@@ -2,8 +2,13 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Helmet from 'react-helmet';
-import selectProfile from './selectors';
+import { createStructuredSelector } from 'reselect';
+
+import { selectProfile, selectPodcast } from './selectors';
+import * as peopleActions from './actions';
+
 
 import Card from 'components/Card';
 
@@ -12,8 +17,13 @@ import PeopleProfile from 'components/PeopleProfile';
 
 
 export class People extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  componentWillMount() {
+    this.props.loadPodcast();
+    this.props.loadPeople();
+  }
   render() {
+    const { people, podcast } = this.props;
+    console.log(people, podcast);
     const mockList = [
       { id: '1', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, isBuy: true },
       { id: '2', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
@@ -42,13 +52,19 @@ export class People extends React.Component { // eslint-disable-line react/prefe
     );
   }
 }
-
-const mapStateToProps = selectProfile();
+People.propTypes = {
+  people: React.PropTypes.object,
+  podcast: React.PropTypes.object,
+  loadPodcast: React.PropTypes.func,
+  loadPeople: React.PropTypes.func,
+};
+const mapStateToProps = createStructuredSelector({
+  profile: selectProfile(),
+  podcast: selectPodcast(),
+});
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // onSearch: (content) => dispatch(searchPodcast(content)),
-  };
+  return bindActionCreators({ ...peopleActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(People);

@@ -1,11 +1,86 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga';
+import { put, fork, call, select } from 'redux-saga/effects';
+import fetchData from 'containers/App/sagas/fetchData';
+import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
+import { selectCurrentUser } from 'containers/App/selectors';
 
-// Individual exports for testing
-export function* defaultSaga() {
-  return;
+import { LOAD_SUBSCRIPTION, LOAD_VIP, LOAD_PEOPLE, subscriptionLoaded, vipLoaded, peopleLoaded } from './actions';
+
+export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export function* requestSubscribe(action) {
+  const user = yield select(selectCurrentUser());
+  const url = `/member/${user.member_id}/subscription/album/?page=${action.page}`;
+  const options = { headers: { token: user.token } };
+  const response = yield call(fetchData, { url, options });
+  if (response) {
+    const { results } = response;
+    const memorizedResults = results.map((item) =>
+      ({
+        ...item,
+      })
+    );
+    yield put(subscriptionLoaded(memorizedResults));
+  }
 }
 
-// All sagas to be loaded
-export default [
-  defaultSaga,
-];
+export function* subscribeWatcher() {
+  yield fork(takeLatest, LOAD_SUBSCRIPTION, requestSubscribe);
+}
+
+export function* subscribe() {
+  yield fork(subscribeWatcher);
+}
+
+export function* requestVip(action) {
+  const user = yield select(selectCurrentUser());
+  const url = `/member/${user.member_id}/purchase/album/?page=${action.page}`;
+  const options = { headers: { token: user.token } };
+  const response = yield call(fetchData, { url, options });
+  if (response) {
+    const { results } = response;
+    const memorizedResults = results.map((item) =>
+      ({
+        ...item,
+      })
+    );
+    yield put(vipLoaded(memorizedResults));
+  }
+}
+
+export function* vipWatcher() {
+  yield fork(takeLatest, LOAD_VIP, requestVip);
+}
+
+export function* vip() {
+  yield fork(vipWatcher);
+}
+
+export function* requestPeople(action) {
+  const url = `/podcast/people/?page=${action.page}`;
+  const response = yield call(fetchData, { url });
+  if (response) {
+    const { results } = response;
+    const memorizedResults = results.map((item) =>
+      ({
+        ...item,
+      })
+    );
+    yield put(peopleLoaded(memorizedResults));
+  }
+}
+
+export function* peopleWatcher() {
+  yield fork(takeLatest, LOAD_PEOPLE, requestPeople);
+}
+
+export function* people() {
+  yield fork(peopleWatcher);
+}
+
+// Bootstrap sagas
+export default cancelSagaOnLocationChange([
+  subscribe,
+  vip,
+  people,
+]);

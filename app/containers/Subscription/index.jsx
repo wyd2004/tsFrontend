@@ -14,7 +14,9 @@ import Title from 'components/Title';
 const Wrapper = styled.div`
 `;
 export class Subscription extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  componentWillMount() {
+    this.props.loadSubscription();
+  }
   render() {
     const { podcasts } = this.props;
     const { results: data } = podcasts;

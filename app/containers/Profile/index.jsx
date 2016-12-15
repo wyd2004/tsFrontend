@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import moment from 'moment';
 import { selectCurrentUser } from 'containers/App/selectors';
-import { createStructuredSelector } from 'reselect';
+
+import * as profileActions from './actions';
+import { selectSubscription, selectVip, selectPeople } from './selectors';
 
 import Card from 'components/Card';
 import Title from 'components/Title';
@@ -19,9 +23,14 @@ const Wrap = styled.div`
   flex-wrap: wrap;
 `;
 export class Profile extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  componentWillMount() {
+    this.props.loadSubscription();
+    this.props.loadVip();
+    this.props.loadPeople();
+  }
   render() {
-    const { user } = this.props;
+    const { user, subs, vip, people } = this.props;
+    console.log(subs, vip, people);
     const { expire_datetime: expire, nickname } = user;
     const isVip = expire !== false;
     const mockCollectionData = [
@@ -67,16 +76,22 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
 }
 Profile.propTypes = {
   user: React.PropTypes.object,
+  subs: React.PropTypes.object,
+  vip: React.PropTypes.object,
+  people: React.PropTypes.object,
+  loadSubscription: React.PropTypes.func,
+  loadVip: React.PropTypes.func,
+  loadPeople: React.PropTypes.func,
 };
 const mapStateToProps = createStructuredSelector({
   user: selectCurrentUser(),
-
+  subs: selectSubscription(),
+  vip: selectVip(),
+  people: selectPeople(),
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // onSearch: (content) => dispatch(searchPodcast(content)),
-  };
+  return bindActionCreators({ ...profileActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

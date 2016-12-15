@@ -10,7 +10,7 @@ import { LOAD_PODCAST_SUCCESS, LOAD_HISTORY_SUCCESS } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({
-  podcast: {},
+  podcast: null,
   history: {
     page: 1,
     results: [],
@@ -23,7 +23,7 @@ function profileReducer(state = initialState, action) {
       return state.set('podcast', action.result);
     case LOAD_HISTORY_SUCCESS:
       return state
-      .set('history', action.more ? state.getIn(['album', 'page']) + 1 : null)
+      .set('history', action.more ? state.getIn(['history', 'page']) + 1 : null)
       .setIn(['history', 'results'], action.result);
     default:
       return state;
