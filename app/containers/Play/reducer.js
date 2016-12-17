@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 
-import { LOAD_PODCAST_SUCCESS, LOAD_HISTORY_SUCCESS } from './actions';
+import { LOAD_PODCAST_SUCCESS, LOAD_HISTORY_SUCCESS, SUBSCRIBE_SUCCESS } from './actions';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -25,6 +25,9 @@ function profileReducer(state = initialState, action) {
       return state
       .set('history', action.more ? state.getIn(['history', 'page']) + 1 : null)
       .setIn(['history', 'results'], action.result);
+    case SUBSCRIBE_SUCCESS:
+      return state
+      .set('podcast', { ...state.get('podcast'), subscribed: true });
     default:
       return state;
   }

@@ -10,9 +10,9 @@ import { Motion, spring } from 'react-motion';
 
 import { selectPodcast, selectAblum } from './selectors';
 
-import Loading from 'react-loading-animation';
 import UserButton from 'components/UserButton';
 import PodcastItem from 'components/PodcastItem';
+import Infinite from 'components/Infinite';
 
 import * as indexActions from './actions';
 
@@ -51,6 +51,9 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
     podcast.length === 0 && this.props.loadPodcast();
     ablum.length === 0 && this.props.loadAlbum();
   }
+  handleRefresh = () => {
+    console.log('refresh');
+  }
   handleChange = (state) =>
      (e) => {
        e.preventDefault();
@@ -81,14 +84,16 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
         <UserButton />
         <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
           {({ x }) =>
-            <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
-              <ListWrapper>
-                {podcast.map((item) => <PodcastItem {...item} />)}
-              </ListWrapper>
-              <ListWrapper>
-                {podcast.map((item) => <PodcastItem {...item} />)}
-              </ListWrapper>
-            </ContentWrapper>
+            <Infinite onRefresh={this.handleRefresh}>
+              <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
+                <ListWrapper>
+                  {podcast.map((item) => <PodcastItem {...item} />)}
+                </ListWrapper>
+                <ListWrapper>
+                  {podcast.map((item) => <PodcastItem {...item} />)}
+                </ListWrapper>
+              </ContentWrapper>
+            </Infinite>
             }
         </Motion>
       </div>

@@ -41,8 +41,8 @@ const Next = styled(Prev)`
 `;
 const PlayButton = styled.span`
   background-image: url(${require('./assets/play.png')});
-  background-size: 60px 60px;
-  background-position-x: ${(props) => !props.played ? 0 : 25}px;
+  background-size: 120px 60px;
+  background-position-x: ${(props) => !props.played ? 0 : -60}px;
   height: 60px;
   width: 60px;
   display: inline-block;
@@ -175,7 +175,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
             <Next></Next>
           </Actions>
         </Card>
-        <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/${id}`}>购买本节目</StyledLink></Card2>
+        <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>
         <Card>
           { !canPlay && <Subscribe>订阅</Subscribe> }
           <Title>{title}</Title>
