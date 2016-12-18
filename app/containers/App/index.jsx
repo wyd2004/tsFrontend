@@ -8,10 +8,11 @@ import * as globalActions from './actions';
 import { selectCurrentUser, selectLoading, selectDailog } from './selectors';
 
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import DialogBox from 'components/DialogBox';
 
 const Warpper = styled.div`
-  padding: 6px;
+  padding: ${rem('6px')};
   overflow: hidden;
 `;
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function

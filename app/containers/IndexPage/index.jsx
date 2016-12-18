@@ -17,6 +17,7 @@ import Infinite from 'components/Infinite';
 import * as indexActions from './actions';
 
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 
 import Button from './button';
 
@@ -24,10 +25,10 @@ const Actions = styled.div`
   overflow: hidden;
 `;
 const PodcastButton = styled(Button)`
-  height: 110px;
-  line-height: 80px;
-  background-size: 55px;
-  text-indent: 40px;
+  height: ${rem('110px')};
+  line-height: ${rem('80px')};
+  background-size: ${rem('55px')};
+  text-indent: ${rem('40px')};
 `;
 const LinkWrapper = styled(Link)`
   color: ${COLOR_3};

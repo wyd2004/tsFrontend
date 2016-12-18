@@ -1,6 +1,7 @@
 /* global COLOR_1 */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import CollectionItem from '../CollectionItem';
 
 const Wrap = styled.div`
@@ -11,11 +12,11 @@ const Wrap = styled.div`
 const CollectionItemWrap = styled.span`
   display: inline-block;
   width: 25%;
-  margin-bottom: 6px;
+  margin-bottom: ${rem('6px')};
 `;
 
 const CollectionList = styled.div`
-      margin-bottom: -15px;
+      margin-bottom: -${rem('15px')};
 `;
 
 export default class Collection extends PureComponent {

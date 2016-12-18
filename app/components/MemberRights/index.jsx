@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import Card from 'components/Card';
 
 const List = styled.ul`
@@ -9,7 +10,7 @@ const List = styled.ul`
   margin: 0;
   list-style: none;
   overflow: hidden;
-  margin-bottom: -20px;
+  margin-bottom: -${rem('20px')};
 `;
 const ListItem = styled.li`
   float: left;
@@ -17,18 +18,18 @@ const ListItem = styled.li`
   text-align: center;
 
   & img {
-    ${''/* width: 28px;*/}
-    border: 1px dotted rgb(210, 210, 210);
-    padding: 6px;
-    height: 42px;
-    width: 42px;
+    ${''/* width: ${rem('28px')};*/}
+    border: ${rem('1px')} dotted rgb(210, 210, 210);
+    padding: ${rem('6px')};
+    height: ${rem('42px')};
+    width: ${rem('42px')};
     margin: auto;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: ${rem('8px')};
   }
 
   & span {
-    margin-bottom: 20px;
+    margin-bottom: ${rem('20px')};
     display: inline-block;
   }
 `;

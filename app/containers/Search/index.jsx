@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import selectSearchPage from './selectors';
 
 import SearchBar from 'components/SearchBar';
@@ -14,7 +15,7 @@ import { searchPodcast } from './actions';
 const ResultBar = styled.p`
   color: ${COLOR_3};
   overflow: hidden;
-  font-size: 12px;
+  font-size: ${rem('12px')};
 `;
 
 const Total = styled.span`

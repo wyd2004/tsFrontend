@@ -1,6 +1,7 @@
 /* global COLOR_1 */
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import LoadingComp from 'react-loading-animation';
 import { DIALOG_TYPE } from 'containers/App/actions';
 
@@ -19,13 +20,13 @@ const ComWrapper = styled.div`
 `;
 const AlertBox = styled.div`
   background: #ccc;
-  padding: 20px 30px;
-  border-radius: 15px;
+  padding: ${rem('20px')} ${rem('30px')};
+  border-radius: ${rem('15px')};
   color: #333;
 
   &:before {
     content: '❗️';
-    font-size: 55px;
+    font-size: ${rem('55px')};
     color: ${COLOR_1};
     display: block;
     text-align: center;
@@ -33,13 +34,13 @@ const AlertBox = styled.div`
 `;
 const ErrorBox = styled.div`
   background: #ccc;
-  padding: 20px 30px;
-  border-radius: 15px;
+  padding: ${rem('20px')} ${rem('30px')};
+  border-radius: ${rem('15px')};
   color: #333;
 
   &:before {
     content: '❌';
-    font-size: 55px;
+    font-size: ${rem('55px')};
     color: ${COLOR_1};
     display: block;
     text-align: center;

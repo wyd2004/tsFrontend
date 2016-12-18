@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { Link } from 'react-router';
 
 const Button = styled(Link)`
   position: fixed;
-  right: 10px;
-  bottom: 10px;
-  width: 40px;
-  height: 40px;
+  right: ${rem('10px')};
+  bottom: ${rem('10px')};
+  width: ${rem('40px')};
+  height: ${rem('40px')};
   background: url(${require('./assets/icon.png')});
   background-size: 100%;
   z-index: 10000;

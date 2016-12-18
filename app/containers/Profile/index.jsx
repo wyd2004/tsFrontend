@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import moment from 'moment';
 import { selectCurrentUser } from 'containers/App/selectors';
 

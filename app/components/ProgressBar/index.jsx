@@ -1,6 +1,7 @@
 /* global COLOR_1 COLOR_2 COLOR_3 */
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { convAudioTime } from 'utils/tools';
 
 
@@ -8,52 +9,52 @@ import { convAudioTime } from 'utils/tools';
 // some padding and a papayawhip background
 
 const Wrapper = styled.div`
-  margin: 12px;
+  margin: ${rem('12px')};
   text-align: center;
 `;
 const Bar = styled.span`
-  height: 3px;
+  height: ${rem('3px')};
   background: ${COLOR_3};
-  width: calc(100% - 120px);
+  width: calc(100% - ${rem('120px')});
   position: relative;
   display:inline-block;
-  top: -3px;
-  border-radius: 3px;
+  top: -${rem('3px')};
+  border-radius: ${rem('3px')};
 
   &:before {
     content: '';
     color: ${COLOR_1};
     display: block;
     width: ${(props) => props.progress}%;
-    height: 3px;
+    height: ${rem('3px')};
     background-color: ${COLOR_1};
-    border-radius: 3px;
+    border-radius: ${rem('3px')};
   }
 `;
 
 const Time = styled.span`
   color: ${(props) => props.isPressed ? COLOR_1 : COLOR_3};
-  width: 60px;
+  width: ${rem('60px')};
   display: inline-block;
 `;
 
 const Control = styled.div`
-  width: 40px;
-  height: 40px;
+  width: ${rem('40px')};
+  height: ${rem('40px')};
   position: absolute;
-  top: -20px;
+  top: -${rem('20px')};
   left: ${(props) => props.progress}%;
-  line-height: 37px;
-  margin-left: -15px;
+  line-height: ${rem('37px')};
+  margin-left: -${rem('15px')};
   transform: scale(${(props) => props.isPressed ? 2 : 1});
 
   &:after {
     content: '';
     display: inline-block;
-    width: 7px;
-    height: 7px;
+    width: ${rem('7px')};
+    height: ${rem('7px')};
     color: ${COLOR_1};
-    border-radius: 7px;
+    border-radius: ${rem('7px')};
     transform: translateX(-50%);
     background-color: ${COLOR_1};
   }

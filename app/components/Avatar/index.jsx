@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { Link } from 'react-router';
 
 const Wrapper = styled(Link)`
@@ -8,18 +9,18 @@ const Wrapper = styled(Link)`
 `;
 
 const Img = styled.img`
-  width: 64px;
-  height: 64px;
+  width: ${rem('64px')};
+  height: ${rem('64px')};
   border-radius: 50%;
   overflow: hidden;
 `;
 
 const VipIcon = styled.img`
   position: absolute;
-  width: 17px;
-  height: 17px;
-  right: 0px;
-  bottom: 3px;
+  width: ${rem('17px')};
+  height: ${rem('17px')};
+  right: ${rem('0px')};
+  bottom: ${rem('3px')};
 `;
 
 export default class Avatar extends PureComponent {

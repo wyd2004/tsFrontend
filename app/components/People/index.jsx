@@ -1,26 +1,27 @@
 /* global COLOR_2 */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { Link } from 'react-router';
 const Wrapper = styled(Link)`
   display: inline-block;
   position: relative;
   width: 25%;
-  margin-bottom: 6px;
+  margin-bottom: ${rem('6px')};
   text-align: center;
 `;
 
 const Img = styled.img`
-  width: 64px;
-  height: 64px;
-  border-radius: 64px;
+  width: ${rem('64px')};
+  height: ${rem('64px')};
+  border-radius: ${rem('64px')};
   display: block;
   margin: auto;
 `;
 
 const Text = styled.span`
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: ${rem('6px')};
+  font-size: ${rem('14px')};
   color: ${COLOR_2};
 `;
 export default class Album extends PureComponent {

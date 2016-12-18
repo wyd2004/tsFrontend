@@ -1,10 +1,11 @@
 /* global COLOR_1 COLOR_2 COLOR_3 */
 
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import Button from './Button';
 
 const Title = styled.h1`
-  font-size: 13px;
+  font-size: ${rem('13px')};
   text-align: left;
   color: ${COLOR_2};
   margin: 0;
@@ -15,31 +16,35 @@ const Title = styled.h1`
 `;
 const Desc = styled.div`
   color: ${COLOR_3};
-  font-size: 12px;
+  font-size: ${rem('10px')};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 `;
 const Ablum = styled.div`
-  border-radius: 5px;
-  width: 56px;
-  height: 56px;
+  border-radius: ${rem('5px')};
+  width: ${rem('56px')};
+  height: ${rem('56px')};
   float: left;
-  margin-right: 10px;
+  margin-right: ${rem('10px')};
+
+  & img {
+    width: 100%;
+  }
 `;
 const Actions = styled.div`
-  margin-top: 2px;
+  margin-top: ${rem('2px')};
   color: ${COLOR_3};
-  font-size: 12px;
+  font-size: ${rem('12px')};
 
 `;
 const ActionsItem = styled.span`
-  padding-left: 10px;
-  margin-left: 8px;
+  padding-left: ${rem('10px')};
+  margin-left: ${rem('8px')};
   color: ${COLOR_3};
-  background-size: 13px 13px!important;
-  padding-left: 14px;
-  padding-top: 2px;
+  background-size: ${rem('13px')} ${rem('13px')}!important;
+  padding-left: ${rem('14px')};
+  padding-top: ${rem('2px')};
 `;
 const Special = styled.span`
   float: right;
@@ -58,7 +63,7 @@ const CreateDate = styled(ActionsItem)`
 `;
 const Coast = styled(Button)`
   float: right;
-  margin-left: 10px;
+  margin-left: ${rem('10px')};
   background-color: ${(props) => props.isBuy ? COLOR_3 : COLOR_1};
 `;
 const Searched = styled.span`

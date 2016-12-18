@@ -1,6 +1,7 @@
 /* global COLOR_1 COLOR_2 COLOR_3 COLOR_4 */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 
 
 const Wrapper = styled.div`
@@ -9,15 +10,15 @@ const Wrapper = styled.div`
 
 const AvatarWrap = styled.span`
   display: inline-block;
-  min-width: 64px;
-  margin-right: 20px;
+  min-width: ${rem('64px')};
+  margin-right: ${rem('20px')};
 `;
 
 const Avatar = styled.img`
   display: inline-block;
-  height: 86px;
-  width: 86px;
-  border-radius: 2px;
+  height: ${rem('86px')};
+  width: ${rem('86px')};
+  border-radius: ${rem('2px')};
 `;
 
 const TextWrap = styled.span`
@@ -28,18 +29,18 @@ const TextWrap = styled.span`
 `;
 
 const Title = styled.span`
-  font-size: 14px;
+  font-size: ${rem('14px')};
   color: ${COLOR_2};
 `;
 
 const Amount = styled.span`
-  font-size: 11px;
-  margin-bottom: 5px;
+  font-size: ${rem('11px')};
+  margin-bottom: ${rem('5px')};
   color: ${COLOR_3};
 `;
 
 const Desc = styled.div`
-  font-size: 11px;
+  font-size: ${rem('11px')};
   color: ${COLOR_2};
 `;
 

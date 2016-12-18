@@ -2,18 +2,19 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 
 const Wrapper = styled.div`
-  padding: 7px;
-  border-radius: 2px;
+  padding: ${rem('7px')};
+  border-radius: ${rem('2px')};
   background: white;
 `;
 const InputContainer = styled.div`
-  padding-left: 17px;
+  padding-left: ${rem('17px')};
   background: url(${require('./assets/search.png')}) no-repeat;
-  background-size: 14px 14px;
+  background-size: ${rem('14px')} ${rem('14px')};
   background-position: left center;
-  margin-left: ${(props) => props.shrink ? '0' : '70px'};
+  margin-left: ${(props) => props.shrink ? '0' : `${rem('70px')}`};
   transition: margin 0.5s ease-in-out;
   position: relative;
 

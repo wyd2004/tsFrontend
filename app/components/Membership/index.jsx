@@ -2,29 +2,30 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import CardWrapS from 'components/Card/CardWrapS';
 import Button from 'components/PodcastItem/Button';
 
 const Wrapper = styled(CardWrapS)`
-  font-size: 13px;
+  font-size: ${rem('13px')};
 `;
 const Title = styled.span`
   color: ${COLOR_2};
   padding: 0;
-  width: 125px;
+  width: ${rem('125px')};
   display: inline-block;
 `;
 const Item = styled.div`
-  padding-top: 3px;
+  padding-top: ${rem('3px')};
 `;
 const Limit = styled.span`
   color: ${COLOR_3};
-  width: 80px;
+  width: ${rem('80px')};
   display: inline-block;
 `;
 const Price = styled.span`
   color: ${COLOR_1};
-  width: 40px;
+  width: ${rem('40px')};
   display: inline-block;
 `;
 const Desc = styled.p`

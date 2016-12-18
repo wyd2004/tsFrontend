@@ -1,6 +1,7 @@
 /* global COLOR_1 COLOR_2 COLOR_3 */
 import React from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { Link } from 'react-router';
 import { convDate } from 'utils/tools';
 
@@ -28,63 +29,63 @@ const Actions = styled.div`
 `;
 const Prev = styled.span`
   background-image: url(${require('./assets/prev.png')});
-  background-size: 25px 25px;
-  height: 25px;
-  width: 25px;
+  background-size: ${rem('25px')} ${rem('25px')};
+  height: ${rem('25px')};
+  width: ${rem('25px')};
   display: inline-block;
   position: relative;
-  top: -17px;
+  top: -${rem('17px')};
 `;
 const Next = styled(Prev)`
   background: url(${require('./assets/next.png')});
-  background-size: 25px 25px;
+  background-size: ${rem('25px')} ${rem('25px')};
 `;
 const PlayButton = styled.span`
   background-image: url(${require('./assets/play.png')});
-  background-size: 120px 60px;
+  background-size: ${rem('120px')} ${rem('60px')};
   background-position-x: ${(props) => !props.played ? 0 : -60}px;
-  height: 60px;
-  width: 60px;
+  height: ${rem('60px')};
+  width: ${rem('60px')};
   display: inline-block;
-  margin: 0 40px;
+  margin: 0 ${rem('40px')};
 `;
 const StyledLink = styled(Link)`
   color: ${COLOR_1};
 `;
 const Card2 = styled.div`
   background: white;
-  border-radius: 2px;
-  margin: 6px;
+  border-radius: ${rem('2px')};
+  margin: ${rem('6px')};
   position: relative;
-  font-size: 13px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  font-size: ${rem('13px')};
+  padding-top: ${rem('5px')};
+  padding-bottom: ${rem('5px')};
   text-align: center;
 `;
 const Title = styled.h1`
-  font-size: 13px;
+  font-size: ${rem('13px')};
   color: ${COLOR_2};
   font-weight: normal;
   margin-top: 0;
 `;
 const Info = styled.p`
   color: ${COLOR_3};
-  font-size: 11px;
+  font-size: ${rem('11px')};
   margin: 0;
 `;
 const Label = styled.span`
   display: inline-block;
-  ${''/* width: 60px;*/}
+  ${''/* width: ${rem('60px')};*/}
   text-align: right;
 `;
 const Coast = styled.span`
   display: inline-block;
-  padding-left: 15px;
+  padding-left: ${rem('15px')};
   background-image: url(${require('./assets/coast.png')});
-  background-size: 14px;
+  background-size: ${rem('14px')};
   background-position-y: center;
-  margin-right: 20px;
-  margin-bottom: 6px;
+  margin-right: ${rem('20px')};
+  margin-bottom: ${rem('6px')};
 `;
 const Date = styled(Coast)`
   background-image: url(${require('../PodcastItem/assets/time.png')});

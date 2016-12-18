@@ -1,6 +1,7 @@
 /* global COLOR_2 */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import Album from '../Album';
 import Avatar from '../Avatar';
 
@@ -12,8 +13,8 @@ const Wrap = styled.span`
 `;
 
 const Text = styled.span`
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: ${rem('6px')};
+  font-size: ${rem('14px')};
   color: ${COLOR_2};
 `;
 

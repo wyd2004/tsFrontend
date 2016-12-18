@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 

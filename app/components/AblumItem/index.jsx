@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { convDate } from 'utils/tools';
 import CardWrapS from 'components/Card/CardWrapS';
-import { Title, Desc, Ablum, Actions, Rank, CreateDate } from './style';
+import { Title, Desc, Ablum, Actions, Rank, CreateDate } from '../podcastItem/style';
 
 export default class AblumItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

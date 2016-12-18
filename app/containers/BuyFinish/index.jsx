@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import rem from 'utils/pxtorem';
 
 import CardOrigin from 'components/Card/CardWrap';
 import Button from 'components/PodcastItem/Button';
@@ -34,7 +35,7 @@ const PayButton = styled(Button)`
   width: 100%;
   display: inline-block;
   text-align: center;
-  line-height: 44px;
+  line-height: ${rem('44px')};
   padding: 0;
 `;
 export class Buy extends React.Component { // eslint-disable-line react/prefer-stateless-function
