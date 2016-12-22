@@ -34,9 +34,11 @@ export function historyLoaded(result, more) {
   };
 }
 
-export function subscribe() {
+export function subscribe(id, state) {
   return {
     type: SUBSCRIBE,
+    id,
+    state,
   };
 }
 

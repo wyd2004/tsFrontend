@@ -1,28 +1,16 @@
-/*
- *
- * IndexPage actions
- *
- */
+export const LOAD_ABLUM_INFO = 'app/Special/LOAD_ABLUM_INFO';
+export const LOAD_ABLUM_INFO_SUCCESSED = 'app/Special/LOAD_ABLUM_INFO_SUCCESSED';
 
-export const LOAD_SUBSCRIBE = 'app/Profile/LOAD_SUBSCRIBE';
-export const LOAD_MEMBER = 'app/Profile/LOAD_MEMBER';
-export const LOAD_PEOPLE = 'app/Profile/LOAD_PEOPLE';
-
-export function loadSubscribe(result) {
+export function loadInfo(id) {
   return {
-    type: LOAD_SUBSCRIBE,
-    result,
+    type: LOAD_ABLUM_INFO,
+    id,
   };
 }
-export function loadMember(result) {
+export function loaded(info, podcast) {
   return {
-    type: LOAD_MEMBER,
-    result,
-  };
-}
-export function loadPeople(result) {
-  return {
-    type: LOAD_PEOPLE,
-    result,
+    type: LOAD_ABLUM_INFO_SUCCESSED,
+    info,
+    podcast,
   };
 }

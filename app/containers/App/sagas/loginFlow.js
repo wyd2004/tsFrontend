@@ -1,5 +1,5 @@
 /* global WX_APP_ID */
-import { takeEvery } from 'redux-saga';
+import { takeEvery, takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import { FETCH_ACCESS_TOKEN, AUTH_ERROR, FETCH_PROFILE, fetchAccessTokenSuccess, fetchProfile, profileLoaded } from 'containers/App/actions';
 import fetchData from './fetchData';
@@ -8,10 +8,10 @@ import { key } from '../reducer';
 /* 微信登录 */
 
 function* weixinWatcher() {
-  const handleLogin = (action) => {
+  const handleLogin = () => {
     let url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
     url += `?appid=${WX_APP_ID}`;
-    url += `&redirect_uri=${encodeURIComponent(action.from)}`;
+    url += `&redirect_uri=${encodeURIComponent('http://vip.tangsuanradio.com/mp')}`;
     url += '&response_type=code';
     url += '&scope=snsapi_userinfo';
     url += '#wechat_redirect';
@@ -19,18 +19,19 @@ function* weixinWatcher() {
     console.log('调起登录', url);
     // window.location.href = url;
   };
-  yield fork(takeEvery, AUTH_ERROR, handleLogin);
+  yield fork(takeLatest, AUTH_ERROR, handleLogin);
 }
-
 
 function* weixinFlow() {
   yield fork(weixinWatcher);
 }
 
 function* fetchAccessToken(action) {
-  const formData = new FormData();
-  formData.append('code', action.code);
-  const results = yield call(fetchData, { url: '/member/oauth', options: { method: 'POST', body: formData } });
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ code: action.code }),
+  };
+  const results = yield call(fetchData, { url: '/member/oauth', options });
   if (results) {
     yield put(fetchAccessTokenSuccess(results));
     yield put(fetchProfile(results.member_id));

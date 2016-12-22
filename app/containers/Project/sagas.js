@@ -10,7 +10,7 @@ export function* getData() {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
         desc: item.message || '',
@@ -19,7 +19,7 @@ export function* getData() {
     )
     .filter((item) => item.package === 'channel')
     .sort((a, b) => parseInt(a.price, 10) > parseInt(b.price, 10));
-    yield put(projectLoaded(memorizedResults));
+    yield put(projectLoaded(normalizedResults));
   }
 }
 

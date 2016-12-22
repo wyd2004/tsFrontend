@@ -8,7 +8,7 @@ import { convDate } from 'utils/tools';
 import ProgressBar from 'components/ProgressBar';
 import Card from 'components/Card';
 
-import Button from 'components/PodcastItem/Button';
+import { Button } from 'components/PodcastItem/style';
 
 const Wrapper = styled.div`
   & audio {
@@ -94,23 +94,8 @@ const Subscribe = styled(Button)`
   float: right;
 `;
 
-export default class Player extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  static propTypes = {
-    srcShort: React.PropTypes.string,
-    src: React.PropTypes.string,
-    id: React.PropTypes.number,
-    ablum: React.PropTypes.string,
-    canPlay: React.PropTypes.bool,
-    time: React.PropTypes.number,
-    onPrev: React.PropTypes.func,
-    onNext: React.PropTypes.func,
-    title: React.PropTypes.string,
-    date: React.PropTypes.number,
-    serial: React.PropTypes.string,
-    desc: React.PropTypes.string,
-    people: React.PropTypes.string,
-    coast: React.PropTypes.number,
-  }
+class Player extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
   constructor(props) {
     super(props);
     this.state = {
@@ -149,8 +134,13 @@ export default class Player extends React.Component { // eslint-disable-line rea
   handleProgressUpdate = (newProgress) => {
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
+  handleSub = () => {
+    const { id, isSub } = this.props;
+    const state = isSub ? 0 : 1;
+    this.props.onSubscribe(id, state);
+  }
   render() {
-    const { id, srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast } = this.props;
+    const { id, srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast, isSub } = this.props;
     const { currentTime, loaded, played } = this.state;
 
     return (
@@ -178,7 +168,7 @@ export default class Player extends React.Component { // eslint-disable-line rea
         </Card>
         <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>
         <Card>
-          { !canPlay && <Subscribe>订阅</Subscribe> }
+          { !canPlay && <Subscribe onClick={this.handleSub}>{isSub ? '已订阅' : '订阅'}</Subscribe> }
           <Title>{title}</Title>
           <Info>
             <Coast>{coast}</Coast>
@@ -192,3 +182,23 @@ export default class Player extends React.Component { // eslint-disable-line rea
     );
   }
 }
+Player.propTypes = {
+  srcShort: React.PropTypes.string,
+  src: React.PropTypes.string,
+  id: React.PropTypes.number,
+  ablum: React.PropTypes.string,
+  isSub: React.PropTypes.bool,
+  canPlay: React.PropTypes.bool,
+  time: React.PropTypes.number,
+  onPrev: React.PropTypes.func,
+  onNext: React.PropTypes.func,
+  title: React.PropTypes.string,
+  date: React.PropTypes.number,
+  serial: React.PropTypes.string,
+  desc: React.PropTypes.string,
+  people: React.PropTypes.string,
+  coast: React.PropTypes.number,
+  onSubscribe: React.PropTypes.func,
+};
+
+export default Player;

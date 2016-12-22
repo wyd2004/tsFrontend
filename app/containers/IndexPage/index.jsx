@@ -12,6 +12,7 @@ import { selectPodcast, selectAblum } from './selectors';
 
 import UserButton from 'components/UserButton';
 import PodcastItem from 'components/PodcastItem';
+import AblumItem from 'components/AblumItem';
 import Infinite from 'components/Infinite';
 
 import * as indexActions from './actions';
@@ -19,7 +20,24 @@ import * as indexActions from './actions';
 import styled from 'styled-components';
 import rem from 'utils/pxtorem';
 
-import Button from './button';
+/* eslint-disable */
+const Button = styled.button`
+  border-radius: ${rem('2px')};
+  background: white;
+  margin: ${rem('3px')};
+  padding: ${rem('16px')};
+  text-align: center;
+  height: ${rem('52px')};
+  width: calc(50% - ${rem('6px')});
+  display: block;
+  float: left;
+  background-color: ${(props) => props.highlight ? 'rgba(210, 210, 210, 0.2)' : ''};
+  background-position: ${rem('20px')} center;
+  background-image: url(${(props) => props.icon ? require('./assets/' + props.icon + '.png') : ''});
+  background-repeat: no-repeat;
+  background-size: ${rem('18px')} ${rem('18px')};
+`;
+/* eslint-enable */
 
 const Actions = styled.div`
   overflow: hidden;
@@ -67,6 +85,7 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
   render() {
     const { podcast, ablum } = this.props;
     const { current } = this.state;
+    console.log(podcast, ablum);
     return (
       <div style={{ overflow: 'hidden' }}>
         <Helmet
@@ -88,10 +107,10 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
             <Infinite onRefresh={this.handleRefresh}>
               <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
                 <ListWrapper>
-                  {podcast.map((item) => <PodcastItem {...item} />)}
+                  {podcast.map((item) => <PodcastItem {...item} key={item.id} />)}
                 </ListWrapper>
                 <ListWrapper>
-                  {podcast.map((item) => <PodcastItem {...item} />)}
+                  {ablum.map((item) => <AblumItem {...item} key={item.id} />)}
                 </ListWrapper>
               </ContentWrapper>
             </Infinite>

@@ -9,11 +9,11 @@ import styled from 'styled-components';
 import rem from 'utils/pxtorem';
 
 import { selectPodcast } from './selectors';
-import { loadPodcast, requireOrder } from './actions';
+import { loadPodcast } from './actions';
 
 import PodcastItem from 'components/PodcastItem';
 import CardOrigin from 'components/Card/CardWrap';
-import Button from 'components/PodcastItem/Button';
+import { Button } from 'components/PodcastItem/style';
 import Title from 'components/Title';
 
 const Card = styled(CardOrigin)`
@@ -46,14 +46,10 @@ const PayButton = styled(Button)`
 `;
 export class Buy extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    const { params } = this.props;
-    const { id } = params;
+    const { params: { id } } = this.props;
     this.props.loadPodcast(id);
   }
   handlePay = () => {
-    const { params } = this.props;
-    const { id } = params;
-    this.props.requireOrder(id);
   }
   render() {
     const { item } = this.props;
@@ -69,7 +65,7 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
         <PodcastItem {...item} />
         <Tips>
           <Desc>单月会员只要￥60！！还有多种特权</Desc>
-          <Link to="/payBundle"><Button>我还是买会员吧</Button></Link>
+          <Link to="/project"><Button>我还是买会员吧</Button></Link>
         </Tips>
         <PayButton onClick={this.handlePay}>去支付</PayButton>
       </Wrapper>
@@ -80,13 +76,12 @@ Buy.propTypes = {
   item: PropTypes.object,
   params: PropTypes.object,
   loadPodcast: PropTypes.func,
-  requireOrder: PropTypes.func,
 };
 
 const mapStateToProps = selectPodcast();
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loadPodcast, requireOrder }, dispatch);
+  return bindActionCreators({ loadPodcast }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buy);

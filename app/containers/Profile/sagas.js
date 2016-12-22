@@ -15,12 +15,12 @@ export function* requestSubscribe(action) {
   const response = yield call(fetchData, { url, options });
   if (response) {
     const { results } = response;
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
       })
     );
-    yield put(subscriptionLoaded(memorizedResults));
+    yield put(subscriptionLoaded(normalizedResults));
   }
 }
 
@@ -39,12 +39,12 @@ export function* requestVip(action) {
   const response = yield call(fetchData, { url, options });
   if (response) {
     const { results } = response;
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
       })
     );
-    yield put(vipLoaded(memorizedResults));
+    yield put(vipLoaded(normalizedResults));
   }
 }
 
@@ -61,12 +61,12 @@ export function* requestPeople(action) {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
       })
     );
-    yield put(peopleLoaded(memorizedResults));
+    yield put(peopleLoaded(normalizedResults));
   }
 }
 

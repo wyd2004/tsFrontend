@@ -1,14 +1,20 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, select } from 'redux-saga/effects';
 import request from 'utils/request';
 import { DIALOG_TYPE, authError, showDialog, loading, loaded } from 'containers/App/actions';
+import { selectCurrentUser } from 'containers/App/selectors';
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve({ errno: 0, test: 'test' }), ms));
 
 export default function* fetchData({ url, options, successMessage, loadIndentify = 'global' }) {
+  const { token } = yield select(selectCurrentUser());
+  const headers = {
+    'Content-Type': 'application/jsosn',
+    Authorization: `Token ${token}`,
+  };
   let results;
   try {
     yield put(loading(loadIndentify));
-    results = yield call(request, url, options);
+    results = yield call(request, url, { ...options, headers });
     if (successMessage) {
       yield put(showDialog(DIALOG_TYPE.success, successMessage));
     }

@@ -20,7 +20,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
   componentWillMount() {
     const { location, user, fetchAccessToken, authError } = this.props;
     const code = getSearchObj(location.search).code;
-    if (code) {
+    if (code && !user) {
       fetchAccessToken(code);
     } else if (!user) {
       authError();

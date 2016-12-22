@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
-import { LOAD_PODCAST, LOAD_HISTORY, podcastLoaded, historyLoaded } from './actions';
+import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribe, podcastLoaded, historyLoaded } from './actions';
 
 import fetchData from 'containers/App/sagas/fetchData';
 
@@ -9,7 +9,7 @@ export function* getPodcastData(action) {
   const results = yield call(fetchData, { url });
 
   if (results) {
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
         desc: item.description || '暂无简介',
@@ -20,7 +20,7 @@ export function* getPodcastData(action) {
         createDate: item.dt_updated,
       })
     );
-    yield put(podcastLoaded(memorizedResults));
+    yield put(podcastLoaded(normalizedResults));
   }
 }
 export function* getHistoryData(action) {
@@ -28,7 +28,7 @@ export function* getHistoryData(action) {
   const results = yield call(fetchData, { url });
 
   if (results) {
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
         ({
           ...item,
           desc: item.description || '暂无简介',
@@ -39,7 +39,7 @@ export function* getHistoryData(action) {
           createDate: item.dt_updated,
         })
       );
-    yield put(historyLoaded(memorizedResults));
+    yield put(historyLoaded(normalizedResults));
   }
 }
 
@@ -52,7 +52,39 @@ export function* loadPodcast() {
   yield fork(watcher);
 }
 
+export function* subscribePodcast(action) {
+  const url = `/podcast/album/${action.id}/subscribe/`;
+  const options = {
+    method: action.state === 1 ? 'POST' : 'DELETE',
+  };
+  const results = yield call(fetchData, { url, options });
+
+  if (results) {
+    const normalizedResults = results.map((item) =>
+        ({
+          ...item,
+          desc: item.description || '暂无简介',
+          rank: item.episodes_count || 0,
+          ablumPicture: item.image,
+          time: item.length || 0,
+          coast: item.price || 0,
+          createDate: item.dt_updated,
+        })
+      );
+    yield put(subscribe(normalizedResults));
+  }
+}
+
+export function* watcherSubscribe() {
+  yield fork(takeLatest, SUBSCRIBE, subscribePodcast);
+}
+
+export function* sub() {
+  yield fork(watcherSubscribe);
+}
+
 // Bootstrap sagas
 export default [
   loadPodcast,
+  sub,
 ];

@@ -3,31 +3,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
-import rem from 'utils/pxtorem';
-import selectProfile from './selectors';
+import { bindActionCreators } from 'redux';
+
+import { loadInfo } from './actions';
+import selectAblum from './selectors';
 
 import Card from 'components/Card/CardWrapS';
 
 import AlbumHeader from 'components/AlbumHeader';
 import PodcastItem from 'components/PodcastItem';
 
-export class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentWillMount() {
+    const { info, params } = this.props;
+    const { id } = params;
+    !info && this.props.loadInfo(id);
+  }
   render() {
-    const mockList = [
-      { id: 1, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
-      { id: 3, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
-      { id: 4, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
-      { id: 5, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, searchValue: '大脑' },
-    ];
-    const ablumInfo = {
-      image: 'http://p4.music.126.net/xomieFDiQZkFO3bebFAuDg==/103354093026187.jpg?param=130y130',
-      title: '时间卡位',
-      amount: 123,
-      desc: '他是法国波旁王朝国王，也是世界历史上在位时间最长的君主之一。5岁那年被母后安娜抱上了国王宝座，开始了长达72年的漫长……',
-    };
-    const { image, title, amount, desc } = ablumInfo;
+    const { info, podcast } = this.props;
+    const { results } = podcast;
     return (
       <div>
         <Helmet
@@ -37,20 +31,24 @@ export class Special extends React.Component { // eslint-disable-line react/pref
           ]}
         />
         <Card>
-          <AlbumHeader image={image} title={title} amount={amount} desc={desc} />
+          { info && <AlbumHeader image={info.image} title={info.title} amount={info.amount} desc={info.desc} /> }
         </Card>
-        {mockList.map((item) => <PodcastItem {...item} />) }
+        {results.map((item) => <PodcastItem {...item} key={item.id} />) }
       </div>
     );
   }
 }
 
-const mapStateToProps = selectProfile();
+Special.propTypes = {
+  loadInfo: React.PropTypes.func,
+  params: React.PropTypes.object,
+  info: React.PropTypes.object,
+  podcast: React.PropTypes.object,
+};
+const mapStateToProps = selectAblum();
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // onSearch: (content) => dispatch(searchPodcast(content)),
-  };
+  return bindActionCreators({ loadInfo }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Special);

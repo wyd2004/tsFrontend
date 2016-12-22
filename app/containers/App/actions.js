@@ -44,10 +44,9 @@ export function showDialog(dialogType, message) {
   };
 }
 
-export function authError(from) {
+export function authError() {
   return {
     type: AUTH_ERROR,
-    from,
   };
 }
 

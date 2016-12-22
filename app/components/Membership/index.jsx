@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import rem from 'utils/pxtorem';
 import CardWrapS from 'components/Card/CardWrapS';
-import Button from 'components/PodcastItem/Button';
+import { Button } from 'components/PodcastItem/style';
 
 const Wrapper = styled(CardWrapS)`
   font-size: ${rem('13px')};

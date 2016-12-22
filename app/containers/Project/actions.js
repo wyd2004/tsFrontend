@@ -1,9 +1,3 @@
-/*
- *
- * IndexPage actions
- *
- */
-
 export const LOAD_PROJECT = 'app/Project/LOAD_PROJECT';
 export const LOAD_PROJECT_SUCCESS = 'app/Project/LOAD_PROJECT_SUCCESS';
 

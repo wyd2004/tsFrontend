@@ -12,7 +12,7 @@ export const key = 'USER_DATA';
 
 let user = {
   member_id: 1,
-  token: '1b4ea5daa3037b36f1beaddf562c7bda4d7e1337',
+  token: '123456',
   nickname: 'test_member',
   avatar: 'https://tower.im/assets/default_avatars/jokul.jpg',
   expire_datetime: '2016-11-20T14:36:32.427000Z',

@@ -32,7 +32,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
     console.log('refresh');
   }
   render() {
-    const { podcast, history } = this.props;
+    const { podcast, history, subscribe } = this.props;
     console.log(podcast, history);
 
     const mockPodcast = {
@@ -56,7 +56,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
             { name: 'description', content: '糖蒜广播-播放页' },
           ]}
         />
-        <Player {...mockPodcast} />
+        <Player {...mockPodcast} onSubscribe={subscribe} />
         <Title icon="before">往期广播</Title>
         <Infinite onRefresh={this.handleRefresh}>
           {mockList.map((item) => <PodcastItem key={item.id} {...item} />)}
@@ -68,6 +68,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
 Play.propTypes = {
   loadPodcast: PropTypes.func,
   loadHistory: PropTypes.func,
+  subscribe: PropTypes.func,
   podcast: PropTypes.object,
   history: PropTypes.object,
   params: PropTypes.shape({

@@ -11,7 +11,7 @@ export function* requestSearch(action) {
   const url = `/podcast/episode/?search=${action.content}`;
   const results = yield call(fetchData, { url });
   if (results) {
-    const memorizedResults = results.map((item) =>
+    const normalizedResults = results.map((item) =>
       ({
         ...item,
         desc: item.description || '暂无简介',
@@ -22,7 +22,7 @@ export function* requestSearch(action) {
         createDate: item.dt_updated,
       })
     );
-    yield put(searchResult(memorizedResults));
+    yield put(searchResult(normalizedResults));
   }
 }
 

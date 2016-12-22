@@ -31,6 +31,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
     });
   }
   app.use('/api/**', proxy('http://vip.tangsuanradio.com', {
+    preserveHostHdr: true,
     forwardPathAsync(req) {
       return new Promise((resolve) => {
         setTimeout(() => { resolve(require('url').parse(req.originalUrl).path); }, 1000);

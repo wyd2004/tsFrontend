@@ -1,9 +1,9 @@
 import { takeLatest } from 'redux-saga';
-import { put, fork, call, select } from 'redux-saga/effects';
-import { LOAD_PODCAST, CREATE_ORDER, podcastLoaded } from './actions';
+import { put, fork, call } from 'redux-saga/effects';
+import { LOAD_PODCAST, podcastLoaded } from './actions';
 
 import fetchData from 'containers/App/sagas/fetchData';
-import { selectCurrentUser } from 'containers/App/selectors';
+// import { selectCurrentUser } from 'containers/App/selectors';
 
 export function* getPodcastData(action) {
   const url = `/podcast/episode/${action.id}`;
@@ -37,14 +37,14 @@ export function* getPodcastData(action) {
       explicit: 'no',
     };
     const { description, latest_update, episodes_count } = results;
-    const memorizedResults = {
+    const normalizedResults = {
       // ...results,
       ...mock,
       desc: description,
       update: latest_update,
       count: episodes_count,
     };
-    yield put(podcastLoaded(memorizedResults));
+    yield put(podcastLoaded(normalizedResults));
   }
 }
 
@@ -56,36 +56,8 @@ export function* loadPodcast() {
   yield fork(watcher);
 }
 
-export function* requireOrder(action) {
-  const user = yield select(selectCurrentUser());
-  const url = '/term/order/';
-  const options = {
-    method: 'POST',
-    body: JSON.stringify({
-      tier: 'episode',
-      member: user.member_id,
-      item: action.id,
-      payments: [{ agent: 'wechat' }],
-    }),
-  };
-  const results = yield call(fetchData, { url, options });
-
-  if (results) {
-    // TODO: 根据返回值调起支付
-    console.log(results);
-  }
-}
-
-export function* createOrderWatcher() {
-  yield fork(takeLatest, CREATE_ORDER, requireOrder);
-}
-
-export function* createOrder() {
-  yield fork(createOrderWatcher);
-}
 
 // Bootstrap sagas
 export default [
   loadPodcast,
-  createOrder,
 ];

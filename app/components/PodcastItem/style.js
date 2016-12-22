@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import rem from 'utils/pxtorem';
-import Button from './Button';
 
 const Title = styled.h1`
   font-size: ${rem('13px')};
@@ -61,6 +60,12 @@ const Time = styled(ActionsItem)`
 const CreateDate = styled(ActionsItem)`
   background: url(${require('./assets/time.png')}) no-repeat left;
 `;
+const Button = styled.span`
+background: ${COLOR_1};
+padding: ${rem('4px')} ${rem('15px')};
+border-radius: ${rem('2px')};
+color: white;
+`;
 const Coast = styled(Button)`
   float: right;
   margin-left: ${rem('10px')};
@@ -69,7 +74,6 @@ const Coast = styled(Button)`
 const Searched = styled.span`
   color: ${COLOR_1};
 `;
-
 export {
   Title,
   Desc,
@@ -81,4 +85,5 @@ export {
   CreateDate,
   Coast,
   Searched,
+  Button,
 };

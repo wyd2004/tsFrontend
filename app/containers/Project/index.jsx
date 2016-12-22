@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { selectCurrentUser } from 'containers/App/selectors';
@@ -10,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { loadProject } from './actions';
 import selectProject from './selectors';
+import { PAY_TYPE } from 'containers/Pay/actions';
 
 import Card from 'components/Card';
 import Title from 'components/Title';
@@ -24,7 +26,7 @@ export class Project extends React.Component { // eslint-disable-line react/pref
   }
   buy = (id) => (e) => {
     e.preventDefault();
-    console.log(id, '掉漆支付');
+    browserHistory.push(`/pay?type=${PAY_TYPE.project}&id=${id}`);
   }
 
   render() {

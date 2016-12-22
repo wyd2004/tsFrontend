@@ -1,17 +1,20 @@
 import { createSelector } from 'reselect';
 
-const selectProfileDomain = () => (state) => state.get('profile');
+const selectAblumDomain = () => (state) => state.get('special');
 
 /**
  * Default selector used by searchPage
  */
 
-const selectProfile = () => createSelector(
-  selectProfileDomain(),
-  (profileState) => ({ profileState }),
+const selectAblum = () => createSelector(
+  selectAblumDomain(),
+  (specialState) => ({
+    info: specialState.get('info'),
+    podcast: specialState.get('podcast').toJS(),
+  }),
 );
 
-export default selectProfile;
+export default selectAblum;
 export {
-  selectProfileDomain,
+  selectAblumDomain,
 };

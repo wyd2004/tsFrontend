@@ -10,7 +10,7 @@ const Button = styled.button`
   padding: ${rem('16px')};
   text-align: center;
   height: ${rem('52px')};
-  width: calc(50% - ${rem('12px')});
+  width: calc(50% - ${rem('6px')});
   display: block;
   float: left;
   background-color: ${(props) => props.highlight ? 'rgba(210, 210, 210, 0.2)' : ''};
@@ -19,4 +19,6 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-size: ${rem('18px')} ${rem('18px')};
 `;
+/* eslint-enable */
+
 export default Button;
