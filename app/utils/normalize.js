@@ -4,10 +4,14 @@ export function normalizePodcast(data) {
     title: data.title,
     desc: data.description || '暂无简介',
     rank: data.episodes_count || 0,
-    ablumPicture: data.image,
+    image: data.image,
     time: data.full_length || 0,
     coast: data.price || 0,
     createDate: data.dt_updated,
+    srcShort: data.preview_url,
+    src: data.full_url,
+    serial: data.album_title,
+    people: data.hosts,
   };
 }
 

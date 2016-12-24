@@ -8,14 +8,14 @@ export default class PodcastProfile extends React.PureComponent { // eslint-disa
     title: React.PropTypes.string,
     desc: React.PropTypes.string,
     coast: React.PropTypes.number,
-    ablumPicture: React.PropTypes.string,
+    image: React.PropTypes.string,
   };
 
   render() {
-    const { title, desc, coast, ablumPicture } = this.props;
+    const { title, desc, coast, image } = this.props;
     return (
       <CardWrap>
-        <Ablum><img src={ablumPicture} alt="" /></Ablum>
+        <Ablum><img src={image} alt="" /></Ablum>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
         <Desc>购买后，在xx年xx月xx日前，可随意收听本节目</Desc>

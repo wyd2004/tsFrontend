@@ -28,7 +28,7 @@ export function podcastLoaded(result) {
 }
 export function historyLoaded(result, more) {
   return {
-    type: LOAD_PODCAST_SUCCESS,
+    type: LOAD_HISTORY_SUCCESS,
     result,
     more,
   };

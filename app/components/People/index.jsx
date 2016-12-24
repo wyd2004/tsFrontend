@@ -31,17 +31,17 @@ export default class Album extends PureComponent {
 
   static propTypes = {
     image: PropTypes.string,
-    title: PropTypes.string,
+    name: PropTypes.string,
     id: PropTypes.number,
   };
 
   render() {
-    const { image, title, id } = this.props;
+    const { image, name, id } = this.props;
 
     return (
       <Wrapper to={`/people/${id}`}>
-        <Img src={image} alt={title} />
-        <Text>{title}</Text>
+        <Img src={image} alt={name} />
+        <Text>{name}</Text>
       </Wrapper>
     );
   }

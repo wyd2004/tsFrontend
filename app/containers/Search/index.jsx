@@ -9,6 +9,8 @@ import selectSearchPage from './selectors';
 
 import SearchBar from 'components/SearchBar';
 import { Searched } from 'components/PodcastItem/style';
+import Infinite from 'components/Infinite';
+import PodcastItem from 'components/PodcastItem';
 
 import { searchPodcast } from './actions';
 
@@ -30,11 +32,14 @@ const Total = styled.span`
 export class SearchPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     onSearch: React.PropTypes.func,
+    podcast: React.PropTypes.array,
+    page: React.PropTypes.number,
+    search: React.PropTypes.string,
   }
   constructor(props) {
     super(props);
     this.state = {
-      searchValue: '',
+      searchValue: props.search,
     };
   }
   handleSearch = (value) => {
@@ -43,9 +48,12 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
       searchValue: value,
     });
   }
+  handleRefresh = () => {
+    const { page, onSearch } = this.props;
+    onSearch(this.state.searchValue, page);
+  }
   render() {
-    // const {resutls} = this.props;
-    const results = [];
+    const { podcast } = this.props;
     const { searchValue } = this.state;
     return (
       <div>
@@ -56,7 +64,10 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
           ]}
         />
         <SearchBar onSearch={this.handleSearch} />
-        { results.length !== 0 && <ResultBar>以下是包含<Searched>{searchValue}</Searched>的节目<Total>共有<span>{results.length}</span>个节目</Total></ResultBar> }
+        { podcast.length !== 0 && <ResultBar>以下是包含<Searched>{searchValue}</Searched>的节目<Total>共有<span>{podcast.length}</span>个节目</Total></ResultBar> }
+        <Infinite onRefresh={this.handleRefresh}>
+          {podcast.map((item) => <PodcastItem {...item} searchValue={searchValue} key={item.id} />)}
+        </Infinite>
       </div>
     );
   }

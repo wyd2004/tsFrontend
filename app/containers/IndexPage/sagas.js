@@ -13,7 +13,7 @@ export function* getData(action) {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results, next } = response;
-    const normalizedResults = results.map((item) => normalizer(item));
+    const normalizedResults = results.map(normalizer);
     yield put(loadedAction({ results: normalizedResults, next }));
   }
 }

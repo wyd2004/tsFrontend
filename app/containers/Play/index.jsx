@@ -14,14 +14,6 @@ import PodcastItem from 'components/PodcastItem';
 import Title from 'components/Title';
 import Infinite from 'components/Infinite';
 
-const mockList = [
-  { id: 1, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, isBuy: true },
-  { id: 2, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-  { id: 3, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-  { id: 4, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-  { id: 5, title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-];
-
 export class Play extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const { id } = this.props.params;
@@ -33,21 +25,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
   }
   render() {
     const { podcast, history, subscribe } = this.props;
-    console.log(podcast, history);
 
-    const mockPodcast = {
-      srcShort: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
-      src: 'http://game.gtimg.cn/images/mhzx/web201610/mp3/wangsulong.mp3',
-      ablum: 'http://p4.music.126.net/xomieFDiQZkFO3bebFAuDg==/103354093026187.jpg?param=130y130',
-      canPlay: false,
-      time: 1233,
-      title: '本期：上班拍女同事的照片是否违法',
-      date: 123123412,
-      serial: '失色静安寺',
-      desc: '会说相声的拍照片儿的不是一个好搓屎的。”——@二宝-杨毅',
-      people: '糖蒜',
-      coast: 123,
-    };
     return (
       <div>
         <Helmet
@@ -56,11 +34,15 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
             { name: 'description', content: '糖蒜广播-播放页' },
           ]}
         />
-        <Player {...mockPodcast} onSubscribe={subscribe} />
-        <Title icon="before">往期广播</Title>
-        <Infinite onRefresh={this.handleRefresh}>
-          {mockList.map((item) => <PodcastItem key={item.id} {...item} />)}
-        </Infinite>
+        <Player {...podcast} onSubscribe={subscribe} />
+        {history.results.length !== 0 && (
+          <div>
+            <Title icon="before">往期广播</Title>
+            <Infinite onRefresh={this.handleRefresh}>
+              {history.results.map((item) => <PodcastItem key={item.id} {...item} />)}
+            </Infinite>
+          </div>
+        )}
       </div>
     );
   }

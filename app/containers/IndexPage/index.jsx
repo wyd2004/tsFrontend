@@ -85,7 +85,6 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
   render() {
     const { podcast, ablum } = this.props;
     const { current } = this.state;
-    console.log(podcast, ablum);
     return (
       <div style={{ overflow: 'hidden' }}>
         <Helmet

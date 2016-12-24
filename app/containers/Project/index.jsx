@@ -22,7 +22,8 @@ import Header from 'components/Header';
 
 export class Project extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    this.props.loadProject();
+    const { projects } = this.props;
+    projects.length === 0 && this.props.loadProject();
   }
   buy = (id) => (e) => {
     e.preventDefault();

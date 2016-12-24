@@ -51,7 +51,7 @@ const Special = styled.span`
 
 const Rank = styled(ActionsItem)`
   color: ${COLOR_1};
-  background: url(${require('./assets/play_sm.png')}) no-repeat left;
+  background: url(${require('./assets/list.png')}) no-repeat left;
   margin-left: 0;
 `;
 const Time = styled(ActionsItem)`

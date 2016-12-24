@@ -22,7 +22,7 @@ const Name = styled.p`
   margin-top: ${rem('0px')};
 `;
 
-const Desc = styled.p`
+const Description = styled.p`
   font-size: ${rem('11px')};
   margin-bottom: 0;
 `;
@@ -40,20 +40,20 @@ const Vip = styled.span`
 export default class PeopleProfile extends PureComponent {
   static propTypes = {
     isVip: PropTypes.bool,
-    avatar: PropTypes.string,
-    desc: PropTypes.string,
-    username: PropTypes.string,
+    image: PropTypes.string,
+    description: PropTypes.string,
+    name: PropTypes.string,
   };
 
   render() {
-    const { isVip, avatar, desc, username } = this.props;
+    const { isVip, image, description, name } = this.props;
 
     return (
       <Wrapper>
-        <Avatar isVip={isVip} src={avatar} />
+        <Avatar isVip={isVip} src={image} />
         { isVip && <Vip /> }
-        <Name>{username}</Name>
-        <Desc>{desc}</Desc>
+        <Name>{name}</Name>
+        <Description>{description}</Description>
       </Wrapper>
     );
   }

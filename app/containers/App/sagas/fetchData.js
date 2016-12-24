@@ -8,7 +8,7 @@ export const delay = (ms) => new Promise((resolve) => setTimeout(resolve({ errno
 export default function* fetchData({ url, options, successMessage, loadIndentify = 'global' }) {
   const { token } = yield select(selectCurrentUser());
   const headers = {
-    'Content-Type': 'application/jsosn',
+    'Content-Type': 'application/json',
     Authorization: `Token ${token}`,
   };
   let results;

@@ -18,19 +18,14 @@ import PeopleProfile from 'components/PeopleProfile';
 
 export class People extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    this.props.loadPodcast();
-    this.props.loadPeople();
+    const { profile, podcast, params } = this.props;
+    const { id } = params;
+    podcast.length === 0 && this.props.loadPodcast(id);
+    !profile && this.props.loadPeople(id);
   }
   render() {
-    const { people, podcast } = this.props;
-    console.log(people, podcast);
-    const mockList = [
-      { id: '1', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6, isBuy: true },
-      { id: '2', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '3', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '4', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-      { id: '5', title: '强迫性新闻不是强迫性行为', desc: '大脑洞', rank: 23, time: 75, date: Date.now, coast: 6 },
-    ];
+    const { profile, podcast } = this.props;
+
     return (
       <div>
         <Helmet
@@ -40,21 +35,17 @@ export class People extends React.Component { // eslint-disable-line react/prefe
           ]}
         />
         <Card>
-          <PeopleProfile
-            isVip
-            avatar={'http://cn.gravatar.com/avatar/c78af66f07877a04a35e759acc791b7a?s=50'}
-            desc={'他是法国波旁王朝国王，也是世界历史上在位时间最长的君主之一。5岁那年被母后安娜抱上了国王宝座，开始了长达72年的漫长帝王生涯。'}
-            username={'大王王大大王'}
-          />
+          <PeopleProfile {...profile} />
         </Card>
-        {mockList.map((item) => <PodcastItem {...item} />)}
+        {podcast.map((item) => <PodcastItem key={item.id} {...item} />)}
       </div>
     );
   }
 }
 People.propTypes = {
-  people: React.PropTypes.object,
-  podcast: React.PropTypes.object,
+  profile: React.PropTypes.object,
+  podcast: React.PropTypes.array,
+  params: React.PropTypes.object,
   loadPodcast: React.PropTypes.func,
   loadPeople: React.PropTypes.func,
 };

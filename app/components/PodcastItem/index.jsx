@@ -13,7 +13,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
     createDate: React.PropTypes.string,
     time: React.PropTypes.number,
     rank: React.PropTypes.number,
-    ablumPicture: React.PropTypes.string,
+    image: React.PropTypes.string,
     isBuy: React.PropTypes.bool,
     buying: React.PropTypes.bool,
     searchValue: React.PropTypes.string,
@@ -26,7 +26,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
      }
 
   render() {
-    const { id, title, desc, coast, createDate, time, rank, ablumPicture, isBuy, searchValue, buying } = this.props;
+    const { id, title, desc, coast, createDate, time, rank, image, isBuy, searchValue, buying } = this.props;
     const renderSearchValue = (string = '') => {
       const index = string.search(searchValue);
       if (searchValue && index !== -1) {
@@ -37,7 +37,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
     return (
       <Link to={`/play/${id}`}>
         <CardWrapS>
-          <Ablum><img src={ablumPicture || require('./assets/default.jpg')} alt="" /></Ablum>
+          <Ablum><img src={image || require('./assets/default.jpg')} alt="" /></Ablum>
           <Coast isBuy={isBuy} onClick={this.goBuy(id)}>{isBuy ? '已购买' : `RMB${parseInt(coast, 10).toFixed(2)}`}</Coast>
           <Title>{renderSearchValue(title)}</Title>
           <Desc>{renderSearchValue(desc)}</Desc>

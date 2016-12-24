@@ -6,7 +6,7 @@ const initialState = fromJS({
   profile: null,
   podcast: {
     page: 1,
-    results: null,
+    results: [],
   },
 });
 
@@ -14,11 +14,11 @@ function profileReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_PEOPLE_SUCCESS:
       return state
-        .setIn(['profile'], action.results);
+        .setIn(['profile'], action.result);
     case LOAD_PEOPLE_PODCASTS_SUCCESS:
       return state
         .setIn(['podcast', 'page'], action.next ? state.getIn(['podcast', 'page']) + 1 : state.getIn(['podcast', 'page']))
-        .setIn(['podcast', 'results'], action.results);
+        .mergeIn(['podcast', 'results'], action.results);
     default:
       return state;
   }

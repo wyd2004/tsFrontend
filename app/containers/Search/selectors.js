@@ -13,7 +13,11 @@ const selectSearchPageDomain = () => (state) => state.get('search');
 
 const selectSearchPage = () => createSelector(
   selectSearchPageDomain(),
-  (searchState) => ({ result: searchState.get('results') }),
+  (searchState) => ({
+    search: searchState.get('search'),
+    podcast: searchState.getIn(['podcast', 'results']).toJS(),
+    page: searchState.getIn(['podcast', 'page']),
+  }),
 );
 
 export default selectSearchPage;

@@ -25,20 +25,19 @@ const Wrap = styled.div`
 `;
 export class Profile extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    this.props.loadSubscription();
-    this.props.loadVip();
-    this.props.loadPeople();
+    const { subs, vip, people } = this.props;
+    subs.results.length === 0 && this.props.loadSubscription();
+    vip.results.length === 0 && this.props.loadVip();
+    people.results.length === 0 && this.props.loadPeople();
   }
   render() {
     const { user, subs, vip, people } = this.props;
-    console.log(subs, vip, people);
     const { expire_datetime: expire, nickname } = user;
+    const { results: peopleResults } = people;
+    const { results: subsResults } = subs;
+    const { results: vipResults } = vip;
     const isVip = expire !== false;
-    const mockCollectionData = [
-      { title: 'a', id: 1 }, { title: 'a', id: 4 },
-      { title: 'a', id: 2 }, { title: 'a', id: 5 }, { title: 'a', id: 7 },
-      { title: 'a', id: 3 }, { title: 'a', id: 6 },
-    ];
+
     const addPic = require('./add.png');
     return (
       <div>
@@ -54,21 +53,21 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
         <Title icon="vip">订阅栏目</Title>
         <Card>
           <Wrap>
-            {mockCollectionData.map((album) => <Album key={album.id} {...album} />)}
-            {mockCollectionData.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/subscription" />}
+            {subsResults.map((album) => <Album key={album.id} {...album} />)}
+            {subsResults.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/subscription" />}
           </Wrap>
         </Card>
         <Title icon="vip">会员栏目</Title>
         <Card>
           <Wrap>
-            {mockCollectionData.map((album) => <Album key={album.id} {...album} />)}
-            {mockCollectionData.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/vip" />}
+            {vipResults.map((album) => <Album key={album.id} {...album} />)}
+            {vipResults.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/vip" />}
           </Wrap>
         </Card>
         <Title icon="vip">按主播查看</Title>
         <Card>
           <Wrap>
-            {mockCollectionData.map((host) => <People key={host.id} {...host} />)}
+            {peopleResults.map((host) => <People key={host.id} {...host} />)}
           </Wrap>
         </Card>
       </div>

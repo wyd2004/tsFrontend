@@ -2,27 +2,19 @@ import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
 import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
+import { normalizePodcast } from 'utils/normalize';
 
 import { SEARCH, searchResult } from './actions';
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function* requestSearch(action) {
-  const url = `/podcast/episode/?search=${action.content}`;
-  const results = yield call(fetchData, { url });
-  if (results) {
-    const normalizedResults = results.map((item) =>
-      ({
-        ...item,
-        desc: item.description || '暂无简介',
-        rank: item.episodes_count || 0,
-        ablumPicture: item.image,
-        time: item.length || 0,
-        coast: item.price || 0,
-        createDate: item.dt_updated,
-      })
-    );
-    yield put(searchResult(normalizedResults));
+  const url = `/podcast/episode/?search=${action.content}&page=${action.page}`;
+  const response = yield call(fetchData, { url });
+  if (response) {
+    const { results, next } = response;
+    const normalizedResults = results.map(normalizePodcast);
+    yield put(searchResult(normalizedResults, next));
   }
 }
 

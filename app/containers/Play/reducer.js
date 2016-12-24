@@ -23,8 +23,8 @@ function profileReducer(state = initialState, action) {
       return state.set('podcast', action.result);
     case LOAD_HISTORY_SUCCESS:
       return state
-      .set('history', action.more ? state.getIn(['history', 'page']) + 1 : null)
-      .setIn(['history', 'results'], action.result);
+      .setIn(['history', 'page'], action.more ? state.getIn(['history', 'page']) + 1 : null)
+      .mergeIn(['history', 'results'], action.result);
     case SUBSCRIBE_SUCCESS:
       return state
       .set('podcast', { ...state.get('podcast'), subscribed: true });

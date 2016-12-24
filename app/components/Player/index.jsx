@@ -55,7 +55,7 @@ const StyledLink = styled(Link)`
 const Card2 = styled.div`
   background: white;
   border-radius: ${rem('2px')};
-  margin: ${rem('6px')};
+  margin: ${rem('6px')} 0;
   position: relative;
   font-size: ${rem('13px')};
   padding-top: ${rem('5px')};
@@ -140,8 +140,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     this.props.onSubscribe(id, state);
   }
   render() {
-    const { id, srcShort, src, ablum, canPlay, time: totalTime, title, date, serial, desc, people, coast, isSub } = this.props;
+    const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, isSub, prev, next } = this.props;
     const { currentTime, loaded, played } = this.state;
+    const canPlay = src;
 
     return (
       <Wrapper>
@@ -153,7 +154,7 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
           onTimeUpdate={this.handleTimeUpdate}
         />
         <Card>
-          <Ablum><img src={ablum || require('./assets/default.jpg')} alt="节目封面" /></Ablum>
+          <Ablum><img src={image || require('./assets/default.jpg')} alt="节目封面" /></Ablum>
           <ProgressBar
             currentTime={currentTime}
             totalTime={totalTime}
@@ -161,20 +162,20 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
             onProgressUpdate={this.handleProgressUpdate}
           />
           <Actions>
-            <Prev></Prev>
+            <Prev to={prev && `/play/${prev}`}></Prev>
             <PlayButton onClick={this.handlePlay} played={played}></PlayButton>
-            <Next></Next>
+            <Next to={next && `/play/${next}`}></Next>
           </Actions>
         </Card>
-        <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>
+        {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}
         <Card>
           { !canPlay && <Subscribe onClick={this.handleSub}>{isSub ? '已订阅' : '订阅'}</Subscribe> }
           <Title>{title}</Title>
           <Info>
             <Coast>{coast}</Coast>
-            <Date>{convDate(date)}</Date>
+            <Date>{convDate(createDate)}</Date>
           </Info>
-          <Info><Label>主持人：</Label>{people}</Info>
+          <Info><Label>主持人：</Label>{people && people.map((item) => item.name)}</Info>
           <Info><Label>栏目：</Label>{serial}</Info>
           <Info><Label>栏目介绍：</Label>{desc}</Info>
         </Card>
@@ -186,17 +187,16 @@ Player.propTypes = {
   srcShort: React.PropTypes.string,
   src: React.PropTypes.string,
   id: React.PropTypes.number,
-  ablum: React.PropTypes.string,
+  image: React.PropTypes.string,
   isSub: React.PropTypes.bool,
-  canPlay: React.PropTypes.bool,
   time: React.PropTypes.number,
-  onPrev: React.PropTypes.func,
-  onNext: React.PropTypes.func,
+  prev: React.PropTypes.number,
+  next: React.PropTypes.number,
   title: React.PropTypes.string,
-  date: React.PropTypes.number,
+  createDate: React.PropTypes.string,
   serial: React.PropTypes.string,
   desc: React.PropTypes.string,
-  people: React.PropTypes.string,
+  people: React.PropTypes.array,
   coast: React.PropTypes.number,
   onSubscribe: React.PropTypes.func,
 };
