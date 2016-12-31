@@ -2,6 +2,7 @@ import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
 import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribeSuccessed, podcastLoaded, historyLoaded } from './actions';
 import { normalizePodcast } from 'utils/normalize';
+import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 
 import fetchData from 'containers/App/sagas/fetchData';
 
@@ -52,7 +53,7 @@ export function* sub() {
 }
 
 // Bootstrap sagas
-export default [
+export default cancelSagaOnLocationChange([
   loadPodcast,
   sub,
-];
+]);

@@ -17,6 +17,16 @@ import Infinite from 'components/Infinite';
 export class Play extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const { id } = this.props.params;
+    this.fetchDate(id);
+  }
+  componentWillReceiveProps(nextProps) {
+    const next = nextProps.params.id;
+    const current = this.props.params.id;
+    if (next !== current) {
+      this.fetchDate(next);
+    }
+  }
+  fetchDate = (id) => {
     this.props.loadPodcast(id);
     this.props.loadHistory(id);
   }

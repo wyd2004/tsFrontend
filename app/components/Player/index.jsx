@@ -27,7 +27,7 @@ const Ablum = styled.div`
 const Actions = styled.div`
   text-align: center;
 `;
-const Prev = styled.span`
+const Prev = styled(Link)`
   background-image: url(${require('./assets/prev.png')});
   background-size: ${rem('25px')} ${rem('25px')};
   height: ${rem('25px')};
@@ -145,7 +145,6 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, subscribed, prev, next } = this.props;
     const { currentTime, loaded, played } = this.state;
     const canPlay = src;
-
     return (
       <Wrapper>
         {/* 此处的ref用法请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
