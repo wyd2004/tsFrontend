@@ -12,7 +12,7 @@ import { selectPodcast, selectAblum } from './selectors';
 
 import UserButton from 'components/UserButton';
 import PodcastItem from 'components/PodcastItem';
-import AblumItem from 'components/AblumItem';
+import AlbumItem from 'components/AlbumItem';
 import Infinite from 'components/Infinite';
 
 import * as indexActions from './actions';
@@ -115,7 +115,7 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
               </ListWrapper>
               <ListWrapper>
                 <Infinite onRefresh={this.handleRefresh}>
-                  {ablum.map((item) => <AblumItem {...item} key={item.id} />)}
+                  {ablum.map((item) => <AlbumItem {...item} key={item.id} />)}
                 </Infinite>
               </ListWrapper>
             </ContentWrapper>

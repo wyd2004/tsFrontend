@@ -12,8 +12,7 @@ export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export function* requestSubscribe(action) {
   const user = yield select(selectCurrentUser());
   const url = `/member/${user.member_id}/subscription/album/?page=${action.page}`;
-  const options = { headers: { token: user.token } };
-  const response = yield call(fetchData, { url, options });
+  const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
     const normalizedResults = results.map((item) => normalizeAblum(item.album));
@@ -32,15 +31,10 @@ export function* subscribe() {
 export function* requestVip(action) {
   const user = yield select(selectCurrentUser());
   const url = `/member/${user.member_id}/purchase/album/?page=${action.page}`;
-  const options = { headers: { token: user.token } };
-  const response = yield call(fetchData, { url, options });
+  const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) =>
-      ({
-        ...item,
-      })
-    );
+    const normalizedResults = results.map((item) => normalizeAblum(item.album));
     yield put(vipLoaded(normalizedResults));
   }
 }
@@ -58,12 +52,7 @@ export function* requestPeople(action) {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) =>
-      ({
-        ...item,
-      })
-    );
-    yield put(peopleLoaded(normalizedResults));
+    yield put(peopleLoaded(results));
   }
 }
 

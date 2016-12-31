@@ -2,26 +2,30 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import rem from 'utils/pxtorem';
 import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { loadSubscription } from 'containers/Profile/actions';
-import { selectSubscription } from 'containers/Profile/selectors';
+import { loadAlbum } from './actions';
+import { selectSubscription } from './selectors';
+import Infinite from 'components/Infinite';
 
-import PodcastItem from 'components/PodcastItem';
+import AlbumItem from 'components/AlbumItem';
 import Title from 'components/Title';
 
 const Wrapper = styled.div`
 `;
 export class Subscription extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    this.props.loadSubscription();
+    this.props.loadAlbum();
+  }
+  handleRefresh = () => {
+    const { albums } = this.props;
+    const { page } = albums;
+    page && this.props.loadAlbum(page);
   }
   render() {
-    const { podcasts } = this.props;
-    const { results: data } = podcasts;
-    console.log(podcasts);
+    const { albums } = this.props;
+    const { results: data } = albums;
     return (
       <Wrapper>
         <Helmet
@@ -31,21 +35,23 @@ export class Subscription extends React.Component { // eslint-disable-line react
           ]}
         />
         <Title icon="podcast">订阅栏目</Title>
-        {data.map((item) => <PodcastItem {...item} />)}
+        <Infinite onRefresh={this.handleRefresh}>
+          {data.map((item) => <AlbumItem key={item.id} {...item} />)}
+        </Infinite>
       </Wrapper>
     );
   }
 }
 Subscription.propTypes = {
-  podcasts: PropTypes.object,
-  loadSubscription: PropTypes.func,
+  albums: PropTypes.object,
+  loadAlbum: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loadSubscription }, dispatch);
+  return bindActionCreators({ loadAlbum }, dispatch);
 }
 const mapStateToProps = createStructuredSelector({
-  podcasts: selectSubscription(),
+  albums: selectSubscription(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Subscription);

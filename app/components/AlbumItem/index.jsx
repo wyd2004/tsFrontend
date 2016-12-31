@@ -4,7 +4,7 @@ import { convDate } from 'utils/tools';
 import CardWrapS from 'components/Card/CardWrapS';
 import { Title, Desc, Ablum, Actions, Rank, CreateDate } from '../PodcastItem/style';
 
-export default class AblumItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class AlbumItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     id: React.PropTypes.number,
     title: React.PropTypes.string,
