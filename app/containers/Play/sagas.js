@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
-import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribe, podcastLoaded, historyLoaded } from './actions';
+import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribeSuccessed, podcastLoaded, historyLoaded } from './actions';
 import { normalizePodcast } from 'utils/normalize';
 
 import fetchData from 'containers/App/sagas/fetchData';
@@ -39,18 +39,7 @@ export function* subscribePodcast(action) {
   const results = yield call(fetchData, { url, options });
 
   if (results) {
-    const normalizedResults = results.map((item) =>
-        ({
-          ...item,
-          desc: item.description || '暂无简介',
-          rank: item.episodes_count || 0,
-          ablumPicture: item.image,
-          time: item.length || 0,
-          coast: item.price || 0,
-          createDate: item.dt_updated,
-        })
-      );
-    yield put(subscribe(normalizedResults));
+    yield put(subscribeSuccessed(action.state));
   }
 }
 

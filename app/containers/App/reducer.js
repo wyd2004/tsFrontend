@@ -10,14 +10,14 @@ import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_PROFILE_SUCCESS, FETCH
 
 export const key = 'USER_DATA';
 
-let user = {
-  member_id: 1,
-  token: '123456',
-  nickname: 'test_member',
-  avatar: 'https://tower.im/assets/default_avatars/jokul.jpg',
-  expire_datetime: '2016-11-20T14:36:32.427000Z',
-};
-// let user;
+// let user = {
+//   member_id: 1,
+//   token: '123456',
+//   nickname: 'test_member',
+//   avatar: 'https://tower.im/assets/default_avatars/jokul.jpg',
+//   expire_datetime: '2016-11-20T14:36:32.427000Z',
+// };
+let user;
 try {
   const json = localStorage.getItem(key);
   if (json) {

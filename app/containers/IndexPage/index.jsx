@@ -55,8 +55,12 @@ const ContentWrapper = styled.div`
   width: 200%;
 `;
 const ListWrapper = styled.div`
-  width: 50%;
-  float: left;
+width: 50%;
+float: left;
+  & > div {
+    height: calc(100vh - ${rem('130px')});
+    overflow: scroll;
+  }
 `;
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -103,16 +107,18 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
         <UserButton />
         <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
           {({ x }) =>
-            <Infinite onRefresh={this.handleRefresh}>
-              <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
-                <ListWrapper>
+            <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
+              <ListWrapper>
+                <Infinite onRefresh={this.handleRefresh}>
                   {podcast.map((item) => <PodcastItem {...item} key={item.id} />)}
-                </ListWrapper>
-                <ListWrapper>
+                </Infinite>
+              </ListWrapper>
+              <ListWrapper>
+                <Infinite onRefresh={this.handleRefresh}>
                   {ablum.map((item) => <AblumItem {...item} key={item.id} />)}
-                </ListWrapper>
-              </ContentWrapper>
-            </Infinite>
+                </Infinite>
+              </ListWrapper>
+            </ContentWrapper>
             }
         </Motion>
       </div>

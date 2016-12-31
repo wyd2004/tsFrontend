@@ -8,9 +8,9 @@ export function loadPodcast(id) {
   };
 }
 
-export function podcastLoaded(result) {
+export function podcastLoaded(podcast) {
   return {
     type: LOAD_PODCAST_SUCCESS,
-    result,
+    podcast,
   };
 }

@@ -42,8 +42,9 @@ export function subscribe(id, state) {
   };
 }
 
-export function subscribeSuccessed() {
+export function subscribeSuccessed(state) {
   return {
     type: SUBSCRIBE_SUCCESS,
+    subscribed: state === 1,
   };
 }

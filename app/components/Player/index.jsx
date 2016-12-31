@@ -43,7 +43,7 @@ const Next = styled(Prev)`
 const PlayButton = styled.span`
   background-image: url(${require('./assets/play.png')});
   background-size: ${rem('120px')} ${rem('60px')};
-  background-position-x: ${(props) => !props.played ? 0 : -60}px;
+  background-position-x: ${(props) => !props.played ? 0 : '100%'};
   height: ${rem('60px')};
   width: ${rem('60px')};
   display: inline-block;
@@ -86,12 +86,14 @@ const Coast = styled.span`
   background-position-y: center;
   margin-right: ${rem('20px')};
   margin-bottom: ${rem('6px')};
+  font-family: 'BebasNeue';
 `;
-const Date = styled(Coast)`
+const PublicDate = styled(Coast)`
   background-image: url(${require('../PodcastItem/assets/time.png')});
 `;
 const Subscribe = styled(Button)`
   float: right;
+  background-color: ${(props) => !props.subscribed ? '#ff7575' : COLOR_3};
 `;
 
 class Player extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -135,12 +137,12 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
   handleSub = () => {
-    const { id, isSub } = this.props;
-    const state = isSub ? 0 : 1;
-    this.props.onSubscribe(id, state);
+    const { albumId, subscribed } = this.props;
+    const state = subscribed ? 0 : 1;
+    this.props.onSubscribe(albumId, state);
   }
   render() {
-    const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, isSub, prev, next } = this.props;
+    const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, subscribed, prev, next } = this.props;
     const { currentTime, loaded, played } = this.state;
     const canPlay = src;
 
@@ -169,11 +171,11 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
         </Card>
         {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}
         <Card>
-          { !canPlay && <Subscribe onClick={this.handleSub}>{isSub ? '已订阅' : '订阅'}</Subscribe> }
+          <Subscribe subscribed={subscribed} onClick={this.handleSub}>{subscribed ? '取消订阅' : '订阅'}</Subscribe>
           <Title>{title}</Title>
           <Info>
             <Coast>{coast}</Coast>
-            <Date>{convDate(createDate)}</Date>
+            <PublicDate>{convDate(createDate)}</PublicDate>
           </Info>
           <Info><Label>主持人：</Label>{people && people.map((item) => item.name)}</Info>
           <Info><Label>栏目：</Label>{serial}</Info>
@@ -187,8 +189,9 @@ Player.propTypes = {
   srcShort: React.PropTypes.string,
   src: React.PropTypes.string,
   id: React.PropTypes.number,
+  albumId: React.PropTypes.number,
   image: React.PropTypes.string,
-  isSub: React.PropTypes.bool,
+  subscribed: React.PropTypes.bool,
   time: React.PropTypes.number,
   prev: React.PropTypes.number,
   next: React.PropTypes.number,

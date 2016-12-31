@@ -27,7 +27,7 @@ function profileReducer(state = initialState, action) {
       .mergeIn(['history', 'results'], action.result);
     case SUBSCRIBE_SUCCESS:
       return state
-      .set('podcast', { ...state.get('podcast'), subscribed: true });
+      .set('podcast', { ...state.get('podcast'), subscribed: action.subscribed });
     default:
       return state;
   }

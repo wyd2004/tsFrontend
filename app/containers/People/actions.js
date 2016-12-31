@@ -21,9 +21,10 @@ export function loadPodcast(id) {
     id,
   };
 }
-export function podcastLoaded(result) {
+export function podcastLoaded(results, next) {
   return {
     type: LOAD_PEOPLE_PODCASTS_SUCCESS,
-    result,
+    results,
+    next,
   };
 }

@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import rem from 'utils/pxtorem';
@@ -15,6 +15,7 @@ import PodcastItem from 'components/PodcastItem';
 import CardOrigin from 'components/Card/CardWrap';
 import { Button } from 'components/PodcastItem/style';
 import Title from 'components/Title';
+import { PAY_TYPE } from 'containers/Pay/actions';
 
 const Card = styled(CardOrigin)`
   margin: 0;
@@ -49,10 +50,13 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
     const { params: { id } } = this.props;
     this.props.loadPodcast(id);
   }
-  handlePay = () => {
+  handlePay = (e) => {
+    e.preventDefault();
+    const { podcast: { id } } = this.props;
+    browserHistory.push(`/pay?type=${PAY_TYPE.podcast}&id=${id}`);
   }
   render() {
-    const { item } = this.props;
+    const { podcast } = this.props;
     return (
       <Wrapper>
         <Helmet
@@ -62,7 +66,7 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
           ]}
         />
         <Title icon="buy">节目购买</Title>
-        <PodcastItem {...item} />
+        <PodcastItem {...podcast} />
         <Tips>
           <Desc>单月会员只要￥60！！还有多种特权</Desc>
           <Link to="/project"><Button>我还是买会员吧</Button></Link>
@@ -73,7 +77,7 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 Buy.propTypes = {
-  item: PropTypes.object,
+  podcast: PropTypes.object,
   params: PropTypes.object,
   loadPodcast: PropTypes.func,
 };

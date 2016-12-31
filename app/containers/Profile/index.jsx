@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import rem from 'utils/pxtorem';
 import moment from 'moment';
 import { selectCurrentUser } from 'containers/App/selectors';
 
@@ -32,7 +31,7 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
   }
   render() {
     const { user, subs, vip, people } = this.props;
-    const { expire_datetime: expire, nickname } = user;
+    const { expire_datetime: expire, nickname, avatar } = user;
     const { results: peopleResults } = people;
     const { results: subsResults } = subs;
     const { results: vipResults } = vip;
@@ -48,7 +47,7 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
           ]}
         />
         <Card>
-          <Header isVip={isVip} otherText={moment(expire).format('YYYY/MM/DD')} isSelf userName={nickname} toRenew={() => console.log(123)} />
+          <Header isVip={isVip} avatarSrc={avatar} otherText={moment(expire).format('YYYY/MM/DD')} isSelf userName={nickname} toRenew={() => console.log(123)} />
         </Card>
         <Title icon="vip">订阅栏目</Title>
         <Card>

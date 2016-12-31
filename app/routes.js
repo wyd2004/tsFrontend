@@ -22,6 +22,7 @@ const routes = [
   { path: '/special/:id',     name: 'special',        modulePath: 'Special'         },  // 专辑栏目列表
   { path: '/buy/:type/:id',   name: 'buy',            modulePath: 'Buy'             },  // 单次购买页
   { path: '/pay',             name: 'pay',            modulePath: 'Pay'             },  // 调起支付、完成页
+  { path: '/test/pay',        name: 'pay',            modulePath: 'Pay'             },  // 调起支付、完成页
   { path: '/project',         name: 'project',        modulePath: 'Project'         },  // 月费购买
   { path: '/subscription',    name: 'subscription',   modulePath: 'Subscription'    },  // 已订阅栏目列表页
   { path: '/vip',             name: 'vip',            modulePath: 'Vip'             },  // 会员栏目列表页

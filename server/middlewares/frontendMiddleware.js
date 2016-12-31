@@ -34,7 +34,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
     preserveHostHdr: true,
     forwardPathAsync(req) {
       return new Promise((resolve) => {
-        setTimeout(() => { resolve(require('url').parse(req.originalUrl).path); }, 1000);
+        setTimeout(() => { resolve(require('url').parse(req.originalUrl).path); }, 500);
       });
     },
   }));

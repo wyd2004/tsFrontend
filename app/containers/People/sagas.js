@@ -12,9 +12,9 @@ export function* requestPodcast(action) {
   const url = `/podcast/people/${action.id}/episode/`;
   const response = yield call(fetchData, { url });
   if (response) {
-    const { results } = response;
+    const { results, next } = response;
     const normalizedResults = results.map(normalizePodcast);
-    yield put(podcastLoaded(normalizedResults));
+    yield put(podcastLoaded(normalizedResults, next));
   }
 }
 

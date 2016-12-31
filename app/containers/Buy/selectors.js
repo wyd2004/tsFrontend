@@ -12,7 +12,7 @@ const selectBuyDomain = () => (state) => state.get('buy');
 
 const selectPodcast = () => createSelector(
   selectBuyDomain(),
-  (state) => ({ item: state.toJS() }),
+  (state) => ({ podcast: state.toJS() }),
 );
 
 export {

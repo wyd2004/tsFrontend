@@ -1,8 +1,7 @@
-/* global WX_APP_ID */
-
 import { takeLatest } from 'redux-saga';
 import { put, fork, call, select } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
+import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 import wxpay from 'utils/wxbridge';
 
 import { CREATE_ORDER, paySuccessed, payFailed, PAY_TYPE } from './actions';
@@ -10,7 +9,8 @@ import { selectCurrentUser } from 'containers/App/selectors';
 
 export function* createOrder(action) {
   const { payType, id } = action;
-  const tier = payType === PAY_TYPE.podcast ? 'episode' : 'channel';
+  const tier = payType === PAY_TYPE.podcast ? 4 : +id;
+  const item = payType === PAY_TYPE.podcast ? +id : 1;
   const user = yield select(selectCurrentUser());
   const url = '/term/order/';
   const options = {
@@ -18,17 +18,16 @@ export function* createOrder(action) {
     body: JSON.stringify({
       tier,
       member: user.member_id,
-      item: id,
-      payments: [{ agent: 'wechat' }],
+      item,
+      payments: [{ agent: 'wechat', status: 'wait-for-payment' }],
     }),
   };
   const results = yield call(fetchData, { url, options });
 
   if (results) {
-    // TODO: 根据返回值调起支付
-    const { payments: { payload } } = results;
-    const { prepay_id, pay_sign } = payload;
-    const payResult = yield wxpay(prepay_id, pay_sign);
+    const { payments } = results;
+    const { prepay_id, sign, nonce_str, timestamp } = payments && payments[0] && payments[0].payload;
+    const payResult = yield wxpay(prepay_id, sign, nonce_str, timestamp);
     if (payResult.err_msg === 'get_brand_wcpay_request：ok') {
       yield put(paySuccessed());
     } else {
@@ -46,6 +45,6 @@ export function* pay() {
 }
 
 // Bootstrap sagas
-export default [
+export default cancelSagaOnLocationChange([
   pay,
-];
+]);

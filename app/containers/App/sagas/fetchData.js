@@ -6,11 +6,14 @@ import { selectCurrentUser } from 'containers/App/selectors';
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve({ errno: 0, test: 'test' }), ms));
 
 export default function* fetchData({ url, options, successMessage, loadIndentify = 'global' }) {
-  const { token } = yield select(selectCurrentUser());
+  const user = yield select(selectCurrentUser());
+  const token = user && user.token;
   const headers = {
     'Content-Type': 'application/json',
-    Authorization: `Token ${token}`,
   };
+  if (token) {
+    headers.Authorization = `Token ${token}`;
+  }
   let results;
   try {
     yield put(loading(loadIndentify));

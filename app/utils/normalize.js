@@ -12,6 +12,9 @@ export function normalizePodcast(data) {
     src: data.full_url,
     serial: data.album_title,
     people: data.hosts,
+    albumId: data.album_id,
+    next: data.next_ep_id,
+    prev: data.previous_ep_id,
   };
 }
 

@@ -3,6 +3,7 @@ import { put, fork, call, select } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
 import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 import { selectCurrentUser } from 'containers/App/selectors';
+import { normalizeAblum } from 'utils/normalize';
 
 import { LOAD_SUBSCRIPTION, LOAD_VIP, LOAD_PEOPLE, subscriptionLoaded, vipLoaded, peopleLoaded } from './actions';
 
@@ -15,11 +16,7 @@ export function* requestSubscribe(action) {
   const response = yield call(fetchData, { url, options });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) =>
-      ({
-        ...item,
-      })
-    );
+    const normalizedResults = results.map((item) => normalizeAblum(item.album));
     yield put(subscriptionLoaded(normalizedResults));
   }
 }

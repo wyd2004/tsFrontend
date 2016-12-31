@@ -17,7 +17,7 @@ function* weixinWatcher() {
     url += '#wechat_redirect';
 
     console.log('调起登录', url);
-    // window.location.href = url;
+    window.location.href = url;
   };
   yield fork(takeLatest, AUTH_ERROR, handleLogin);
 }
@@ -31,7 +31,7 @@ function* fetchAccessToken(action) {
     method: 'POST',
     body: JSON.stringify({ code: action.code }),
   };
-  const results = yield call(fetchData, { url: '/member/oauth', options });
+  const results = yield call(fetchData, { url: '/member/oauth/', options });
   if (results) {
     yield put(fetchAccessTokenSuccess(results));
     yield put(fetchProfile(results.member_id));

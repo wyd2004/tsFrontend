@@ -8,7 +8,7 @@ const HOST = '/api';
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
-  return response.json();
+  return response.status !== 204 ? response.json() : true;
 }
 
 /**

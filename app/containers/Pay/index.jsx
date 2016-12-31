@@ -35,6 +35,9 @@ export class Pay extends React.Component { // eslint-disable-line react/prefer-s
     const { location } = this.props;
     const { type, id } = getSearchObj(location.search);
     this.props.requireOrder({ payType: type, id });
+    if (['development', 'test'].indexOf(process.env.NODE_ENV) !== -1 && window.location.pathname === '/pay') {
+      window.location.href = `/test/pay/${window.location.search}`;
+    }
   }
 
   render() {
