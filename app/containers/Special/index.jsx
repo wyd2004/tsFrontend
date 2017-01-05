@@ -12,12 +12,16 @@ import Card from 'components/Card/CardWrapS';
 
 import AlbumHeader from 'components/AlbumHeader';
 import PodcastItem from 'components/PodcastItem';
+import Infinite from 'components/Infinite';
 
 class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const { info, params } = this.props;
     const { id } = params;
     !info && this.props.loadInfo(id);
+  }
+  handleRefresh = () => {
+
   }
   render() {
     const { info, podcast } = this.props;
@@ -30,10 +34,12 @@ class Special extends React.Component { // eslint-disable-line react/prefer-stat
             { name: 'description', content: '糖蒜广播-专辑列表' },
           ]}
         />
-        <Card>
-          { info && <AlbumHeader image={info.image} title={info.title} amount={info.amount} desc={info.desc} /> }
-        </Card>
-        {results.map((item) => <PodcastItem {...item} key={item.id} />) }
+        <Infinite onRefresh={this.handleRefresh}>
+          <Card>
+            { info && <AlbumHeader image={info.image} title={info.title} amount={info.amount} desc={info.desc} /> }
+          </Card>
+          {results.map((item) => <PodcastItem {...item} key={item.id} />) }
+        </Infinite>
       </div>
     );
   }

@@ -34,7 +34,7 @@ export function* requestVip(action) {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) => normalizeAblum(item.album));
+    const normalizedResults = results.map((item) => normalizeAblum(item));
     yield put(vipLoaded(normalizedResults));
   }
 }

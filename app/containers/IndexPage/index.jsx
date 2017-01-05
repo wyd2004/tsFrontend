@@ -109,12 +109,12 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
           {({ x }) =>
             <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
               <ListWrapper>
-                <Infinite onRefresh={this.handleRefresh}>
+                <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
                   {podcast.map((item) => <PodcastItem {...item} key={item.id} />)}
                 </Infinite>
               </ListWrapper>
               <ListWrapper>
-                <Infinite onRefresh={this.handleRefresh}>
+                <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
                   {ablum.map((item) => <AlbumItem {...item} key={item.id} />)}
                 </Infinite>
               </ListWrapper>

@@ -35,7 +35,7 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
     const { results: peopleResults } = people;
     const { results: subsResults } = subs;
     const { results: vipResults } = vip;
-    const isVip = expire !== false;
+    const isVip = expire && true;
 
     const addPic = require('./add.png');
     return (
@@ -47,7 +47,7 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
           ]}
         />
         <Card>
-          <Header isVip={isVip} avatarSrc={avatar} otherText={moment(expire).format('YYYY/MM/DD')} isSelf userName={nickname} toRenew={() => console.log(123)} />
+          <Header isVip={isVip} avatarSrc={avatar} otherText={expire && `${moment(expire).format('YYYY/MM/DD')}`} isSelf userName={nickname} />
         </Card>
         <Title icon="vip">订阅栏目</Title>
         <Card>

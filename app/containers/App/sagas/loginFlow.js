@@ -16,7 +16,7 @@ function* weixinWatcher() {
     url += '&scope=snsapi_userinfo';
     url += '#wechat_redirect';
 
-    console.log('调起登录', url);
+    // console.log('调起登录', url);
     window.location.href = url;
   };
   yield fork(takeLatest, AUTH_ERROR, handleLogin);

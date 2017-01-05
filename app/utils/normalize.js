@@ -15,6 +15,7 @@ export function normalizePodcast(data) {
     albumId: data.album_id,
     next: data.next_ep_id,
     prev: data.previous_ep_id,
+    subscribed: data.is_album_sub,
   };
 }
 

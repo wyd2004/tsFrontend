@@ -64,11 +64,10 @@ export default class Header extends PureComponent {
     userUrl: PropTypes.string,
     isSelf: PropTypes.bool,
     isVip: PropTypes.bool,
-    toRenew: PropTypes.func,
   };
 
   render() {
-    const { userUrl, isVip, avatarSrc, avatarAlt, otherText, userName, isSelf, toRenew } = this.props;
+    const { userUrl, isVip, avatarSrc, avatarAlt, otherText, userName, isSelf } = this.props;
     let headerText;
     if (isSelf) {
       if (otherText) {

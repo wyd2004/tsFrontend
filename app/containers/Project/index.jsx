@@ -33,7 +33,7 @@ export class Project extends React.Component { // eslint-disable-line react/pref
   render() {
     const { user, projects } = this.props;
     const { expire_datetime: expire, nickname, avatar } = user;
-    const isVip = expire !== false;
+    const isVip = expire && true;
     return (
       <div>
         <Helmet
@@ -43,7 +43,7 @@ export class Project extends React.Component { // eslint-disable-line react/pref
           ]}
         />
         <Card>
-          <Header isVip={isVip} avatarSrc={avatar} otherText={expire ? `会员截止日期：${moment(expire).format('YYYY/MM/DD')}` : '非会员'} userName={nickname} />
+          <Header isVip={isVip} isSelf avatarSrc={avatar} otherText={`${moment(expire).format('YYYY/MM/DD')}`} userName={nickname} />
         </Card>
         <Title icon="vip">开通会员</Title>
         {projects.map((item) => <Membership key={item.id} onClick={this.buy(item.id)} {...item} />)}

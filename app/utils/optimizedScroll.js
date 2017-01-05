@@ -10,8 +10,11 @@ const throttle = (type, name, obj) => {
     });
   };
   node.addEventListener(type, func);
+  return () => {
+    node.removeEventListener(type, func);
+  };
 };
 
-export default () => {
-  throttle('scroll', 'optimizedScroll');
-};
+export default (node) =>
+   throttle('scroll', 'optimizedScroll', node)
+;
