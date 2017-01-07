@@ -1,4 +1,4 @@
-/* global COLOR_2 */
+  /* global COLOR_2 */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import rem from 'utils/pxtorem';
@@ -23,6 +23,9 @@ const Text = styled.span`
   margin-top: ${rem('6px')};
   font-size: ${rem('14px')};
   color: ${COLOR_2};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 export default class Album extends PureComponent {
   static defaultProps = {

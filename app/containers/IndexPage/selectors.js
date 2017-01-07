@@ -12,12 +12,12 @@ const selectIndexPageDomain = () => (state) => state.get('indexPage');
 
 const selectPodcast = () => createSelector(
   selectIndexPageDomain(),
-  (indexState) => indexState.getIn(['podcast', 'results']).toJS(),
+  (indexState) => indexState.get('podcast').toJS(),
 );
 
 const selectAblum = () => createSelector(
   selectIndexPageDomain(),
-  (indexState) => indexState.getIn(['album', 'results']).toJS(),
+  (indexState) => indexState.get('album').toJS(),
 );
 
 export {

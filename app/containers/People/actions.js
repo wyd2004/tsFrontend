@@ -15,10 +15,11 @@ export function peopleLoaded(result) {
     result,
   };
 }
-export function loadPodcast(id) {
+export function loadPodcast(id, page = 1) {
   return {
     type: LOAD_PEOPLE_PODCASTS,
     id,
+    page,
   };
 }
 export function podcastLoaded(results, next) {

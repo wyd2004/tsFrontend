@@ -9,7 +9,7 @@ import { LOAD_PEOPLE_PODCASTS, LOAD_PEOPLE, peopleLoaded, podcastLoaded } from '
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function* requestPodcast(action) {
-  const url = `/podcast/people/${action.id}/episode/`;
+  const url = `/podcast/people/${action.id}/episode/?page=${action.page}`;
   const response = yield call(fetchData, { url });
   if (response) {
     const { results, next } = response;

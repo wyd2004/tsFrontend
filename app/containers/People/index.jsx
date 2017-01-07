@@ -14,14 +14,19 @@ import Card from 'components/Card';
 
 import PodcastItem from 'components/PodcastItem';
 import PeopleProfile from 'components/PeopleProfile';
+import Infinite from 'components/Infinite';
 
 
 export class People extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const { profile, podcast, params } = this.props;
     const { id } = params;
-    podcast.length === 0 && this.props.loadPodcast(id);
+    podcast.results.length === 0 && this.props.loadPodcast(id);
     !profile && this.props.loadPeople(id);
+  }
+  handleRefresh = () => {
+    const { podcast, params } = this.props;
+    podcast.page !== null && this.props.loadPodcast(params.id, podcast.page);
   }
   render() {
     const { profile, podcast } = this.props;
@@ -29,22 +34,24 @@ export class People extends React.Component { // eslint-disable-line react/prefe
     return (
       <div>
         <Helmet
-          title="个人中心"
+          title="主播"
           meta={[
-            { name: 'description', content: '糖蒜广播-个人中心' },
+            { name: 'description', content: '糖蒜广播-主播' },
           ]}
         />
         <Card>
           <PeopleProfile {...profile} />
         </Card>
-        {podcast.map((item) => <PodcastItem key={item.id} {...item} />)}
+        <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
+          {podcast.results.map((item) => <PodcastItem {...item} key={item.id} />)}
+        </Infinite>
       </div>
     );
   }
 }
 People.propTypes = {
   profile: React.PropTypes.object,
-  podcast: React.PropTypes.array,
+  podcast: React.PropTypes.object,
   params: React.PropTypes.object,
   loadPodcast: React.PropTypes.func,
   loadPeople: React.PropTypes.func,

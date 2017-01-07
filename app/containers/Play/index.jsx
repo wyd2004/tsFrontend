@@ -31,7 +31,8 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
     this.props.loadHistory(id);
   }
   handleRefresh = () => {
-    console.log('refresh');
+    const { history, params } = this.props;
+    history.page !== null && this.props.loadHistory(params.id, history.page);
   }
   render() {
     const { podcast, history, subscribe } = this.props;

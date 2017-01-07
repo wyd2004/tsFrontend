@@ -71,11 +71,17 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
   }
   componentWillMount() {
     const { podcast, ablum } = this.props;
-    podcast.length === 0 && this.props.loadPodcast();
-    ablum.length === 0 && this.props.loadAlbum();
+    podcast.results.length === 0 && this.props.loadPodcast();
+    ablum.results.length === 0 && this.props.loadAlbum();
   }
   handleRefresh = () => {
-    console.log('refresh');
+    const { podcast, ablum } = this.props;
+    const { current } = this.state;
+    if (current === 'album') {
+      ablum.page !== null && this.props.loadAlbum(ablum.page);
+    } else {
+      podcast.page !== null && this.props.loadPodcast(podcast.page);
+    }
   }
   handleChange = (state) =>
      (e) => {
@@ -110,12 +116,12 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
             <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
               <ListWrapper>
                 <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
-                  {podcast.map((item) => <PodcastItem {...item} key={item.id} />)}
+                  {podcast.results.map((item) => <PodcastItem {...item} key={item.id} />)}
                 </Infinite>
               </ListWrapper>
               <ListWrapper>
                 <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
-                  {ablum.map((item) => <AlbumItem {...item} key={item.id} />)}
+                  {ablum.results.map((item) => <AlbumItem {...item} key={item.id} />)}
                 </Infinite>
               </ListWrapper>
             </ContentWrapper>
@@ -129,8 +135,8 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
 IndexPage.propTypes = {
   loadAlbum: PropTypes.func,
   loadPodcast: PropTypes.func,
-  podcast: PropTypes.array,
-  ablum: PropTypes.array,
+  podcast: PropTypes.object,
+  ablum: PropTypes.object,
 };
 
 function mapDispatchToProps(dispatch) {

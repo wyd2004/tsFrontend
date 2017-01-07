@@ -53,7 +53,7 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
     onSearch(this.state.searchValue, page);
   }
   render() {
-    const { podcast } = this.props;
+    const { podcast, page } = this.props;
     const { searchValue } = this.state;
     return (
       <div>
@@ -65,6 +65,7 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
         />
         <SearchBar onSearch={this.handleSearch} />
         { podcast.length !== 0 && <ResultBar>以下是包含<Searched>{searchValue}</Searched>的节目<Total>共有<span>{podcast.length}</span>个节目</Total></ResultBar> }
+        { page === null && podcast.length === 0 ? <div>没有搜索到相关节目</div> : null}
         <Infinite onRefresh={this.handleRefresh}>
           {podcast.map((item) => <PodcastItem {...item} searchValue={searchValue} key={item.id} />)}
         </Infinite>

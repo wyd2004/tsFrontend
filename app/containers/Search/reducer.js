@@ -24,7 +24,7 @@ function searchPageReducer(state = initialState, action) {
     case SEARCH_SUCCESS:
       return state
       .setIn(['podcast', 'page'], action.next ? state.getIn(['podcast', 'page']) + 1 : null)
-      .mergeIn(['podcast', 'results'], action.results);
+      .setIn(['podcast', 'results'], fromJS(action.results));
     default:
       return state;
   }

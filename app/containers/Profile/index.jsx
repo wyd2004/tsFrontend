@@ -16,6 +16,7 @@ import Card from 'components/Card';
 import Title from 'components/Title';
 import Album from 'components/Album';
 import People from 'components/People';
+import Infinite from 'components/Infinite';
 
 import Header from 'components/Header';
 const Wrap = styled.div`
@@ -28,6 +29,10 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
     subs.results.length === 0 && this.props.loadSubscription();
     vip.results.length === 0 && this.props.loadVip();
     people.results.length === 0 && this.props.loadPeople();
+  }
+  handleRefresh = () => {
+    const { people } = this.props;
+    people.page !== null && this.props.loadPeople(people.page);
   }
   render() {
     const { user, subs, vip, people } = this.props;
@@ -66,7 +71,9 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
         <Title icon="vip">按主播查看</Title>
         <Card>
           <Wrap>
-            {peopleResults.map((host) => <People key={host.id} {...host} />)}
+            <Infinite onRefresh={this.handleRefresh} >
+              {peopleResults.map((host) => <People key={host.id} {...host} />)}
+            </Infinite>
           </Wrap>
         </Card>
       </div>

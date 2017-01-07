@@ -12,7 +12,7 @@ import { LOAD_PODCAST, LOAD_PODCAST_SUCCESS, LOAD_HISTORY_SUCCESS, SUBSCRIBE_SUC
 const initialState = fromJS({
   podcast: null,
   history: {
-    page: 1,
+    page: 0,
     results: [],
   },
 });

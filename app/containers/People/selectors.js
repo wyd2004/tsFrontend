@@ -8,7 +8,7 @@ const selectProfile = () => createSelector(
  );
 const selectPodcast = () => createSelector(
    selectProfileDomain(),
-   (state) => state.getIn(['podcast', 'results']).toJS(),
+   (state) => state.get('podcast').toJS(),
  );
 
 export default selectProfileDomain;
