@@ -7,7 +7,7 @@ import { normalizePodcast, normalizeAblum } from 'utils/normalize';
 
 export function* getData(action) {
   const isPodcast = action.type === LOAD_PODCASTS;
-  const url = isPodcast ? `/podcast/episode/?page=${action.page}/` : `/podcast/album/?page=${action.page}/`;
+  const url = isPodcast ? `/podcast/episode/?page=${action.page}` : `/podcast/album/?page=${action.page}`;
   const normalizer = isPodcast ? normalizePodcast : normalizeAblum;
   const loadedAction = isPodcast ? podcastLoaded : ablumLoaded;
   const response = yield call(fetchData, { url });
