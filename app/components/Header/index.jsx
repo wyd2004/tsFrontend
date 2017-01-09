@@ -88,7 +88,7 @@ export default class Header extends PureComponent {
           <UserName>{userName}</UserName>
           <OtherText>{headerText}</OtherText>
         </TextWrap>
-        {isVip && isSelf ? <RenewWrap to="/project"><RenewIcon src={require('./assets/renew.png')}></RenewIcon><RenewText>续费</RenewText></RenewWrap> : null}
+        {isSelf ? <RenewWrap to="/project"><RenewIcon src={require('./assets/renew.png')}></RenewIcon><RenewText>续费</RenewText></RenewWrap> : null}
       </Wrapper>
     );
   }

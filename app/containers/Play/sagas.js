@@ -7,7 +7,7 @@ import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 import fetchData from 'containers/App/sagas/fetchData';
 
 export function* getPodcastData(action) {
-  const url = `/podcast/episode/${action.id}`;
+  const url = `/podcast/episode/${action.id}/`;
   const results = yield call(fetchData, { url });
   if (results) {
     yield put(podcastLoaded(normalizePodcast(results)));

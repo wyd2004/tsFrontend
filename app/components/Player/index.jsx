@@ -163,9 +163,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
             onProgressUpdate={this.handleProgressUpdate}
           />
           <Actions>
-            <Prev to={prev !== undefined && `/play/${prev}`}></Prev>
+            <Prev to={prev !== undefined ? `/play/${prev}` : ''}></Prev>
             <PlayButton onClick={this.handlePlay} played={played}></PlayButton>
-            <Next to={next !== undefined && `/play/${next}`}></Next>
+            <Next to={next !== undefined ? `/play/${next}` : ''}></Next>
           </Actions>
         </Card>
         {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}

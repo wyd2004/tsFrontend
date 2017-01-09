@@ -1,7 +1,7 @@
 /* global WX_APP_ID */
 import { takeEvery, takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
-import { FETCH_ACCESS_TOKEN, AUTH_ERROR, FETCH_PROFILE, fetchAccessTokenSuccess, fetchProfile, profileLoaded } from 'containers/App/actions';
+import { FETCH_ACCESS_TOKEN, AUTH_ERROR, fetchAccessTokenSuccess } from 'containers/App/actions';
 import fetchData from './fetchData';
 import { key } from '../reducer';
 
@@ -34,7 +34,6 @@ function* fetchAccessToken(action) {
   const results = yield call(fetchData, { url: '/member/oauth/', options });
   if (results) {
     yield put(fetchAccessTokenSuccess(results));
-    yield put(fetchProfile(results.member_id));
     // 此处为hack，暂未找到合适的处理持久化用户token的方法
     try {
       localStorage.setItem(key, JSON.stringify(results));
@@ -51,22 +50,8 @@ function* authFlow() {
   yield fork(authWatcher);
 }
 
-function* getProfile(action) {
-  const results = yield call(fetchData, { url: `/member/${action.id}` });
-  if (results) {
-    yield put(profileLoaded(results));
-  }
-}
-
-function* profileFlowWatcher() {
-  yield fork(takeEvery, FETCH_PROFILE, getProfile);
-}
-function* profileFlow() {
-  yield fork(profileFlowWatcher);
-}
 
 export default function* loginFlow() {
   yield fork(weixinFlow);
   yield fork(authFlow);
-  yield fork(profileFlow);
 }

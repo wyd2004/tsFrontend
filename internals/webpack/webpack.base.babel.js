@@ -68,6 +68,7 @@ module.exports = (options) => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        NODE_ENV_PAY: JSON.stringify(process.env.NODE_ENV_PAY),
       },
       // 此处定义通用样式的变量
       COLOR_1: '"#ff7575"',

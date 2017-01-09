@@ -13,7 +13,7 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(process.cwd(), 'static'),
-    publicPath: '/static',
+    publicPath: '/static/',
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
 

@@ -7,7 +7,7 @@ import fetchData from 'containers/App/sagas/fetchData';
 // import { selectCurrentUser } from 'containers/App/selectors';
 
 export function* getPodcastData(action) {
-  const url = `/podcast/episode/${action.id}`;
+  const url = `/podcast/episode/${action.id}/`;
   const results = yield call(fetchData, { url });
   if (results) {
     yield put(podcastLoaded(normalizePodcast(results)));

@@ -27,7 +27,7 @@ export function* podcast() {
 }
 
 export function* requestPeople(action) {
-  const url = `/podcast/people/${action.id}`;
+  const url = `/podcast/people/${action.id}/`;
   const response = yield call(fetchData, { url });
   if (response) {
     yield put(peopleLoaded(response));

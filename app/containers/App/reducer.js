@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 
-import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_PROFILE_SUCCESS, FETCH_ACCESS_TOKEN_SUCCESS } from './actions';
+import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_ACCESS_TOKEN_SUCCESS } from './actions';
 
 export const key = 'USER_DATA';
 
@@ -50,8 +50,6 @@ function globalReducer(state = initialState, action) {
       return state.set('loading', null);
     case FETCH_ACCESS_TOKEN_SUCCESS:
       return state.set('user', action.userData);
-    case FETCH_PROFILE_SUCCESS:
-      return state.mergeIn(['user'], action.userData);
     default:
       return state;
   }
