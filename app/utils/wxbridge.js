@@ -2,6 +2,7 @@
 export default (prepayId, paySign, nonceStr, timeStamp) =>
    new Promise((resolve) => {
      function onBridgeReady() {
+       console.log('调起支付ing');
        WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
              appId: WX_APP_ID,     // 公众号名称，由商户传入

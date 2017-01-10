@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call, select } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
-import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
+import { DIALOG_TYPE, showDialog } from 'containers/App/actions';
 import wxpay from 'utils/wxbridge';
 
 import { CREATE_ORDER, paySuccessed, payFailed, PAY_TYPE } from './actions';
@@ -27,11 +27,15 @@ export function* createOrder(action) {
   if (results) {
     const { payments } = results;
     const { prepay_id, sign, nonce_str, timestamp } = payments && payments[0] && payments[0].payload;
-    const payResult = yield wxpay(prepay_id, sign, nonce_str, timestamp);
-    if (payResult.err_msg === 'get_brand_wcpay_request：ok') {
-      yield put(paySuccessed());
+    if (!sign) {
+      yield put(showDialog(DIALOG_TYPE.error, '生成订单失败，请返回重试'));
     } else {
-      yield put(payFailed());
+      const payResult = yield wxpay(prepay_id, sign, nonce_str, timestamp);
+      if (payResult.err_msg === 'get_brand_wcpay_request:ok') {
+        yield put(paySuccessed());
+      } else {
+        yield put(payFailed());
+      }
     }
   }
 }
@@ -45,6 +49,6 @@ export function* pay() {
 }
 
 // Bootstrap sagas
-export default cancelSagaOnLocationChange([
+export default [
   pay,
-]);
+];

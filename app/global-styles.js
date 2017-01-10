@@ -38,7 +38,7 @@ injectGlobal`
   @media only screen and (max-width: 320px){html{font-size: 9px;} }
   @media only screen and (min-width: 320px) and (max-width: 352px){html{font-size: 14px;} }
   @media only screen and (min-width: 352px) and (max-width: 384px){html{font-size: 16px;} }
-  @media only screen and (min-width: 384px) and (max-width: 416px){html{font-size: 12px;} }
+  @media only screen and (min-width: 384px) and (max-width: 416px){html{font-size: 16px;} }
   @media only screen and (min-width: 416px) and (max-width: 448px){html{font-size: 16px;} }
   @media only screen and (min-width: 448px) and (max-width: 480px){html{font-size: 17px;} }
   @media only screen and (min-width: 480px) and (max-width: 512px){html{font-size: 18px;} }

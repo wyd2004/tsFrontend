@@ -60,7 +60,7 @@ const comps = {
 export default class DialogBox extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     message: React.PropTypes.string,
-    type: React.PropTypes.oneOf([...DIALOG_TYPE, 'Loading']),
+    type: React.PropTypes.oneOf([DIALOG_TYPE.success, DIALOG_TYPE.info, DIALOG_TYPE.error, 'Loading']),
   };
   render() {
     const { message, type } = this.props;

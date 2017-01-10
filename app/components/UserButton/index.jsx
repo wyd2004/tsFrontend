@@ -7,8 +7,8 @@ const Button = styled(Link)`
   position: fixed;
   right: ${rem('10px')};
   bottom: ${rem('10px')};
-  width: ${rem('40px')};
-  height: ${rem('40px')};
+  width: ${rem('60px')};
+  height: ${rem('60px')};
   background: url(${require('./assets/icon.png')});
   background-size: 100%;
   z-index: 10000;

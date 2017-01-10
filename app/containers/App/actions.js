@@ -19,6 +19,8 @@ export const LOADED = 'app/global/LOADED';
 export const AUTH_ERROR = 'app/global/AUTH_ERROR';
 export const FETCH_ACCESS_TOKEN = 'app/global/FETCH_ACCESS_TOKEN';
 export const FETCH_ACCESS_TOKEN_SUCCESS = 'app/global/FETCH_ACCESS_TOKEN_SUCCESS';
+export const FETCH_USERINFO = 'app/global/FETCH_USERINFO';
+export const FETCH_USERINFO_SUCCESS = 'app/global/FETCH_USERINFO_SUCCESS';
 
 export function loading(indentify) {
   return {
@@ -59,5 +61,18 @@ export function fetchAccessTokenSuccess(userData) {
   return {
     type: FETCH_ACCESS_TOKEN_SUCCESS,
     userData,
+  };
+}
+
+export function getUserInfo() {
+  return {
+    type: FETCH_USERINFO,
+  };
+}
+
+export function getUserInfoSuccess(user) {
+  return {
+    type: FETCH_USERINFO_SUCCESS,
+    user,
   };
 }

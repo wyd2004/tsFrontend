@@ -18,12 +18,15 @@ const Warpper = styled.div`
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   componentWillMount() {
-    const { location, user, fetchAccessToken, authError } = this.props;
+    const { location, user, fetchAccessToken, authError, getUserInfo } = this.props;
+
     const code = getSearchObj(location.search).code;
     if (code && !user) {
       fetchAccessToken(code);
     } else if (!user) {
       authError();
+    } else {
+      getUserInfo();
     }
   }
 
@@ -44,6 +47,7 @@ App.propTypes = {
   user: React.PropTypes.object,
   fetchAccessToken: React.PropTypes.func,
   authError: React.PropTypes.func,
+  getUserInfo: React.PropTypes.func,
   load: React.PropTypes.string,
   dialog: React.PropTypes.object,
 };

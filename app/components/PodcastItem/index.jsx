@@ -38,7 +38,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
       <Link to={`/play/${id}`}>
         <CardWrapS>
           <Ablum><img src={image || require('./assets/default.jpg')} alt="" /></Ablum>
-          <Coast isBuy={isBuy} onClick={this.goBuy(id)}>{isBuy ? '已购买' : `RMB ${parseInt(coast, 10).toFixed(2)}`}</Coast>
+          <Coast isBuy={isBuy} onClick={this.goBuy(id)}>{isBuy ? '已购买' : `RMB ${coast && coast.toFixed(2)}`}</Coast>
           <Title>{renderSearchValue(title)}</Title>
           <Desc>{renderSearchValue(desc)}</Desc>
           {

@@ -1,7 +1,8 @@
 /* global WX_APP_ID */
 import { takeEvery, takeLatest } from 'redux-saga';
-import { put, fork, call } from 'redux-saga/effects';
-import { FETCH_ACCESS_TOKEN, AUTH_ERROR, fetchAccessTokenSuccess } from 'containers/App/actions';
+import { put, fork, call, select } from 'redux-saga/effects';
+import { selectCurrentUser } from '../selectors';
+import { FETCH_ACCESS_TOKEN, FETCH_USERINFO, getUserInfoSuccess, AUTH_ERROR, fetchAccessTokenSuccess } from '../actions';
 import fetchData from './fetchData';
 import { key } from '../reducer';
 
@@ -50,8 +51,31 @@ function* authFlow() {
   yield fork(authWatcher);
 }
 
+function* getUser() {
+  const user = yield select(selectCurrentUser());
+  const results = yield call(fetchData, { url: `/member/${user.member_id}/` });
+  const finalUser = { ...results, ...user };
+  if (results) {
+    yield put(getUserInfoSuccess(finalUser));
+    // 此处为hack，暂未找到合适的处理持久化用户token的方法
+    try {
+      localStorage.setItem(key, JSON.stringify(finalUser));
+    } catch (e) {
+      console.warn('Could not write session to localStorage:', e)//eslint-disable-line
+    }
+  }
+}
+
+function* userInfoWatcher() {
+  yield fork(takeEvery, FETCH_USERINFO, getUser);
+}
+function* userInfo() {
+  yield fork(userInfoWatcher);
+}
+
 
 export default function* loginFlow() {
   yield fork(weixinFlow);
   yield fork(authFlow);
+  yield fork(userInfo);
 }
