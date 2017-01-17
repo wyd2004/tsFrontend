@@ -9,7 +9,7 @@ import { selectCurrentUser } from 'containers/App/selectors';
 
 export function* createOrder(action) {
   const { payType, id } = action;
-  const tier = payType === PAY_TYPE.podcast ? 4 : +id;
+  const tier = payType === PAY_TYPE.podcast ? 5 : +id;
   const item = payType === PAY_TYPE.podcast ? +id : 1;
   const user = yield select(selectCurrentUser());
   const url = '/term/order/';

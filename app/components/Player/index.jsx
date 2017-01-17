@@ -12,7 +12,7 @@ import { Button } from 'components/PodcastItem/style';
 
 const Wrapper = styled.div`
   & audio {
-    display: none;
+    ${''/* display: none;*/}
   }
 `;
 
@@ -144,16 +144,20 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
   render() {
     const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, subscribed, prev, next } = this.props;
     const { currentTime, loaded, played } = this.state;
+    const finalSrc = src || srcShort;
     const canPlay = src;
     return (
       <Wrapper>
         {/* 此处的ref用法请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
         <audio
           ref={(c) => { this.audio = c; }}
-          src={canPlay ? src : srcShort} preload
+          preload="auto"
+          src={finalSrc}
           onCanPlay={this.handleLoaded}
           onTimeUpdate={this.handleTimeUpdate}
-        />
+        >
+          <source src={finalSrc} type="audio/mpeg" />
+        </audio>
         <Card>
           <Ablum><img src={image || require('./assets/default.jpg')} alt="节目封面" /></Ablum>
           <ProgressBar
