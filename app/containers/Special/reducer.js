@@ -5,7 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
-
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { LOAD_ABLUM_INFO_SUCCESSED } from './actions';
 
 // The initial state of the App
@@ -19,6 +19,8 @@ const initialState = fromJS({
 
 function profileReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE:
+      return initialState;
     case LOAD_ABLUM_INFO_SUCCESSED:
       return state
         .set('info', action.info)

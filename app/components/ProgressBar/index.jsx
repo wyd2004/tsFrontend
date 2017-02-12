@@ -84,6 +84,17 @@ export default class ProgressBar extends React.PureComponent { // eslint-disable
     window.removeEventListener('touchmove', this.handleTouchMove);
     window.removeEventListener('touchend', this.handleTouchEnd);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.totalTime !== this.props.totalTime) {
+      const { currentTime, totalTime } = this.props;
+      const progress = (currentTime * 100) / totalTime || 0;
+      this.setState({
+        startTouch: 0,
+        isPressed: false,
+        progress,
+      });
+    }
+  }
   handleTouchStart = (e) => {
     const { pageX } = e.touches[0];
     const { progress } = this.state;
@@ -131,7 +142,7 @@ export default class ProgressBar extends React.PureComponent { // eslint-disable
 
     return (
       <Wrapper>
-        <Time isPressed={isPressed}>{ready ? convAudioTime(isPressed ? ((totalTime * progress ) / 100) : currentTime) : '--:--'}</Time>
+        <Time isPressed={isPressed}>{ready ? convAudioTime(isPressed ? ((totalTime * progress) / 100) : currentTime) : '--:--'}</Time>
         <Bar progress={progress}>
           <Control progress={progress} onTouchStart={this.handleTouchStart} isPressed={isPressed} />
         </Bar>

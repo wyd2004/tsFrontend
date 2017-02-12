@@ -12,7 +12,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
     coast: React.PropTypes.number,
     createDate: React.PropTypes.string,
     time: React.PropTypes.number,
-    rank: React.PropTypes.number,
+    rank: React.PropTypes.string,
     image: React.PropTypes.string,
     isBuy: React.PropTypes.bool,
     buying: React.PropTypes.bool,

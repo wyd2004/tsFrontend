@@ -27,7 +27,7 @@ const Ablum = styled.div`
 const Actions = styled.div`
   text-align: center;
 `;
-const Prev = styled(Link)`
+const Prev = styled.a`
   background-image: url(${require('./assets/prev.png')});
   background-size: ${rem('25px')} ${rem('25px')};
   height: ${rem('25px')};
@@ -106,6 +106,15 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
       played: false,
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.setState({
+        currentTime: 0,
+        loaded: false,
+        played: false,
+      });
+    }
+  }
   handleLoaded = () => {
     this.setState({
       ...this.state,
@@ -167,9 +176,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
             onProgressUpdate={this.handleProgressUpdate}
           />
           <Actions>
-            <Prev to={prev !== undefined ? `/play/${prev}` : ''}></Prev>
+            <Prev href={prev !== undefined ? `/play/${prev}` : `/play/${id}`}></Prev>
             <PlayButton onClick={this.handlePlay} played={played}></PlayButton>
-            <Next to={next !== undefined ? `/play/${next}` : ''}></Next>
+            <Next href={next !== undefined ? `/play/${next}` : `/play/${id}`}></Next>
           </Actions>
         </Card>
         {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}
