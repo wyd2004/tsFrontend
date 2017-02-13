@@ -189,9 +189,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
             <Coast>{coast}</Coast>
             <PublicDate>{convDate(createDate)}</PublicDate>
           </Info>
-          <Info><Label>主持人：</Label>{people && people.map((item) => item.name)}</Info>
+          <Info><Label>主持人：</Label>{people && people.map((item) => `${item.name} `)}</Info>
           <Info><Label>栏目：</Label>{serial}</Info>
-          <Info><Label>栏目介绍：</Label>{desc}</Info>
+          <Info><Label>节目介绍：</Label>{desc}</Info>
         </Card>
       </Wrapper>
     );
