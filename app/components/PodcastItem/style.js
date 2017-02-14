@@ -10,8 +10,8 @@ const Title = styled.h1`
   margin: 0;
   font-weight: normal;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
+  height: 34px;
 `;
 const Desc = styled.div`
   color: ${COLOR_3};

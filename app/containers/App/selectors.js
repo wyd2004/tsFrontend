@@ -37,10 +37,16 @@ const selectLocationState = () => {
   };
 };
 
+const selectLastPodcast = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('lastPodcast'),
+);
+
 export {
   selectGlobal,
   selectCurrentUser,
   selectLoading,
   selectDailog,
   selectLocationState,
+  selectLastPodcast,
 };

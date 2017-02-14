@@ -116,8 +116,10 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     }
   }
   handleLoaded = () => {
+    this.audio.play();
     this.setState({
       ...this.state,
+      played: true,
       loaded: true,
       canPlay: true,
     });
@@ -142,6 +144,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
       currentTime: this.audio.currentTime,
     });
   }
+  handleEnded = () => {
+      alert('试听5分钟，完整收听请开通会员或购买节目'); // eslint-disable-line
+  }
   handleProgressUpdate = (newProgress) => {
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
@@ -164,6 +169,7 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
           src={finalSrc}
           onCanPlay={this.handleLoaded}
           onTimeUpdate={this.handleTimeUpdate}
+          onEnded={this.handleEnded}
         >
           <source src={finalSrc} type="audio/mpeg" />
         </audio>
