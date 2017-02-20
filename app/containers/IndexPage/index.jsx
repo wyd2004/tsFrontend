@@ -71,8 +71,9 @@ const LastPodcast = styled(Link)`
   overflow: hidden;
   padding: 0.75rem;
   display: block;
+  font-weight: bold;
   color: #a2a2a2;
-  font-size: ${rem('10px')};
+  font-size: ${rem('14px')};
 `;
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

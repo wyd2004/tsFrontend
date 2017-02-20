@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 const Button = styled(Link)`
   position: fixed;
-  right: ${rem('10px')};
+  left: ${rem('10px')};
   bottom: ${rem('10px')};
   width: ${rem('60px')};
   height: ${rem('60px')};

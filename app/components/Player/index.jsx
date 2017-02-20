@@ -145,7 +145,15 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     });
   }
   handleEnded = () => {
+    const { src } = this.props;
+    const canPlay = src;
+    if (!canPlay) {
       alert('试听5分钟，完整收听请开通会员或购买节目'); // eslint-disable-line
+    }
+    this.setState({
+      ...this.state,
+      played: false,
+    });
   }
   handleProgressUpdate = (newProgress) => {
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
