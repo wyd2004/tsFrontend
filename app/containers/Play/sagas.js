@@ -5,11 +5,17 @@ import { normalizePodcast } from 'utils/normalize';
 import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 
 import fetchData from 'containers/App/sagas/fetchData';
+export const key = 'LAST_PODCAST';
 
 export function* getPodcastData(action) {
   const url = `/podcast/episode/${action.id}/`;
   const results = yield call(fetchData, { url });
   if (results) {
+    try {
+      localStorage.setItem(key, JSON.stringify(results));
+    } catch (e) {
+      console.warn('Could not write session to localStorage:', e)//eslint-disable-line
+    }
     yield put(podcastLoaded(normalizePodcast(results)));
   }
 }

@@ -7,7 +7,7 @@
 import { fromJS } from 'immutable';
 
 import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_ACCESS_TOKEN_SUCCESS } from './actions';
-
+import { key as lastPodcastKey } from '../Play/sagas';
 export const key = 'USER_DATA';
 
 // let user = {
@@ -18,11 +18,12 @@ export const key = 'USER_DATA';
 //   expire_datetime: '2016-11-20T14:36:32.427000Z',
 // };
 let user;
+let lastPodcast;
 try {
-  const json = localStorage.getItem(key);
-  if (json) {
-    user = JSON.parse(json);
-  }
+  const userJson = localStorage.getItem(key);
+  lastPodcast = localStorage.getItem(lastPodcastKey);
+  lastPodcast = lastPodcast && JSON.parse(lastPodcast);
+  user = userJson && JSON.parse(userJson);
 } catch (e) {
   console.warn('Could not read session from localStorage:', e) //eslint-disable-line
   localStorage.removeItem(key);
@@ -33,7 +34,8 @@ const initialState = fromJS({
   dialog: null,
   loading: null,
   user: null,
-}).set('user', user);
+  lastPodcast: null,
+}).set('user', user).set('lastPodcast', lastPodcast);
 
 function globalReducer(state = initialState, action) {
   switch (action.type) {

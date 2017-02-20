@@ -9,6 +9,7 @@ import { createStructuredSelector } from 'reselect';
 import { Motion, spring } from 'react-motion';
 
 import { selectPodcast, selectAblum } from './selectors';
+import { selectLastPodcast } from 'containers/App/selectors';
 
 import UserButton from 'components/UserButton';
 import PodcastItem from 'components/PodcastItem';
@@ -55,12 +56,24 @@ const ContentWrapper = styled.div`
   width: 200%;
 `;
 const ListWrapper = styled.div`
-width: 50%;
-float: left;
-  & > div {
-    height: calc(100vh - ${rem('130px')});
-    overflow: scroll;
-  }
+  width: 50%;
+  float: left;
+    & > div {
+      height: calc(100vh - ${rem('130px')});
+      overflow: scroll;
+    }
+`;
+const LastPodcast = styled(Link)`
+  border-radius: 0.125rem;
+  background: white;
+  margin: 0.375rem 0;
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem;
+  display: block;
+  font-weight: bold;
+  color: #a2a2a2;
+  font-size: ${rem('14px')};
 `;
 export class IndexPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -93,7 +106,7 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
      }
 
   render() {
-    const { podcast, ablum } = this.props;
+    const { podcast, ablum, last } = this.props;
     const { current } = this.state;
     return (
       <div style={{ overflow: 'hidden' }}>
@@ -110,6 +123,11 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
           </LinkWrapper>
           <Button icon="ablum" onClick={this.handleChange('album')} highlight={current === 'album'}>专辑</Button>
         </Actions>
+        {last && (
+          <LastPodcast to={`/play/${last.id}`}>
+            继续收听：{last.title}
+          </LastPodcast>
+        )}
         <UserButton />
         <Motion defaultStyle={{ x: 0 }} style={{ x: spring(current === 'podcast' ? 0 : 50) }}>
           {({ x }) =>
@@ -137,6 +155,7 @@ IndexPage.propTypes = {
   loadPodcast: PropTypes.func,
   podcast: PropTypes.object,
   ablum: PropTypes.object,
+  last: PropTypes.object,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -145,6 +164,7 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   podcast: selectPodcast(),
   ablum: selectAblum(),
+  last: selectLastPodcast(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

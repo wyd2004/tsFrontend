@@ -24,7 +24,6 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
        e.preventDefault();
        browserHistory.push(`/buy/episode/${id}`);
      }
-
   render() {
     const { id, title, desc, coast, createDate, time, rank, image, isBuy, searchValue, buying } = this.props;
     const renderSearchValue = (string = '') => {
@@ -40,7 +39,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
           <Ablum><img src={image || require('./assets/default.jpg')} alt="" /></Ablum>
           <Coast isBuy={isBuy} onClick={this.goBuy(id)}>{isBuy ? '已购买' : `RMB ${coast && coast.toFixed(2)}`}</Coast>
           <Title>{renderSearchValue(title)}</Title>
-          <Desc>{renderSearchValue(desc)}</Desc>
+          {/*<Desc>{renderSearchValue(desc)}</Desc>*/}
           {
             buying
             ? <Desc>购买后，该微信号对本节目有永久试听权</Desc>
