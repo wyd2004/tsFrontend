@@ -58,14 +58,14 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
         <Card>
           <Wrap>
             {subsResults.map((album) => <Album key={album.id} {...album} />)}
-            {subsResults.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/subscription" />}
+            {subsResults.length >= 7 && <Album key="All" title="查看全部" image={addPic} to="/subscription" />}
           </Wrap>
         </Card>
         <Title icon="vip">会员栏目</Title>
         <Card>
           <Wrap>
             {vipResults.map((album) => <Album key={album.id} {...album} />)}
-            {vipResults.length === 7 && <Album key="All" title="查看全部" image={addPic} to="/vip" />}
+            {vipResults.length >= 7 && <Album key="All" title="查看全部" image={addPic} to="/vip" />}
           </Wrap>
         </Card>
         <Title icon="vip">按主播查看</Title>

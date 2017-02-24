@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 
-import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_ACCESS_TOKEN_SUCCESS } from './actions';
+import { SHOW_DIALOG, HIDE_DIALOG, LOADING, LOADED, FETCH_ACCESS_TOKEN_SUCCESS, FETCH_USERINFO_SUCCESS } from './actions';
 import { key as lastPodcastKey } from '../Play/sagas';
 export const key = 'USER_DATA';
 
@@ -52,6 +52,8 @@ function globalReducer(state = initialState, action) {
       return state.set('loading', null);
     case FETCH_ACCESS_TOKEN_SUCCESS:
       return state.set('user', action.userData);
+    case FETCH_USERINFO_SUCCESS:
+      return state.set('user', action.user);
     default:
       return state;
   }

@@ -10,6 +10,7 @@ export function normalizePodcast(data) {
     createDate: data.dt_updated,
     srcShort: data.preview_url,
     src: data.full_url,
+    isBuy: data.full_url ? true : false, // eslint-disable-line
     serial: data.serial,
     people: data.hosts,
     albumId: data.album_id,

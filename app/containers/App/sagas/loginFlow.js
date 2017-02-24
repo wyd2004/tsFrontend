@@ -54,7 +54,7 @@ function* authFlow() {
 function* getUser() {
   const user = yield select(selectCurrentUser());
   const results = yield call(fetchData, { url: `/member/${user.member_id}/` });
-  const finalUser = { ...results, ...user };
+  const finalUser = { ...user, ...results };
   if (results) {
     yield put(getUserInfoSuccess(finalUser));
     // 此处为hack，暂未找到合适的处理持久化用户token的方法
