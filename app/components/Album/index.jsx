@@ -29,6 +29,9 @@ const Text = styled.span`
   margin-top: ${rem('6px')};
   font-size: ${rem('14px')};
   color: ${COLOR_2};
+  height: 1rem;
+  overflow: hidden;
+  display: inline-block;
 `;
 export default class Album extends PureComponent {
   static defaultProps = {
