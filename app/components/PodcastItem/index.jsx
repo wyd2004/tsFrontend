@@ -16,6 +16,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
     image: React.PropTypes.string,
     isBuy: React.PropTypes.bool,
     buying: React.PropTypes.bool,
+    fromIndex: React.PropTypes.bool,
     searchValue: React.PropTypes.string,
   };
   goBuy = (id) =>
@@ -25,7 +26,7 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
        browserHistory.push(`/buy/episode/${id}`);
      }
   render() {
-    const { id, title, desc, coast, createDate, time, rank, image, isBuy, searchValue, buying } = this.props;
+    const { id, title, coast, createDate, time, rank, image, isBuy, searchValue, buying, fromIndex } = this.props;
     const renderSearchValue = (string = '') => {
       const index = string.search(searchValue);
       if (searchValue && index !== -1) {
@@ -34,12 +35,12 @@ export default class PodcastItem extends React.PureComponent { // eslint-disable
       return string;
     };
     return (
-      <Link to={`/play/${id}`}>
+      <Link to={`/play/${id}${fromIndex ? '/index' : ''}`}>
         <CardWrapS>
           <Ablum><img src={image || require('./assets/default.jpg')} alt="" /></Ablum>
           <Coast isBuy={isBuy} onClick={this.goBuy(id)}>{isBuy ? '已购买' : `RMB ${coast && coast.toFixed(2)}`}</Coast>
           <Title>{renderSearchValue(title)}</Title>
-          {/*<Desc>{renderSearchValue(desc)}</Desc>*/}
+          {/* <Desc>{renderSearchValue(desc)}</Desc>*/}
           {
             buying
             ? <Desc>购买后，该微信号对本节目有永久试听权</Desc>

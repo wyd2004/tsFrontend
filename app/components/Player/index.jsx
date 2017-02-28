@@ -159,9 +159,9 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     this.audio.currentTime = (newProgress / 100) * this.audio.duration;
   }
   handleSub = () => {
-    const { albumId, subscribed } = this.props;
+    const { id, subscribed } = this.props;
     const state = subscribed ? 0 : 1;
-    this.props.onSubscribe(albumId, state);
+    this.props.onSubscribe(id, state);
   }
   render() {
     const { id, srcShort, src, image, time: totalTime, title, createDate, serial, desc, people, coast, subscribed, prev, next } = this.props;

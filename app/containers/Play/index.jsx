@@ -27,8 +27,13 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
     }
   }
   fetchDate = (id) => {
+    const { from } = this.props.params;
     this.props.loadPodcast(id);
-    this.props.loadHistory(id);
+    if (from !== 'index') {
+      this.props.loadHistory(id);
+    } else {
+      this.props.loadIndex();
+    }
   }
   handleRefresh = () => {
     const { history, params } = this.props;
@@ -36,7 +41,6 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
   }
   render() {
     const { podcast, history, subscribe } = this.props;
-
     return (
       <div>
         <Helmet
@@ -61,13 +65,14 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
 Play.propTypes = {
   loadPodcast: PropTypes.func,
   loadHistory: PropTypes.func,
+  loadIndex: PropTypes.func,
   subscribe: PropTypes.func,
   podcast: PropTypes.object,
   history: PropTypes.object,
   params: PropTypes.shape({
     id: PropTypes.string,
+    from: PropTypes.string,
   }),
-
 };
 const mapStateToProps = createStructuredSelector({
   podcast: selectPodcast(),

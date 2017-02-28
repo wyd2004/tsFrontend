@@ -3,7 +3,7 @@ import { put, fork, call, select } from 'redux-saga/effects';
 import fetchData from 'containers/App/sagas/fetchData';
 import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 import { selectCurrentUser } from 'containers/App/selectors';
-import { normalizeAblum } from 'utils/normalize';
+import { normalizePodcast } from 'utils/normalize';
 
 import { LOAD_SUBSCRIPTION, LOAD_VIP, LOAD_PEOPLE, subscriptionLoaded, vipLoaded, peopleLoaded } from './actions';
 
@@ -11,11 +11,11 @@ export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function* requestSubscribe(action) {
   const user = yield select(selectCurrentUser());
-  const url = `/member/${user.member_id}/subscription/album/?page=${action.page}`;
+  const url = `/member/${user.member_id}/subscription/episode/?page=${action.page}`;
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) => normalizeAblum(item.album));
+    const normalizedResults = results.map((item) => normalizePodcast(item.episode));
     yield put(subscriptionLoaded(normalizedResults));
   }
 }
@@ -34,7 +34,7 @@ export function* requestVip(action) {
   const response = yield call(fetchData, { url });
   if (response) {
     const { results } = response;
-    const normalizedResults = results.map((item) => normalizeAblum(item));
+    const normalizedResults = results.map((item) => normalizePodcast(item));
     yield put(vipLoaded(normalizedResults));
   }
 }

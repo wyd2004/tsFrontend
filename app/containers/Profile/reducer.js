@@ -11,15 +11,15 @@ import { LOAD_SUBSCRIPTION_SUCCESS, LOAD_VIP_SUCCESS, LOAD_PEOPLE_SUCCESS } from
 // The initial state of the App
 const initialState = fromJS({
   subscribe: {
-    page: 0,
+    page: 1,
     results: [],
   },
   member: {
-    page: 0,
+    page: 1,
     results: [],
   },
   people: {
-    page: 0,
+    page: 1,
     results: [],
   },
 });

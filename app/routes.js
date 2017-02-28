@@ -18,7 +18,7 @@ const routes = [
   { path: '/search',          name: 'search',         modulePath: 'Search'          },
   { path: '/profile',         name: 'profile',        modulePath: 'Profile'         },  // 个人中心
   { path: '/people/:id',      name: 'people',         modulePath: 'People'          },  // 主播页
-  { path: '/play/:id',        name: 'play',           modulePath: 'Play'            },  // 播放页
+  { path: '/play/:id(/:from)',        name: 'play',           modulePath: 'Play'            },  // 播放页
   { path: '/special/:id',     name: 'special',        modulePath: 'Special'         },  // 专辑栏目列表
   { path: '/buy/:type/:id',   name: 'buy',            modulePath: 'Buy'             },  // 单次购买页
   { path: '/pay',             name: 'pay',            modulePath: 'Pay'             },  // 调起支付、完成页

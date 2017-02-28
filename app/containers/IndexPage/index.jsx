@@ -134,7 +134,7 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
             <ContentWrapper style={{ transform: `translate3d(-${x}%, 0, 0)` }}>
               <ListWrapper>
                 <Infinite onRefresh={this.handleRefresh} scrollOnContainer >
-                  {podcast.results.map((item) => <PodcastItem {...item} key={item.id} />)}
+                  {podcast.results.map((item) => <PodcastItem {...item} key={item.id} fromIndex />)}
                 </Infinite>
               </ListWrapper>
               <ListWrapper>

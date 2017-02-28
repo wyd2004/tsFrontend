@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { put, fork, call } from 'redux-saga/effects';
-import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribeSuccessed, podcastLoaded, historyLoaded } from './actions';
+import { LOAD_PODCAST, LOAD_HISTORY, SUBSCRIBE, subscribeSuccessed, podcastLoaded, historyLoaded, LOAD_INDEX, indexLoaded } from './actions';
 import { normalizePodcast } from 'utils/normalize';
 import cancelSagaOnLocationChange from 'utils/cancelSagaOnLocationChange';
 
@@ -39,7 +39,7 @@ export function* loadPodcast() {
 }
 
 export function* subscribePodcast(action) {
-  const url = `/podcast/album/${action.id}/subscribe/`;
+  const url = `/podcast/episode/${action.id}/subscribe/`;
   const options = {
     method: action.state === 1 ? 'POST' : 'DELETE',
   };
@@ -58,8 +58,26 @@ export function* sub() {
   yield fork(watcherSubscribe);
 }
 
+export function* getData() {
+  const response = yield call(fetchData, { url: '/podcast/episode/?page=1' });
+  if (response) {
+    const { results, next } = response;
+    const normalizedResults = results.map(normalizePodcast);
+    yield put(indexLoaded(normalizedResults, next));
+  }
+}
+
+export function* watcherIndex() {
+  yield fork(takeLatest, LOAD_INDEX, getData);
+}
+
+export function* index() {
+  yield fork(watcherIndex);
+}
+
 // Bootstrap sagas
 export default cancelSagaOnLocationChange([
   loadPodcast,
   sub,
+  index,
 ]);
