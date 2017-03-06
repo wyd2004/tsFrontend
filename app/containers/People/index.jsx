@@ -19,10 +19,10 @@ import Infinite from 'components/Infinite';
 
 export class People extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    const { profile, podcast, params } = this.props;
+    const { params } = this.props;
     const { id } = params;
-    podcast.results.length === 0 && this.props.loadPodcast(id);
-    !profile && this.props.loadPeople(id);
+    this.props.loadPodcast(id);
+    this.props.loadPeople(id);
   }
   handleRefresh = () => {
     const { podcast, params } = this.props;

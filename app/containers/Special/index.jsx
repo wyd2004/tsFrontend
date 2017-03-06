@@ -15,9 +15,9 @@ import PodcastItem from 'components/PodcastItem';
 
 class Special extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    const { info, params } = this.props;
+    const { params } = this.props;
     const { id } = params;
-    !info && this.props.loadInfo(id);
+    this.props.loadInfo(id);
   }
   render() {
     const { info, podcast } = this.props;
