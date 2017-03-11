@@ -171,16 +171,18 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
     return (
       <Wrapper>
         {/* 此处的ref用法请参考：https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md */}
-        <audio
-          ref={(c) => { this.audio = c; }}
-          preload="auto"
-          src={finalSrc}
-          onCanPlay={this.handleLoaded}
-          onTimeUpdate={this.handleTimeUpdate}
-          onEnded={this.handleEnded}
-        >
-          <source src={finalSrc} type="audio/mpeg" />
-        </audio>
+        {finalSrc && (
+          <audio
+            ref={(c) => { this.audio = c; }}
+            preload="auto"
+            src={finalSrc}
+            onCanPlay={this.handleLoaded}
+            onTimeUpdate={this.handleTimeUpdate}
+            onEnded={this.handleEnded}
+          >
+            <source src={finalSrc} type="audio/mpeg" />
+          </audio>
+        )}
         <Card>
           <Ablum><img src={image || require('./assets/default.jpg')} alt="节目封面" /></Ablum>
           <ProgressBar
