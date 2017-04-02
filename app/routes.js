@@ -26,6 +26,7 @@ const routes = [
   { path: '/project',         name: 'project',        modulePath: 'Project'         },  // 月费购买
   { path: '/subscription',    name: 'subscription',   modulePath: 'Subscription'    },  // 已订阅栏目列表页
   { path: '/vip',             name: 'vip',            modulePath: 'Vip'             },  // 会员栏目列表页
+  { path: '/protocol',        name: 'protocol',       modulePath: 'Protocol'        },  // 协议
 ]
 /* eslint-enable */
 export default function createRoutes(store) {

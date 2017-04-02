@@ -14,7 +14,7 @@ import selectProject from './selectors';
 import { PAY_TYPE } from 'containers/Pay/actions';
 
 import Card from 'components/Card';
-import Title from 'components/Title';
+import Title, { PLink } from 'components/Title';
 
 import MemberRights from 'components/MemberRights';
 import Membership from 'components/Membership';
@@ -49,6 +49,7 @@ export class Project extends React.Component { // eslint-disable-line react/pref
         {projects.map((item) => <Membership key={item.id} onClick={this.buy(item.id)} {...item} />)}
         <Title icon="rights">会员特权</Title>
         <MemberRights />
+        <PLink to="/protocol">《全占会员 服务使用协议》</PLink>
       </div>
     );
   }

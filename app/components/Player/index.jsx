@@ -197,7 +197,7 @@ class Player extends React.Component { // eslint-disable-line react/prefer-state
             <Next href={next !== undefined ? `/play/${next}` : `/play/${id}`}></Next>
           </Actions>
         </Card>
-        {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/profile">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}
+        {!canPlay && <Card2>试听5分钟，完整收听请<StyledLink to="/project">开通会员</StyledLink>或<StyledLink to={`/buy/episode/${id}`}>购买本节目</StyledLink></Card2>}
         <Card>
           <Subscribe subscribed={subscribed} onClick={this.handleSub}>{subscribed ? '取消订阅' : '订阅'}</Subscribe>
           <Title>{title}</Title>

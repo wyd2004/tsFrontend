@@ -14,7 +14,7 @@ import { loadPodcast } from './actions';
 import PodcastItem from 'components/PodcastItem';
 import CardOrigin from 'components/Card/CardWrap';
 import { Button } from 'components/PodcastItem/style';
-import Title from 'components/Title';
+import Title, { PLink } from 'components/Title';
 import { PAY_TYPE } from 'containers/Pay/actions';
 
 const Card = styled(CardOrigin)`
@@ -68,10 +68,11 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
         <Title icon="buy">节目购买</Title>
         <PodcastItem {...podcast} />
         <Tips>
-          <Desc>单月会员只要￥60！！还有多种特权</Desc>
+          <Desc>直接购买会员吧！有多种特权</Desc>
           <Link to="/project"><Button>我还是买会员吧</Button></Link>
         </Tips>
         <PayButton onClick={this.handlePay}>去支付</PayButton>
+        <PLink to="/protocol">《全占会员 服务使用协议》</PLink>
       </Wrapper>
     );
   }
