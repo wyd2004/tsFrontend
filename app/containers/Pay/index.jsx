@@ -62,7 +62,7 @@ export class Pay extends React.Component { // eslint-disable-line react/prefer-s
         <Helmet
           title="支付结果"
           meta={[
-            { name: 'description', content: '糖蒜广播-支付结果' },
+            { name: 'description', content: 'TS广播-支付结果' },
           ]}
         />
         {node[payState] || '支付中...'}

@@ -60,7 +60,7 @@ export class SearchPage extends React.Component { // eslint-disable-line react/p
         <Helmet
           title="搜索"
           meta={[
-            { name: 'description', content: '糖蒜广播-搜索' },
+            { name: 'description', content: 'TS广播-搜索' },
           ]}
         />
         <SearchBar onSearch={this.handleSearch} />

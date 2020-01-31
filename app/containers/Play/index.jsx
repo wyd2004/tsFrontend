@@ -46,7 +46,7 @@ export class Play extends React.Component { // eslint-disable-line react/prefer-
         <Helmet
           title="播放页"
           meta={[
-            { name: 'description', content: '糖蒜广播-播放页' },
+            { name: 'description', content: 'TS广播-播放页' },
           ]}
         />
         <Player {...podcast} onSubscribe={subscribe} />

@@ -31,7 +31,7 @@ export class Vip extends React.Component { // eslint-disable-line react/prefer-s
         <Helmet
           title="已会员栏目"
           meta={[
-            { name: 'description', content: '糖蒜广播-已会员栏目' },
+            { name: 'description', content: 'TS广播-已会员栏目' },
           ]}
         />
         <Title icon="podcast">会员栏目</Title>

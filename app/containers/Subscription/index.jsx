@@ -31,7 +31,7 @@ export class Subscription extends React.Component { // eslint-disable-line react
         <Helmet
           title="已订阅栏目"
           meta={[
-            { name: 'description', content: '糖蒜广播-已订阅栏目' },
+            { name: 'description', content: 'TS广播-已订阅栏目' },
           ]}
         />
         <Title icon="podcast">订阅栏目</Title>

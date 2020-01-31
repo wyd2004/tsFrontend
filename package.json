@@ -1,7 +1,7 @@
 {
   "name": "tsFrontend",
   "version": "0.1.0",
-  "description": "糖蒜广播微信WebApp",
+  "description": "TS广播微信WebApp",
   "repository": {
     "type": "git",
     "url": "git@github.com:wyd2004/tsFrontend.git"
@@ -9,7 +9,6 @@
   "engines": {
     "npm": ">=3"
   },
-  "author": "yanzhiqiang",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",

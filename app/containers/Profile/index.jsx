@@ -48,7 +48,7 @@ export class Profile extends React.Component { // eslint-disable-line react/pref
         <Helmet
           title="个人中心"
           meta={[
-            { name: 'description', content: '糖蒜广播-个人中心' },
+            { name: 'description', content: 'TS广播-个人中心' },
           ]}
         />
         <Card>

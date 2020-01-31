@@ -111,9 +111,9 @@ export class IndexPage extends React.Component { // eslint-disable-line react/pr
     return (
       <div style={{ overflow: 'hidden' }}>
         <Helmet
-          title="糖蒜广播-微信"
+          title="TS广播-微信"
           meta={[
-            { name: 'description', content: '糖蒜广播-微信' },
+            { name: 'description', content: 'TS广播-微信' },
           ]}
         />
         <Actions>

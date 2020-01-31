@@ -36,7 +36,7 @@ export class People extends React.Component { // eslint-disable-line react/prefe
         <Helmet
           title="主播"
           meta={[
-            { name: 'description', content: '糖蒜广播-主播' },
+            { name: 'description', content: 'TS广播-主播' },
           ]}
         />
         <Card>

@@ -62,7 +62,7 @@ export class Buy extends React.Component { // eslint-disable-line react/prefer-s
         <Helmet
           title="节目购买"
           meta={[
-            { name: 'description', content: '糖蒜广播-节目购买' },
+            { name: 'description', content: 'TS广播-节目购买' },
           ]}
         />
         <Title icon="buy">节目购买</Title>

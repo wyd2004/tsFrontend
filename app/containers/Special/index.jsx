@@ -27,7 +27,7 @@ class Special extends React.Component { // eslint-disable-line react/prefer-stat
         <Helmet
           title="专辑列表"
           meta={[
-            { name: 'description', content: '糖蒜广播-专辑列表' },
+            { name: 'description', content: 'TS广播-专辑列表' },
           ]}
         />
         <Card>

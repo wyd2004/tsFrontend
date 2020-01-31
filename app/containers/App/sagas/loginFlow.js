@@ -12,7 +12,7 @@ function* weixinWatcher() {
   const handleLogin = () => {
     let url = 'https://open.weixin.qq.com/connect/oauth2/authorize';
     url += `?appid=${WX_APP_ID}`;
-    url += `&redirect_uri=${encodeURIComponent('http://vip.tangsuanradio.com/mp')}`;
+    url += `&redirect_uri=${encodeURIComponent('http://vip.xxx.com/mp')}`;
     url += '&response_type=code';
     url += '&scope=snsapi_userinfo';
     url += '#wechat_redirect';

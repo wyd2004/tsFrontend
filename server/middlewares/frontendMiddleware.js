@@ -30,7 +30,7 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
-  app.use('/api/**', proxy('http://vip.tangsuanradio.com', {
+  app.use('/api/**', proxy('http://vip.xxx.com', {
     preserveHostHdr: true,
     forwardPathAsync(req) {
       return new Promise((resolve) => {
